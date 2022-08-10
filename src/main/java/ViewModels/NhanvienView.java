@@ -12,7 +12,7 @@ public class NhanvienView {
 
 	private String email;
 
-	private byte gioITinh;
+	private int gioITinh;
 
 	private String maNhanVien;
 
@@ -29,13 +29,13 @@ public class NhanvienView {
 
 	private int trangThai;
 
-	private byte vaiTro;
+	private int vaiTro;
 
 
 	public NhanvienView() {
 	}
 
-    public NhanvienView(int ID_NhanVien, String diaChi, String email, byte gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, byte vaiTro) {
+    public NhanvienView(int ID_NhanVien, String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
         this.ID_NhanVien = ID_NhanVien;
         this.diaChi = diaChi;
         this.email = email;
@@ -75,11 +75,11 @@ public class NhanvienView {
 		this.email = email;
 	}
 
-	public byte getGioITinh() {
+	public int getGioITinh() {
 		return this.gioITinh;
 	}
 
-	public void setGioITinh(byte gioITinh) {
+	public void setGioITinh(int gioITinh) {
 		this.gioITinh = gioITinh;
 	}
 
@@ -139,11 +139,11 @@ public class NhanvienView {
 		this.trangThai = trangThai;
 	}
 
-	public byte getVaiTro() {
+	public int getVaiTro() {
 		return this.vaiTro;
 	}
 
-	public void setVaiTro(byte vaiTro) {
+	public void setVaiTro(int vaiTro) {
 		this.vaiTro = vaiTro;
 	}
 

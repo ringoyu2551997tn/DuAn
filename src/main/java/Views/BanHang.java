@@ -5,6 +5,7 @@
  */
 package Views;
 
+import Application.Main;
 import DomainModel.Ban;
 import DomainModel.Hoadoinchitiet;
 import DomainModel.Hoadon;
@@ -807,9 +808,9 @@ public class BanHang extends javax.swing.JPanel {
             int i = JOptionPane.showConfirmDialog(this, "Chọn chức năng");
             //Chuyển bàn
             if(i ==0){
-                new ChuyenBan(new FrmViewMainPage(), true,0,Integer.parseInt(tbl_ban.getValueAt(index, 0).toString().substring(1))).setVisible(true);
+                new ChuyenBan(new Main(), true,0,Integer.parseInt(tbl_ban.getValueAt(index, 0).toString().substring(1))).setVisible(true);
             }else{  //Gộp bàn
-               new ChuyenBan(new FrmViewMainPage(), true,1,Integer.parseInt(tbl_ban.getValueAt(index, 0).toString().substring(1))).setVisible(true);
+               new ChuyenBan(new Main(), true,1,Integer.parseInt(tbl_ban.getValueAt(index, 0).toString().substring(1))).setVisible(true);
             }
         }
         

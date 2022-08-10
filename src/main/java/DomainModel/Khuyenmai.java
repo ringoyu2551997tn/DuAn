@@ -122,5 +122,5 @@ public class Khuyenmai implements Serializable {
         return   tenKhuyenMai+"   " +chietKhau+"%"  ;
     }
         
->>>>> main
+
 }

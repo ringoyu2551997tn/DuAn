@@ -1,6 +1,5 @@
+package ViewModels;
 
- * @author luci
- */
 public class BanView {
     private int ID_Ban;
     private String maBan;

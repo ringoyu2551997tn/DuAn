@@ -10,6 +10,12 @@ public interface InterfaceBangHoaDonChiTiet {
 
 	List<Hoadoinchitiet> findAll(int position, int pageSize);
 
+
+        List<Hoadoinchitiet> findAll();
+        
+        List<Hoadoinchitiet> findByIdBan(int id);
+        
+
 	Hoadoinchitiet findById(long id);
 
 	Hoadoinchitiet create(Hoadoinchitiet hdct);
@@ -17,6 +23,9 @@ public interface InterfaceBangHoaDonChiTiet {
 	Hoadoinchitiet update(Hoadoinchitiet hdct);
 
 	long totalCount();
+
+        
+        void UpdateSelected (int idBan);
 
 	List<Hoadoinchitiet> findByIdHD(int id);
 

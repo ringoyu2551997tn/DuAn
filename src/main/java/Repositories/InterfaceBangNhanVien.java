@@ -5,6 +5,7 @@ import DomainModel.Nhanvien;
 
 public interface InterfaceBangNhanVien {
 
+
     List<Nhanvien> findAll(int position, int pageSize);
 
     List<Nhanvien> findAll();
@@ -22,5 +23,6 @@ public interface InterfaceBangNhanVien {
     public Nhanvien login(String userName, String password);
 
     public Nhanvien findbyEmail(String email, String taikhoan);
+
 
 }

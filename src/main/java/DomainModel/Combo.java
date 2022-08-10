@@ -78,7 +78,9 @@ public class Combo implements Serializable {
 		return this.trangThai;
 	}
 
+	
 	public void setTrangThai(int trangThai) {
+
 		this.trangThai = trangThai;
 	}
 

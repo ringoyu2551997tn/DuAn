@@ -7,6 +7,10 @@ public interface InterfaceBangKhuyenMai {
 	
 	List<Khuyenmai> findAll(int page,int pagesize);
 	
+
+        List<Khuyenmai> findAll();
+        
+
 	Khuyenmai findById(String maKM);
     
 	Khuyenmai create(Khuyenmai khuyenmai);

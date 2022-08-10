@@ -15,7 +15,7 @@ import Utilities.JpaUtils;
 
 public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
-	public static final EntityManager entityManager = JpaUtils.getEntityManager();
+
 	
 	@Override
 	public List<Hoadon> findAll() {
@@ -48,6 +48,8 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 		    entityManager.getTransaction().commit();
 				return hoadon;
 		}catch(Exception ex) {
+
+                    System.out.println("loooix create hoa don");
 			entityManager.getTransaction().rollback();
 			throw new RuntimeException();
 		}
@@ -114,6 +116,20 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 		return list;
 	}
         
+
+        @Override
+	public Hoadon findHoaDonByBan (int idBan) {
+                EntityManager em = JpaUtils.getEntityManager();
+		String jsql = "SELECT h FROM Hoadon h "
+                        + "INNER JOIN Hoadoinchitiet hdct ON hdct.hoadon.ID_HoaDon = h.ID_HoaDon "
+                        + "INNER JOIN Ban b ON b.ID_Ban = hdct.ban.ID_Ban "
+                        + "WHERE h.trangThai =0 AND b.ID_Ban = "+idBan;
+		TypedQuery<Hoadon> query = em.createQuery(jsql, Hoadon.class);
+		Hoadon hd = query.getSingleResult();
+		return hd;
+	}
+        
+
    
 }
 

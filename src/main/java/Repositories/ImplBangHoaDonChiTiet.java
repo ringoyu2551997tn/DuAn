@@ -14,6 +14,7 @@ import DomainModel.Hoadoinchitiet;
 import DomainModel.Sanpham;
 
 
+
 public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
 	
 	public static final EntityManager entityManager = JpaUtils.getEntityManager();
@@ -153,4 +154,50 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
 	
 
 	
+
+
+
+    @Override
+    public List<Hoadoinchitiet> findAll() {
+        String jsql = "SELECT h FROM Hoadoinchitiet h";
+        TypedQuery<Hoadoinchitiet> query = entityManager.createQuery(jsql.toString(), Hoadoinchitiet.class);
+        List<Hoadoinchitiet> list = query.getResultList();
+        return list;
+    }
+
+    
+    @Override
+    public List<Hoadoinchitiet> findByIdBan(int id) {
+        EntityManager em = JpaUtils.getEntityManager();
+        List<Hoadoinchitiet> lst = new ArrayList<>();
+        String jsql = "select hdct  "
+                + "FROM Hoadoinchitiet hdct INNER JOIN Ban b ON hdct.ban.ID_Ban = b.ID_Ban "
+                + "INNER JOIN Hoadon hd ON hd.ID_HoaDon = hdct.hoadon.ID_HoaDon "
+                + "Where hd.trangThai=0 AND b.ID_Ban =" + id;
+        TypedQuery<Hoadoinchitiet> query = em.createQuery(jsql, Hoadoinchitiet.class);
+        lst = query.getResultList();
+        return lst;
+    }
+
+    @Override
+    public void UpdateSelected(int idBan) {
+        EntityManager em = JpaUtils.getEntityManager();
+        em.getTransaction().begin();
+        List<Hoadoinchitiet> lst = new ArrayList<>();
+        String jsql = "select hdct  "
+                + "FROM Hoadoinchitiet hdct INNER JOIN Ban b ON hdct.ban.ID_Ban = b.ID_Ban "
+                + "INNER JOIN Hoadon hd ON hd.ID_HoaDon = hdct.hoadon.ID_HoaDon "
+                + "Where hd.trangThai=0 AND b.ID_Ban =" + idBan;
+        TypedQuery<Hoadoinchitiet> query = em.createQuery(jsql, Hoadoinchitiet.class);
+        lst = query.getResultList();
+        for (Hoadoinchitiet x : lst) {
+            em.remove(x);
+        }
+        em.getTransaction().commit();
+        return;
+    }
+    
+    
+
+
 }

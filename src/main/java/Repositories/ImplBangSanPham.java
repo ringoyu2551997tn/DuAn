@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import DomainModel.Sanpham;
 import Utilities.JpaUtils;
 
+
 public class ImplBangSanPham implements InterfaceBangSanPham {
 	
 
@@ -88,6 +89,14 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 			throw e;
 		}
 	}
+
+
+    @Override
+    public List<Sanpham> findByType(int type) {
+        TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s WHERE s.theloai="+type, Sanpham.class);
+		return query.getResultList();
+    }
+
 	
 	
 }

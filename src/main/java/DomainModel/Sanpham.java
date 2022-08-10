@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-
 @Entity
 @NamedQuery(name="Sanpham.findAll", query="SELECT s FROM Sanpham s")
 public class Sanpham implements Serializable {

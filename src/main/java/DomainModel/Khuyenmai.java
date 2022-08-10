@@ -116,4 +116,11 @@ public class Khuyenmai implements Serializable {
 		return hoadon;
 	}
 
+
+    @Override
+    public String toString() {
+        return   tenKhuyenMai+"   " +chietKhau+"%"  ;
+    }
+        
+>>>>> main
 }

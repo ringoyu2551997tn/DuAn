@@ -5,6 +5,7 @@
 package Application;
 
 import DomainModel.Hoadon;
+
 import DomainModel.Nhanvien;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +14,29 @@ import repositories.ImplBangNhanVien;
 import repositories.InterfaceBangHoaDon;
 import repositories.InterfaceBangNhanVien;
 
+import Views.FrmViewMainPage;
+
+import java.util.ArrayList;
+import java.util.List;
+import repositories.ImplBangHoaDon;
+import repositories.InterfaceBangHoaDon;
+
+
 /**
  *
  * @author ADMIN
  */
 public class NewClass {
      public static void main(String[] args) {
+
          InterfaceBangNhanVien daonv = new ImplBangNhanVien();
         Nhanvien nv =  daonv.findbyEmail("lethithanhtam24102002hn@gmail.com", "tamltt");
      
             System.out.println(nv.getTenNhanVien());
  
     }
+
+         new FrmViewMainPage().setVisible(true); 
+        }
+
 }

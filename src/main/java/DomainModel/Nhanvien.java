@@ -22,7 +22,9 @@ public class Nhanvien implements Serializable {
 
 	private String email;
 
-	private byte gioITinh;
+
+	private int gioITinh;
+
 
 	private String maNhanVien;
 
@@ -39,7 +41,9 @@ public class Nhanvien implements Serializable {
 
 	private int trangThai;
 
-	private byte vaiTro;
+
+	private int vaiTro;
+
 
 	//bi-directional many-to-one association to Hoadon
 	@OneToMany(mappedBy="nhanvien")
@@ -72,11 +76,13 @@ public class Nhanvien implements Serializable {
 		this.email = email;
 	}
 
-	public byte getGioITinh() {
+
+	public int getGioITinh() {
 		return this.gioITinh;
 	}
 
-	public void setGioITinh(byte gioITinh) {
+	public void setGioITinh(int gioITinh) {
+
 		this.gioITinh = gioITinh;
 	}
 
@@ -136,11 +142,13 @@ public class Nhanvien implements Serializable {
 		this.trangThai = trangThai;
 	}
 
-	public byte getVaiTro() {
+
+	public int getVaiTro() {
 		return this.vaiTro;
 	}
 
-	public void setVaiTro(byte vaiTro) {
+	public void setVaiTro(int vaiTro) {
+
 		this.vaiTro = vaiTro;
 	}
 

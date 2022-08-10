@@ -18,11 +18,19 @@ public class ImplBangCombo implements InterfaceBangComBo{
 	public List<Combo> findAll(int position, int pageSize) {
 		EntityManager em = JpaUtils.getEntityManager();
 		TypedQuery<Combo> query = em.createNamedQuery("Combo.findAll", Combo.class);
-		
 		query.setFirstResult((position-1)*3);
 		query.setMaxResults(pageSize);
 		return query.getResultList();
 	}
+
+
+        @Override
+	public List<Combo> findAll() {
+		EntityManager em = JpaUtils.getEntityManager();
+		TypedQuery<Combo> query = em.createNamedQuery("Combo.findAll", Combo.class);
+		return query.getResultList();
+	}
+        
 
 	@Override
 	public Combo findById(String id) {

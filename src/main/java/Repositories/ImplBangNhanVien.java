@@ -33,7 +33,8 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	@Override
 	public Nhanvien findById(int id) {
 		TypedQuery<Nhanvien> typedQuery
-	      = em.createQuery("SELECT b FROM Bangnhanvien b WHERE b.id=:id", Nhanvien.class);
+
+	      = em.createQuery("SELECT b FROM Nhanvien b WHERE b.id=:id", Nhanvien.class);
 	    typedQuery.setParameter("id", id);
 	    return typedQuery.getSingleResult();
 	}
@@ -105,6 +106,7 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	}
 
 	@Override
+
 	public Nhanvien findbyEmail(String email, String taikhoan) {
 	Query typedQuery= em.createQuery("Select b from Nhanvien b WHERE b.email =  ? 1 and b.taiKhoan = ? 2 ", Nhanvien.class);
 	    typedQuery.setParameter(1, email);
@@ -113,10 +115,7 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	    return update(nv);
 	}
 
+
 	
-	
-	
-	
-    
 	
 }

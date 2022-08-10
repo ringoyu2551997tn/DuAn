@@ -6,6 +6,10 @@ import DomainModel.Sanpham;
 public interface InterfaceBangSanPham {
 	
 	 	List<Sanpham> findAll(int position, int pageSize);
+
+                
+                List<Sanpham> findByType(int type);
+
 	    
 	 	Sanpham findById(int id);
 	    

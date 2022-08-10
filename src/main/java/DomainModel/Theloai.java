@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 
+
 @Entity
 @NamedQuery(name="Theloai.findAll", query="SELECT t FROM Theloai t")
 public class Theloai implements Serializable {

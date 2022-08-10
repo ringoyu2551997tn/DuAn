@@ -24,10 +24,12 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 	
 	@Override
 	public List<Sanpham> findAll(int position, int pageSize) {
+
 		TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s", Sanpham.class);
 		query.setFirstResult((position-1)*3);
 		query.setMaxResults(pageSize);
 		return query.getResultList();
+
 	}
 
 	@Override
@@ -88,11 +90,13 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 		}
 	}
 
+
     @Override
     public List<Sanpham> findByType(int type) {
         TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s WHERE s.theloai="+type, Sanpham.class);
 		return query.getResultList();
     }
+
 	
 	
 }

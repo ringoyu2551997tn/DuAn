@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import Utilities.JpaUtils;
 import DomainModel.Ban;
+
 import DomainModel.Combo;
 import DomainModel.Hoadoinchitiet;
 import DomainModel.Sanpham;
@@ -54,10 +55,12 @@ public class ImplBangBan implements InterfaceBangBan{
 
 	@Override
 	public Ban findById(long id) {
+
 		 String jsql = "SELECT b FROM Ban b where b.ID_Ban = "+id;
 		TypedQuery<Ban> query = entityManager.createQuery(jsql, Ban.class);
 		Ban ban = query.getSingleResult();
 		return ban;
+
 	}
 
 	@Override
@@ -118,6 +121,7 @@ public class ImplBangBan implements InterfaceBangBan{
         }
 	}
 
+
     @Override
     public List<Ban> findByStatus(int status) {
          EntityManager entityManager = JpaUtils.getEntityManager();
@@ -154,6 +158,7 @@ public class ImplBangBan implements InterfaceBangBan{
         }
 		return lst;
     }
+
 	
 	
 }

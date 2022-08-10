@@ -18,6 +18,7 @@ public interface InterfaceBangHoaDon {
     List<Hoadon> findByTStatus (int a, int position, int pageSize);
     List<Hoadon> findByDate (Date date, int position, int pageSize);
      List<Hoadon> findByTStatusvaTrangthai (int a, Date date, int position, int pageSize);
-     
+
      public Hoadon findHoaDonByBan (int idBan);
+
 }

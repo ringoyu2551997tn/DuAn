@@ -14,12 +14,16 @@ public class Hoadoinchitiet implements Serializable {
 
 	@Id
 	@Column(name="ID_HDCT")
+
         @GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int idHdct;
 
 	private double donGia;
 
+
 	private int kieu;
+
 
 	private int ma;
 
@@ -56,11 +60,13 @@ public class Hoadoinchitiet implements Serializable {
 		this.donGia = donGia;
 	}
 
+
 	public int getKieu() {
 		return this.kieu;
 	}
 
 	public void setKieu(int kieu) {
+
 		this.kieu = kieu;
 	}
 

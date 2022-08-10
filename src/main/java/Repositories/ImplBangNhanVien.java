@@ -33,6 +33,7 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	@Override
 	public Nhanvien findById(int id) {
 		TypedQuery<Nhanvien> typedQuery
+
 	      = em.createQuery("SELECT b FROM Nhanvien b WHERE b.id=:id", Nhanvien.class);
 	    typedQuery.setParameter("id", id);
 	    return typedQuery.getSingleResult();
@@ -105,22 +106,16 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	}
 
 	@Override
-	public Nhanvien resetPasssword(String email) {
-		TypedQuery<Nhanvien> typedQuery= em.createQuery("Select b from Nhanvien b WHERE b.email =  ? 1 ", Nhanvien.class);
+
+	public Nhanvien findbyEmail(String email, String taikhoan) {
+	Query typedQuery= em.createQuery("Select b from Nhanvien b WHERE b.email =  ? 1 and b.taiKhoan = ? 2 ", Nhanvien.class);
 	    typedQuery.setParameter(1, email);
-	    return typedQuery.getSingleResult();
+             typedQuery.setParameter(2, taikhoan);
+             Nhanvien nv = (Nhanvien) typedQuery.getSingleResult();
+	    return update(nv);
 	}
 
-	@Override
-	public Nhanvien findByEmail(String email) {
-		Nhanvien exitUser = resetPasssword(email);
-		if(exitUser != null) {
-			return update(exitUser);
-		}
-		return null ;
-	}
-	
-	
+
 	
 	
 }

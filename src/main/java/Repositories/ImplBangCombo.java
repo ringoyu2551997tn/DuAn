@@ -23,6 +23,7 @@ public class ImplBangCombo implements InterfaceBangComBo{
 		return query.getResultList();
 	}
 
+
         @Override
 	public List<Combo> findAll() {
 		EntityManager em = JpaUtils.getEntityManager();
@@ -30,6 +31,7 @@ public class ImplBangCombo implements InterfaceBangComBo{
 		return query.getResultList();
 	}
         
+
 	@Override
 	public Combo findById(String id) {
 		EntityManager em = JpaUtils.getEntityManager();

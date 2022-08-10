@@ -24,6 +24,7 @@ public class ImplBangKhuyenMai implements InterfaceBangKhuyenMai{
 		return query.getResultList();
 	}
 	
+
         @Override
 	public List<Khuyenmai> findAll() {
 		EntityManager em =JpaUtils.getEntityManager();
@@ -31,6 +32,7 @@ public class ImplBangKhuyenMai implements InterfaceBangKhuyenMai{
 		return query.getResultList();
 	}
         
+
 	@Override
 	public Khuyenmai findById(String maKM) {
 		EntityManager em = JpaUtils.getEntityManager();

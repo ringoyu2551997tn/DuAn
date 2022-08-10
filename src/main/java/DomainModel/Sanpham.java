@@ -5,10 +5,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the sanpham database table.
- * 
- */
 @Entity
 @NamedQuery(name="Sanpham.findAll", query="SELECT s FROM Sanpham s")
 public class Sanpham implements Serializable {

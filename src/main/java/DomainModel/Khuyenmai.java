@@ -7,10 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * The persistent class for the khuyenmai database table.
- * 
- */
+
+
 @Entity
 @NamedQuery(name="Khuyenmai.findAll", query="SELECT k FROM Khuyenmai k")
 public class Khuyenmai implements Serializable {
@@ -118,11 +116,11 @@ public class Khuyenmai implements Serializable {
 		return hoadon;
 	}
 
+
     @Override
     public String toString() {
         return   tenKhuyenMai+"   " +chietKhau+"%"  ;
     }
         
-        
-
+>>>>> main
 }

@@ -1,3 +1,4 @@
+
 Services\IManageProductService.class
 Utilities\HibernateUtil.class
 Services\ManageCategoryService.class
@@ -12,3 +13,4 @@ Repositories\IProductRepository.class
 DomainModels\Category.class
 Repositories\ProductRepository.class
 Services\ManageProductService.class
+

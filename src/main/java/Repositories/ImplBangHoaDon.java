@@ -15,7 +15,7 @@ import Utilities.JpaUtils;
 
 public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
-	public EntityManager entityManager = JpaUtils.getEntityManager();
+
 	
 	@Override
 	public List<Hoadon> findAll() {
@@ -48,6 +48,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 		    entityManager.getTransaction().commit();
 				return hoadon;
 		}catch(Exception ex) {
+
                     System.out.println("loooix create hoa don");
 			entityManager.getTransaction().rollback();
 			throw new RuntimeException();
@@ -115,6 +116,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 		return list;
 	}
         
+
         @Override
 	public Hoadon findHoaDonByBan (int idBan) {
                 EntityManager em = JpaUtils.getEntityManager();
@@ -127,6 +129,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 		return hd;
 	}
         
+
    
 }
 

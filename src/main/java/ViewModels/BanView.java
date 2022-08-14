@@ -1,18 +1,27 @@
+package ViewModels;
 
- * @author luci
- */
 public class BanView {
     private int ID_Ban;
     private String maBan;
     private int trangThai;
+    private int soGhe;
+
+    public int getSoGhe() {
+        return soGhe;
+    }
+
+    public void setSoGhe(int soGhe) {
+        this.soGhe = soGhe;
+    }
 
     public BanView() {
     }
 
-    public BanView(int ID_Ban, String maBan, int trangThai) {
+    public BanView(int ID_Ban, String maBan, int trangThai,int soGhe) {
         this.ID_Ban = ID_Ban;
         this.maBan = maBan;
         this.trangThai = trangThai;
+        this.soGhe = soGhe;
     }
 
     public int getID_Ban() {

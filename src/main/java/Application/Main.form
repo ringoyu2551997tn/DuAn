@@ -28,13 +28,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-<<<<<<< Updated upstream
+
               <Component id="pn" min="-2" pref="932" max="-2" attributes="0"/>
               <EmptySpace pref="42" max="32767" attributes="0"/>
-=======
-              <Component id="pn" pref="1134" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
->>>>>>> Stashed changes
+
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,13 +44,10 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-<<<<<<< Updated upstream
+
                       <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       <Component id="pn" min="-2" pref="716" max="-2" attributes="0"/>
-=======
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pn" min="-2" pref="784" max="-2" attributes="0"/>
->>>>>>> Stashed changes
+
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>

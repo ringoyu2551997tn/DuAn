@@ -4,11 +4,12 @@
  */
 package Application;
 
-
+import Views.BanHang;
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
 import Views.JpanelThongke;
 import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,15 +24,28 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
-         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        if(Login.getCurrentUser().getVaiTro() == 1){
-            btnCombo.setVisible(false);
-            btnKhuyenMai.setVisible(false);
-            btnSanPham.setVisible(false);
-            btnThongke.setVisible(false);
-            btnNhanVien.setVisible(false);
-           
-        }
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//        if (Login.getCurrentUser().getVaiTro() == 1) {
+//            btnCombo.setVisible(false);
+//            btnKhuyenMai.setVisible(false);
+//            btnSanPham.setVisible(false);
+//            btnThongke.setVisible(false);
+//            btnNhanVien.setVisible(false);
+//
+//        }
+    }
+
+    public void setColor(JButton btn) {
+        btnBanHang.setBackground(Color.white);
+        btnHoaDon.setBackground(Color.WHITE);
+        btnNhanVien.setBackground(Color.WHITE);
+        btnCombo.setBackground(Color.WHITE);
+        btnSanPham.setBackground(Color.WHITE);
+        btnKhuyenMai.setBackground(Color.WHITE);
+        btnDoiMatKhau.setBackground(Color.WHITE);
+        btnDangXuat.setBackground(Color.WHITE);
+        btnThongke.setBackground(Color.WHITE);
+        btn.setBackground(Color.red);
     }
 
     /**
@@ -186,13 +200,10 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-<<<<<<< Updated upstream
-                .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
-=======
+
                 .addComponent(pn, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
                 .addContainerGap())
->>>>>>> Stashed changes
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,15 +213,11 @@ public class Main extends javax.swing.JFrame {
                         .addGap(139, 139, 139)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-<<<<<<< Updated upstream
-                        .addGap(88, 88, 88)
-                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(121, Short.MAX_VALUE))
-=======
+
                         .addContainerGap()
                         .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
->>>>>>> Stashed changes
+
         );
 
         pack();
@@ -218,16 +225,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
         // TODO add your handling code here:
-        
+
         pn.removeAll();
-//        pn.add(new ViewNhanVienn());
+        pn.add(new BanHang());
         pn.validate();
-        btnBanHang.setBackground(Color.red);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnCombo.setBackground(Color.WHITE);
-        btnSanPham.setBackground(Color.WHITE);
-        btnKhuyenMai.setBackground(Color.WHITE);
-        
+        setColor(btnBanHang);
+
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
@@ -235,12 +238,8 @@ public class Main extends javax.swing.JFrame {
         pn.removeAll();
 //        pn.add(new ViewChuyenDee());
         pn.validate();
-        btnNhanVien.setBackground(Color.red);
-        btnBanHang.setBackground(Color.WHITE);
-        btnCombo.setBackground(Color.WHITE);
-        btnSanPham.setBackground(Color.WHITE);
-        btnKhuyenMai.setBackground(Color.WHITE);
-    
+        setColor(btnNhanVien);
+
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
@@ -248,11 +247,7 @@ public class Main extends javax.swing.JFrame {
         pn.removeAll();
 //        pn.add(new ViewNguoiHoc());
         pn.validate();
-        btnSanPham.setBackground(Color.red);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnCombo.setBackground(Color.WHITE);
-        btnBanHang.setBackground(Color.WHITE);
-        btnKhuyenMai.setBackground(Color.WHITE);
+        setColor(btnSanPham);
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComboActionPerformed
@@ -260,39 +255,24 @@ public class Main extends javax.swing.JFrame {
         pn.removeAll();
 //        pn.add(new ViewKhoaHoc());
         pn.validate();
-        btnCombo.setBackground(Color.red);
-        btnSanPham.setBackground(Color.WHITE);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnBanHang.setBackground(Color.WHITE);
-        btnKhuyenMai.setBackground(Color.WHITE);
+        setColor(btnCombo);
     }//GEN-LAST:event_btnComboActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
         pn.removeAll();
 //        pn.add(new ViewHocVien());
         pn.validate();
-        btnKhuyenMai.setBackground(Color.red);
-        btnCombo.setBackground(Color.WHITE);
-        btnSanPham.setBackground(Color.WHITE);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnBanHang.setBackground(Color.WHITE);
+        setColor(btnKhuyenMai);
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
-<<<<<<< Updated upstream
-      int a =  JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không?");
-      if(a==0){
-        this.dispose();
-        new Login().setVisible(true);
-      }
-=======
+
         pn.removeAll();
       pn.add(new JpanelThongke());
         pn.validate();
         setColor(btnThongke);
 
->>>>>>> Stashed changes
     }//GEN-LAST:event_btnThongkeActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
@@ -300,28 +280,24 @@ public class Main extends javax.swing.JFrame {
         pn.removeAll();
         pn.add(new JpanelHoaDon());
         pn.validate();
-        btnHoaDon.setBackground(Color.red);
-        btnDoiMatKhau.setBackground(Color.WHITE);
-        btnCombo.setBackground(Color.WHITE);
-        btnSanPham.setBackground(Color.WHITE);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnBanHang.setBackground(Color.WHITE);
+        setColor(btnHoaDon);
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         // TODO add your handling code here:
-       pn.removeAll();
+        pn.removeAll();
         pn.add(new JpanelDoimatkhau());
         pn.validate();
-        btnDoiMatKhau.setBackground(Color.red);
-        btnCombo.setBackground(Color.WHITE);
-        btnSanPham.setBackground(Color.WHITE);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnBanHang.setBackground(Color.WHITE);
+        setColor(btnDoiMatKhau);
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-        // TODO add your handling code here:
+
+        int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không?");
+        if (a == 0) {
+            this.dispose();
+            new Login().setVisible(true);
+        }// TODO add your handling code here:
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
     /**

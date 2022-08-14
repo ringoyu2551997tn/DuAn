@@ -15,7 +15,7 @@ import Utilities.JpaUtils;
 
 public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
-
+EntityManager entityManager = JpaUtils.getEntityManager();
 	
 	@Override
 	public List<Hoadon> findAll() {

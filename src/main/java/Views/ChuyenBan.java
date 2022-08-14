@@ -4,6 +4,7 @@
  */
 package Views;
 
+import Application.Main;
 import Services.IServiceBan;
 import Services.ServiceBan;
 import ViewModels.BanView;
@@ -24,14 +25,14 @@ public class ChuyenBan extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    private FrmViewMainPage banhang;
+    private Main banhang;
 
     public ChuyenBan(java.awt.Frame parent, boolean modal, int kieu, int id) {
         super(parent, modal);
         a = kieu;
         getID = id;
         initComponents();
-        banhang = (FrmViewMainPage) parent;
+        banhang = (Main) parent;
         loadTableBan(svsBan.findByStatus(kieu));
     }
 
@@ -127,6 +128,7 @@ public class ChuyenBan extends javax.swing.JDialog {
         if (a == 0) {
             int index = tbl_chuyenBan.getSelectedRow();
             int idBan = Integer.parseInt(tbl_chuyenBan.getValueAt(index, 0).toString().substring(1));
+            
             svsBan.chuyenBan(getID, idBan);
         } else {
             int index = tbl_chuyenBan.getSelectedRow();
@@ -134,6 +136,7 @@ public class ChuyenBan extends javax.swing.JDialog {
             svsBan.gopBan(getID, idBan);
         }
         this.dispose();
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xacNhanActionPerformed

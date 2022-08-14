@@ -33,7 +33,7 @@ public class ImplBangCombo implements InterfaceBangComBo{
         
 
 	@Override
-	public Combo findById(String id) {
+	public Combo findById(int id) {
 		EntityManager em = JpaUtils.getEntityManager();
 		Combo bcb = em.find(Combo.class, id);
 		return bcb;

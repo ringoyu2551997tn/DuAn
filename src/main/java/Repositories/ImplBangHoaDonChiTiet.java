@@ -12,6 +12,7 @@ import Utilities.JpaUtils;
 import DomainModel.Combo;
 import DomainModel.Hoadoinchitiet;
 import DomainModel.Sanpham;
+import java.util.ArrayList;
 
 
 
@@ -28,7 +29,7 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
 	}
 
 	@Override
-	public Hoadoinchitiet findById(long id) {
+	public Hoadoinchitiet findById(int id) {
 		Hoadoinchitiet hdct = entityManager.find(Hoadoinchitiet.class, id);
 		return hdct;
 	}

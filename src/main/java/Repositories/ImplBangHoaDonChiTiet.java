@@ -92,66 +92,6 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
 		return list;
 	}
 	
-	public double tongtien(int a ) { 
-		String jsql = "select SUM(hdct.DonGia * hdct.SoLuong) "
-				+ "FROM hoadon h inner join hoadoinchitiet hdct on h.ID_HoaDon = hdct.IDHoaDon "
-				+ "where month(h.NgayTao) =  ? 1 and year(h.NgayTao) = ? 2 ";
-		Query query = entityManager.createQuery(jsql);
-		return (double) query.getSingleResult();
-	}
-	
-	@Override
-	public double tongdoanhthu() { 
-		String jsql = "select SUM(hdct.donGia * hdct.soLuong) "
-				+ "FROM Hoadon h  join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon ";
-		Query query = entityManager.createQuery(jsql);
-		return (double) query.getSingleResult();
-	}
-	@Override
-	public Long tongsp(int a , int b ) { 
-		if(a == 0 ) {
-			String jsql = "select SUM( hdct.soLuong) "
-					+ "FROM Hoadon h  join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon ";
-			Query query = entityManager.createQuery(jsql);
-			return (Long) query.getSingleResult();
-		}else if(a ==1) {
-			String jsql = "select SUM( hdct.soLuong) "
-					+ "FROM Sanpham s  join Hoadoinchitiet hdct on s.ID_SanPham = hdct.ma  WHERE s.ID_SanPham = ?1";
-			
-			Query query = entityManager.createQuery(jsql);
-			query.setParameter(1, b);
-			return (Long) query.getSingleResult();
-		}
-		return null;
-		
-	}
-	
-	@Override
-	public Long tonghd() { 
-		String jsql = "select count(h.ID_HoaDon) "
-				+ "FROM Hoadon h";
-		Query query = entityManager.createQuery(jsql);
-		return (Long) query.getSingleResult();
-	}
-	
-	@Override
-	public Sanpham top1sp() { 
-		String jsql = "select top 1 s "
-				+ "FROM Hoadoinchitiet hdct inner join Sanpham s on hdct.ma = s.ID_SanPham "
-				+ "GROUP BY s.tenSanPham order by SUM(hdct.soLuong) desc ";
-		Query query = entityManager.createQuery(jsql);
-		return(Sanpham) query.getSingleResult();
-	}
-	
-	@Override
-	public List<Sanpham> thongkesp() { 
-		String jsql = "select s "
-				+ "FROM Hoadoinchitiet hdct inner join Sanpham s on hdct.ma = s.ID_SanPham "
-				+ "GROUP BY s.tenSanPham order by SUM(hdct.soLuong)";
-		TypedQuery<Sanpham> query = entityManager.createQuery(jsql, Sanpham.class);
-		List<Sanpham> list = query.getResultList();
-		return list;
-	}
 	
 
 	
@@ -197,6 +137,8 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
         em.getTransaction().commit();
         return;
     }
+
+
     
     
 

@@ -7,6 +7,7 @@ package Application;
 import Views.BanHang;
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
+import Views.JpanelThongke;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -24,14 +25,14 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        if (Login.getCurrentUser().getVaiTro() == 1) {
-//            btnCombo.setVisible(false);
-//            btnKhuyenMai.setVisible(false);
-//            btnSanPham.setVisible(false);
-//            btnThongke.setVisible(false);
-//            btnNhanVien.setVisible(false);
-//
-//        }
+        if (Login.getCurrentUser().getVaiTro() == 1) {
+            btnCombo.setVisible(false);
+            btnKhuyenMai.setVisible(false);
+            btnSanPham.setVisible(false);
+            btnThongke.setVisible(false);
+            btnNhanVien.setVisible(false);
+
+        }
     }
 
     public void setColor(JButton btn) {
@@ -199,8 +200,10 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+
                 .addComponent(pn, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
                 .addContainerGap())
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,9 +213,11 @@ public class Main extends javax.swing.JFrame {
                         .addGap(139, 139, 139)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+
                         .addContainerGap()
                         .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -262,6 +267,10 @@ public class Main extends javax.swing.JFrame {
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
+
+        pn.removeAll();
+      pn.add(new JpanelThongke());
+        pn.validate();
         setColor(btnThongke);
 
     }//GEN-LAST:event_btnThongkeActionPerformed

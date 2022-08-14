@@ -106,12 +106,11 @@ EntityManager entityManager = JpaUtils.getEntityManager();
 	}
 
 	@Override
-	public List<Hoadon> findByDate (Date date, int position, int pageSize) {
-		String jsql = "SELECT h FROM Hoadon h where h.ngayTao = ? 1";
+	public List<Hoadon> findByDate (Date date1,Date date2 ) {
+		String jsql = "SELECT h FROM Hoadon h where h.ngayTao between ? 1 and ? 2";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
-		query.setFirstResult((position-1)*3);
-		query.setMaxResults(pageSize);
-		query.setParameter(1,date);
+		query.setParameter(1,date1);
+                query.setParameter(2,date2);
 		List<Hoadon> list = query.getResultList();
 		return list;
 	}

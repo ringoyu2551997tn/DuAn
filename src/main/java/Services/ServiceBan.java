@@ -33,25 +33,25 @@ public class ServiceBan implements IServiceBan {
         if (status == 2) {
             List<BanView> lstBanView = new ArrayList<>();
             for (Ban x : daoBan.findAll()) {
-                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai()));
+                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai(),x.getSoGhe()));
             }
             return lstBanView;
         } else {
             List<BanView> lstBanView = new ArrayList<>();
             for (Ban x : daoBan.findByStatus(status)) {
-                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai()));
+                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai(),x.getSoGhe()));
             }
             return lstBanView;
         }
     }
 
     @Override
-    public List<SelectedItems> showSelectedItems(int ID_ban, int trangthai) {
+    public List<Hoadoinchitiet> showSelectedItems(int ID_ban, int trangthai) {
         if(trangthai==0){
-            List<SelectedItems> lst= new ArrayList<>();
+            List<Hoadoinchitiet> lst= new ArrayList<>();
             return lst;
         }else{
-            List<SelectedItems> lst= new ArrayList<>();
+            List<Hoadoinchitiet> lst= new ArrayList<>();
             lst = daoBan.findAllSelectedItem(ID_ban);
             return lst;
         }
@@ -62,8 +62,11 @@ public class ServiceBan implements IServiceBan {
         List<Hoadoinchitiet> lst = daoHDCT.findByIdBan(idBanDi);
         for (Hoadoinchitiet x : lst) {
             x.setBan(daoBan.findById(idBanToi));
+            if(x.getGhiChu()==null){
+                x.setGhiChu("");
+            }
+            x.setGhiChu(x.getGhiChu()+ " Chuyển từ :B"+idBanDi);
             daoHDCT.update(x);
-            System.out.println(x.toString());
         }
         Ban bantoi = daoBan.findById(idBanToi);
         Ban ban= daoBan.findById(idBanDi);
@@ -81,6 +84,10 @@ public class ServiceBan implements IServiceBan {
         for (Hoadoinchitiet x : lst) {
             x.setBan(daoBan.findById(idBanToi));
             x.setHoadon(hoadon);
+            if(x.getGhiChu()==null){
+                x.setGhiChu("");
+            }
+            x.setGhiChu(x.getGhiChu()+ " Gộp từ B"+idBanDi);
             daoHDCT.update(x);
         }
         Ban ban= daoBan.findById(idBanDi);

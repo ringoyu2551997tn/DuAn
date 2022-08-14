@@ -5,6 +5,7 @@
 package Services;
 
 import DomainModel.Ban;
+import DomainModel.Hoadoinchitiet;
 import ViewModels.BanView;
 import ViewModels.SelectedItems;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface IServiceBan {
     
     List<BanView> findByStatus(int status);
     
-    List<SelectedItems> showSelectedItems(int ID_ban, int trangthai);
+    List<Hoadoinchitiet> showSelectedItems(int ID_ban, int trangthai);
     
     void chuyenBan (int idBanDi, int idBanToi);
     

@@ -128,6 +128,7 @@ public class ChuyenBan extends javax.swing.JDialog {
         if (a == 0) {
             int index = tbl_chuyenBan.getSelectedRow();
             int idBan = Integer.parseInt(tbl_chuyenBan.getValueAt(index, 0).toString().substring(1));
+            
             svsBan.chuyenBan(getID, idBan);
         } else {
             int index = tbl_chuyenBan.getSelectedRow();
@@ -135,6 +136,7 @@ public class ChuyenBan extends javax.swing.JDialog {
             svsBan.gopBan(getID, idBan);
         }
         this.dispose();
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xacNhanActionPerformed

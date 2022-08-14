@@ -11,7 +11,7 @@ public interface InterfaceBangComBo {
         List<Combo> findAll();
         
 
-	Combo findById(String id);
+	Combo findById(int id);
     
 	Combo create(Combo combo);
 	

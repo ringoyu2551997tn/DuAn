@@ -29,7 +29,7 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
 	}
 
 	@Override
-	public Hoadoinchitiet findById(long id) {
+	public Hoadoinchitiet findById(int id) {
 		Hoadoinchitiet hdct = entityManager.find(Hoadoinchitiet.class, id);
 		return hdct;
 	}

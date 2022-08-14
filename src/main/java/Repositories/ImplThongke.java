@@ -72,7 +72,7 @@ public class ImplThongke implements InterfaceThongke {
             Query query = entityManager.createQuery(jsql);
             query.setParameter(1, date);
             list = query.getResultList();
-            if (list == null) {
+            if (list != null) {
                 return list;
             }
             System.out.println("làm gì có gì");
@@ -464,7 +464,7 @@ public class ImplThongke implements InterfaceThongke {
                 String ngay = String.valueOf(date);
                 dataset.addValue( so,"Số tiền", ngay);
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu".toUpperCase(), "Thời gian", "Số Tiền", dataset,
-                PlotOrientation.VERTICAL, false, true, false);
+        PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));

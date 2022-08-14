@@ -1,45 +1,42 @@
-package DomainModel;
+package ViewModels;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import DomainModel.Ban;
+import DomainModel.Hoadon;
 
-
-
-@Entity
-public class Hoadoinchitiet implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@Column(name="ID_HDCT")
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class HoadoinchitietView {
 
 	private int idHdct;
 
 	private double donGia;
 
-
-	private int kieu;
+	private byte kieu;
 
 	private int ma;
 
 	private String maHoaDonChiTiet;
 
 	private int soLuong;
-        
-        private String ghiChu ;
 
-	//bi-directional many-to-one association to Ban
-	@ManyToOne
-	@JoinColumn(name="IDBan")
-	private Ban ban;
-
-	//bi-directional many-to-one association to Hoadon
-	@ManyToOne
-	@JoinColumn(name="IDHoaDon")
 	private Hoadon hoadon;
 
-	public Hoadoinchitiet() {
+        private Ban ban ;
+        
+        private String ghiChu ;
+        
+	public HoadoinchitietView() {
 	}
+
+    public HoadoinchitietView(int idHdct, double donGia, byte kieu, int ma, String maHoaDonChiTiet, int soLuong, Hoadon hoadon, Ban ban, String ghiChu) {
+        this.idHdct = idHdct;
+        this.donGia = donGia;
+        this.kieu = kieu;
+        this.ma = ma;
+        this.maHoaDonChiTiet = maHoaDonChiTiet;
+        this.soLuong = soLuong;
+        this.hoadon = hoadon;
+        this.ban = ban;
+        this.ghiChu = ghiChu;
+    }
 
 	public int getIdHdct() {
 		return this.idHdct;
@@ -57,13 +54,11 @@ public class Hoadoinchitiet implements Serializable {
 		this.donGia = donGia;
 	}
 
-
-	public int getKieu() {
+	public byte getKieu() {
 		return this.kieu;
 	}
 
-	public void setKieu(int kieu) {
-
+	public void setKieu(byte kieu) {
 		this.kieu = kieu;
 	}
 

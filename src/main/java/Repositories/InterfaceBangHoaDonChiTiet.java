@@ -33,13 +33,4 @@ public interface InterfaceBangHoaDonChiTiet {
 
 	List<Combo> findCombo(int id);
 
-	double tongdoanhthu();
-
-	Long tongsp(int a , int b );
-	
-	Long tonghd();
-	
-	Sanpham top1sp();
-	
-	List<Sanpham> thongkesp();
 }

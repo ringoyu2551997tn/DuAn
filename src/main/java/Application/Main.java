@@ -7,6 +7,7 @@ package Application;
 
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
+import Views.JpanelThongke;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -185,8 +186,13 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<<<<<<< Updated upstream
                 .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 932, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
+=======
+                .addComponent(pn, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
+                .addContainerGap())
+>>>>>>> Stashed changes
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +202,15 @@ public class Main extends javax.swing.JFrame {
                         .addGap(139, 139, 139)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+<<<<<<< Updated upstream
                         .addGap(88, 88, 88)
                         .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(121, Short.MAX_VALUE))
+=======
+                        .addContainerGap()
+                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+>>>>>>> Stashed changes
         );
 
         pack();
@@ -268,11 +280,19 @@ public class Main extends javax.swing.JFrame {
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
       int a =  JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không?");
       if(a==0){
         this.dispose();
         new Login().setVisible(true);
       }
+=======
+        pn.removeAll();
+      pn.add(new JpanelThongke());
+        pn.validate();
+        setColor(btnThongke);
+
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnThongkeActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed

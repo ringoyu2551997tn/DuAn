@@ -69,7 +69,7 @@ public class JpanelDoimatkhau extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
+                .addGap(202, 202, 202)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -89,12 +89,12 @@ public class JpanelDoimatkhau extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(211, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -110,7 +110,7 @@ public class JpanelDoimatkhau extends javax.swing.JPanel {
                     .addComponent(jLabel4))
                 .addGap(45, 45, 45)
                 .addComponent(btndoimk)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGap(152, 152, 152))
         );
     }// </editor-fold>//GEN-END:initComponents
 

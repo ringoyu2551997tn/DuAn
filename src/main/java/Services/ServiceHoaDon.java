@@ -6,6 +6,7 @@ package Services;
 
 import DomainModel.Hoadon;
 import ViewModels.HoadonView;
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,15 +91,14 @@ public class ServiceHoaDon implements IServiceBangHoaDon{
     }
 
     @Override
-    public List<HoadonView> findByDate(Date date) {
+    public List<HoadonView> findByDate(Date date1, Date date2) {
         List<HoadonView> lisst = new ArrayList();
-        for (HoadonView x : findAll()) {
-            if(x.getNgayTao().equals(date)){
-              lisst.add(x);
-        }
+        for (Hoadon x : daohd.findByDate(date1, date2)) {
+            lisst.add(new HoadonView(x.getGhiChu(), x.getMaHoaDon(), x.getNgayTao(), x.getThoiGian(), x.getTrangThai(), x.getKhuyenmai(), x.getNhanvien()));
         }
         return lisst;
     }
+
 
 
    

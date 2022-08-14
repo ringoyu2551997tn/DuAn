@@ -4,10 +4,12 @@
  */
 package Views;
 
+import DomainModel.Ban;
 import DomainModel.Combo;
 import DomainModel.Hoadoinchitiet;
 import DomainModel.Hoadon;
 import DomainModel.Sanpham;
+import Services.Date;
 import Services.IServiceBangHoaDon;
 import Services.ServiceHoaDon;
 import ViewModels.HoadonView;
@@ -30,9 +32,14 @@ import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.VerticalAlignment;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import repositories.ImplBangHoaDon;
 import repositories.ImplBangHoaDonChiTiet;
@@ -58,6 +65,8 @@ public class JpanelHoaDon extends javax.swing.JPanel {
         hdService = new ServiceHoaDon();
         loaddata(hdService.findAll());
         add();
+        date1.setDateFormatString("yyyy-MM-dd");
+        date2.setDateFormatString("yyyy-MM-dd");
     }
     
     void add() {
@@ -78,7 +87,7 @@ public class JpanelHoaDon extends javax.swing.JPanel {
         for (HoadonView x : list) {
             _dTableModel.addRow(new Object[]{stt++, x.getMaHoaDon(),
                 x.getNhanvien().getTenNhanVien(),
-                x.getTrangThai() == 0 ? "Đã thanh toán" : x.getTrangThai() == 1 ? "Chưa thanh toán " : "Hủy",
+                x.getTrangThai() == 0 ? "Chưa thanh toán" : x.getTrangThai() == 1 ? "Đã thanh toán" : "Hủy",
                 x.getGhiChu(),
                 x.getKhuyenmai().getTenKhuyenMai(),
                 x.getNgayTao()});
@@ -91,11 +100,11 @@ public class JpanelHoaDon extends javax.swing.JPanel {
         _dTableModel.setRowCount(0);
         int stt = 0;
         for (Hoadoinchitiet x : list) {
-            if (x.getKieu() == 0) {
+            if (x.getKieu() == 1) {
                 for (Sanpham s : hdct.findSanPham(x.getHoadon().getID_HoaDon())) {
                     _dTableModel.addRow(new Object[]{stt++, s.getMaSanPham(), s.getTenSanPham(), x.getDonGia(), x.getSoLuong(), x.getDonGia() * x.getSoLuong()});
                 }
-            }else if (x.getKieu() == 1){
+            }else if (x.getKieu() == 0){
                 for (Combo c : hdct.findCombo(x.getHoadon().getID_HoaDon())) {
                     _dTableModel.addRow(new Object[]{stt++, c.getMaComBo(), c.getTenComBo(), x.getDonGia(), x.getSoLuong(),x.getDonGia() * x.getSoLuong()});
                 }
@@ -126,13 +135,14 @@ public class JpanelHoaDon extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_hd = new javax.swing.JTable();
         cbcTrangthai = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
+        date1 = new com.toedter.calendar.JDateChooser();
+        date2 = new com.toedter.calendar.JDateChooser();
+        Xuat = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_hd1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        Loc = new javax.swing.JButton();
 
         tbl_hd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,10 +177,10 @@ public class JpanelHoaDon extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Lọc");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Xuat.setText("Xuất");
+        Xuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                XuatActionPerformed(evt);
             }
         });
 
@@ -201,6 +211,13 @@ public class JpanelHoaDon extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Hóa đơn chi tiết ");
 
+        Loc.setText("Lọc");
+        Loc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,39 +228,36 @@ public class JpanelHoaDon extends javax.swing.JPanel {
                 .addGap(355, 355, 355))
             .addGroup(layout.createSequentialGroup()
                 .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(281, 281, 281)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(281, 281, 281)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 775, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbcTrangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(176, 176, 176)
-                                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addContainerGap(55, Short.MAX_VALUE))))
+                        .addComponent(cbcTrangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)
+                        .addComponent(date1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(date2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Xuat, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Xuat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(cbcTrangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,8 +266,8 @@ public class JpanelHoaDon extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(95, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -281,19 +295,25 @@ public class JpanelHoaDon extends javax.swing.JPanel {
         if (cbcTrangthai.getSelectedIndex() == 0) {
             loaddata(hdService.findAll());
         } else if (cbcTrangthai.getSelectedIndex() == 1) {
-            loaddata(hdService.findByTStatus(0));
-        } else if (cbcTrangthai.getSelectedIndex() == 2) {
             loaddata(hdService.findByTStatus(1));
+        } else if (cbcTrangthai.getSelectedIndex() == 2) {
+            loaddata(hdService.findByTStatus(0));
         } else if (cbcTrangthai.getSelectedIndex() == 3) {
             loaddata(hdService.findByTStatus(2));
         }
     }//GEN-LAST:event_cbcTrangthaiItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void XuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_XuatActionPerformed
+         if(tbl_hd.getSelectedRow() < 0){
+              JOptionPane.showMessageDialog(this, "Muốn xuất hóa đơn nào phải chọn chứ");
+                return;
+         }
+        String mahd = tbl_hd.getModel().getValueAt(tbl_hd.getSelectedRow(),1).toString();
+       
         PdfWriter pdfwriter = null;
         try {
-            // TODO add your handling code here:
-            String path = "D:\\PDF\\1.pdf";
+           
+            String path = "D:\\PDF\\"+ IDHD(tbl_hd.getModel().getValueAt(tbl_hd.getSelectedRow(),1).toString()) + ".pdf";
             pdfwriter = new PdfWriter(path);
             PdfDocument pdfDocument = new PdfDocument(pdfwriter);
             Document document = new Document(pdfDocument);
@@ -327,68 +347,72 @@ public class JpanelHoaDon extends javax.swing.JPanel {
             Table customerInfortable = new Table(colwith);
             customerInfortable.addCell(new Cell(0, 4).add(new Paragraph("thong tin chi tiet")).setBold().setBorder(Border.NO_BORDER));
             customerInfortable.addCell(new Cell().add(new Paragraph("Ten NV : ")).setBorder(Border.NO_BORDER));
-//            customerInfortable.addCell(new Cell().add(new Paragraph(hd.getNhanvien().getTenNhanVien())).setBorder(Border.NO_BORDER));
-//            customerInfortable.addCell(new Cell().add(new Paragraph("Date : ")).setBorder(Border.NO_BORDER));
-//            customerInfortable.addCell(new Cell().add(new Paragraph(String.valueOf(hd.getNgayTao()))).setBorder(Border.NO_BORDER));
-//            customerInfortable.addCell(new Cell().add(new Paragraph("Time  : ")).setBorder(Border.NO_BORDER));
-//            customerInfortable.addCell(new Cell().add(new Paragraph(String.valueOf(hd.getThoiGian()))).setBorder(Border.NO_BORDER));
-//            customerInfortable.addCell(new Cell().add(new Paragraph("Ban : ")).setBorder(Border.NO_BORDER));
-//            for (Ban f : listbanHD) {
-//                customerInfortable.addCell(new Cell().add(new Paragraph(f.getMaBan())).setBorder(Border.NO_BORDER));
-//            }
-//            //thông tin sản phẩm
-//            double sum = 0;
-//            for (Hoadoinchitiet x : listhdct) {
-//                sum += (x.getSoLuong() * x.getDonGia());
-//            }
-//            float itemInfoColWith[] = {112,112,112,112,112};
-//            Table itemInfoTable = new Table(itemInfoColWith);
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("Ma SP")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("Ten SP")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("Gia Ban")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("So luong")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("Thanh Tien")).setBorder(Border.NO_BORDER));
-//            for (int i = 0;i< listhdct.size() ; i++) {
-//                if(listhdct.get(i).getKieu() == 1) {
-//                    for (Sanpham s : listSanPham) {
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(s.getMaSanPham())).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(s.getTenSanPham())).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(listhdct.get(i).getDonGia()))).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(listhdct.get(i).getSoLuong()))).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(listhdct.get(i).getSoLuong() * listhdct.get(i).getDonGia()))).setBorder(Border.NO_BORDER));
-//                    }
-//                }else  {
-//                    for (Combo c : listCombo) {
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(c.getMaComBo())).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(c.getTenComBo())).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(listhdct.get(i).getDonGia()))).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(listhdct.get(i).getSoLuong()))).setBorder(Border.NO_BORDER));
-//                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(listhdct.get(i).getSoLuong() * listhdct.get(i).getDonGia()))).setBorder(Border.NO_BORDER));
-//                    }
-//                }
-//                
-//                
-//                
-//            }
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("Giam Gia ")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(hd.getKhuyenmai().getChietKhau()))).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph("Tong ")).setBorder(Border.NO_BORDER));
-//            itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf((sum * (100- hd.getKhuyenmai().getChietKhau().intValue() )) / 100 ))).setBorder(Border.NO_BORDER));
+            customerInfortable.addCell(new Cell().add(new Paragraph(hd.findById(IDHD(mahd)).getNhanvien().getTenNhanVien())).setBorder(Border.NO_BORDER));
+           customerInfortable.addCell(new Cell().add(new Paragraph("Date : ")).setBorder(Border.NO_BORDER));
+          customerInfortable.addCell(new Cell().add(new Paragraph(String.valueOf(hd.findById(IDHD(mahd)).getNgayTao()))).setBorder(Border.NO_BORDER));
+           customerInfortable.addCell(new Cell().add(new Paragraph("Time  : ")).setBorder(Border.NO_BORDER));
+            customerInfortable.addCell(new Cell().add(new Paragraph(String.valueOf(hd.findById(IDHD(mahd)).getThoiGian()))).setBorder(Border.NO_BORDER));
+            customerInfortable.addCell(new Cell().add(new Paragraph("Ban : ")).setBorder(Border.NO_BORDER));
+           	Set<Ban> listbanHD  = new HashSet<Ban>();
+		for (Hoadoinchitiet x : hdct.findByIdHD(IDHD(mahd))) {
+		listbanHD.add(x.getBan());
+			}
+          for (Ban f : listbanHD) {
+              customerInfortable.addCell(new Cell().add(new Paragraph(f.getMaBan())).setBorder(Border.NO_BORDER));
+          }
+            
+            //thông tin sản phẩm
+            double sum = 0;
+            for (Hoadoinchitiet x : hdct.findByIdHD(IDHD(mahd))) {
+                sum += (x.getSoLuong() * x.getDonGia());
+            }
+            float itemInfoColWith[] = {112,112,112,112,112};
+            Table itemInfoTable = new Table(itemInfoColWith);
+            itemInfoTable.addCell(new Cell().add( new Paragraph("Ma SP")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("Ten SP")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("Gia Ban")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("So luong")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("Thanh Tien")).setBorder(Border.NO_BORDER));
+            for (Hoadoinchitiet x :hdct.findByIdHD(IDHD(mahd)) ) {
+                if(x.getKieu() == 1) {
+                    for (Sanpham s :  hdct.findSanPham(x.getHoadon().getID_HoaDon())) {
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(s.getMaSanPham())).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(s.getTenSanPham())).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(x.getDonGia()))).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(x.getSoLuong()))).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(x.getSoLuong() *x.getDonGia()))).setBorder(Border.NO_BORDER));
+                    }
+                }else  {
+                    for (Combo c : hdct.findCombo(x.getHoadon().getID_HoaDon())) {
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(c.getMaComBo())).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(c.getTenComBo())).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(x.getDonGia()))).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(x.getSoLuong()))).setBorder(Border.NO_BORDER));
+                        itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(x.getSoLuong() *x.getDonGia()))).setBorder(Border.NO_BORDER));
+                    }
+                }
+                
+                
+                
+            }
+            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("Giam Gia ")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf(hd.findById(IDHD(mahd)).getKhuyenmai().getChietKhau()))).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph("Tong ")).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf((sum * (100-hd.findById(IDHD(mahd)).getKhuyenmai().getChietKhau().intValue() )) / 100 ))).setBorder(Border.NO_BORDER));
             document.add(table);
             document.add(new Paragraph());
             document.add(customerInfortable);
-//            document.add(itemInfoTable);
+            document.add(itemInfoTable);
             document.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(JpanelHoaDon.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(JpanelHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+              JOptionPane.showMessageDialog(this, "Xuất thành công!");
+        } catch (Exception ex) {
+             JOptionPane.showMessageDialog(this, "Xuất thất bại !");
         } finally {
             try {
                 pdfwriter.close();
@@ -396,26 +420,50 @@ public class JpanelHoaDon extends javax.swing.JPanel {
                 Logger.getLogger(JpanelHoaDon.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_XuatActionPerformed
 
     private void cbcTrangthaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbcTrangthaiKeyPressed
         if (cbcTrangthai.getSelectedItem().toString().equals("Tất cả")) {
             loaddata(hdService.findAll());
         } else if (cbcTrangthai.getSelectedItem().toString().equals("Đã thanh toán")) {
-            loaddata(hdService.findByTStatus(0));
-        } else if (cbcTrangthai.getSelectedItem().toString().equals("Chưa thanh toán")) {
             loaddata(hdService.findByTStatus(1));
+        } else if (cbcTrangthai.getSelectedItem().toString().equals("Chưa thanh toán")) {
+            loaddata(hdService.findByTStatus(0));
         } else if (cbcTrangthai.getSelectedItem().toString().equals("Hủy")) {
             loaddata(hdService.findByTStatus(2));
         }
     }//GEN-LAST:event_cbcTrangthaiKeyPressed
 
+    private void LocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocActionPerformed
+         Calendar cal1 = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            SimpleDateFormat fomat = new SimpleDateFormat("yyyy-MM-dd");
+            cal1.setTime(date1.getDate());
+            cal2.setTime(date2.getDate());
+            if(fomat.format(date2.getDate()).isEmpty() || fomat.format(date1.getDate()).isEmpty()){
+                 JOptionPane.showMessageDialog(this, "Không được null !");
+                return;
+            }
+            if(cal1.after(cal2)){
+                JOptionPane.showMessageDialog(this, "Không được chọn ngày bắt đầu < ngày khết thúc!");
+                return;
+            }
+          
+//            if (!date1.getDateFormatString().(fomat.format(date1.getDate()))){
+//                JOptionPane.showMessageDialog(this, "Không đúng định dạng ngày ");
+//                return;
+//            }      
+        
+        loaddata(hdService.findByDate(date1.getDate(), date2.getDate()));
+    }//GEN-LAST:event_LocActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Loc;
+    private javax.swing.JButton Xuat;
     private javax.swing.JComboBox<String> cbcTrangthai;
-    private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser date1;
+    private com.toedter.calendar.JDateChooser date2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -7,10 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * The persistent class for the hoadon database table.
- * 
- */
 @Entity
 @NamedQuery(name="Hoadon.findAll", query="SELECT h FROM Hoadon h")
 public class Hoadon implements Serializable {

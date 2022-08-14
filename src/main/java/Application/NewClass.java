@@ -4,13 +4,15 @@
  */
 package Application;
 
+import Views.BanHang;
+
 /**
  *
  * @author ADMIN
  */
 public class NewClass {
      public static void main(String[] args) {  
-         new Login().setVisible(true); 
+         new Main().setVisible(true); 
         }
 
 }

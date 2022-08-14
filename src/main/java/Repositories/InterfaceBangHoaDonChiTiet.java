@@ -16,7 +16,7 @@ public interface InterfaceBangHoaDonChiTiet {
         List<Hoadoinchitiet> findByIdBan(int id);
         
 
-	Hoadoinchitiet findById(long id);
+	Hoadoinchitiet findById(int id);
 
 	Hoadoinchitiet create(Hoadoinchitiet hdct);
 

@@ -21,7 +21,18 @@ public class Ban implements Serializable {
 	private String maBan;
 
 	private int trangThai;
+        
+        private int soGhe;
 
+    public int getSoGhe() {
+        return soGhe;
+    }
+
+    public void setSoGhe(int soGhe) {
+        this.soGhe = soGhe;
+    }
+
+        
 	//bi-directional many-to-one association to Hoadoinchitiet
 	@OneToMany(mappedBy="ban")
 	private List<Hoadoinchitiet> hoadoinchitiets;

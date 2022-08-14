@@ -2,6 +2,7 @@ package repositories;
 
 import java.util.List;
 import DomainModel.Ban;
+import DomainModel.Hoadoinchitiet;
 
 import ViewModels.SelectedItems;
 
@@ -16,7 +17,7 @@ public interface InterfaceBangBan {
         
         List<Ban> findAll();
         
-        List<SelectedItems> findAllSelectedItem(int id_ban);
+        List<Hoadoinchitiet> findAllSelectedItem(int id_ban);
         
 
 	Ban findById(long id);

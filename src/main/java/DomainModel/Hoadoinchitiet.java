@@ -30,7 +30,7 @@ public class Hoadoinchitiet implements Serializable {
 	private String maHoaDonChiTiet;
 
 	private int soLuong;
-
+        
 	//bi-directional many-to-one association to Ban
 	@ManyToOne
 	@JoinColumn(name="IDBan")
@@ -40,6 +40,9 @@ public class Hoadoinchitiet implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="IDHoaDon")
 	private Hoadon hoadon;
+        
+         private String ghiChu;
+
 
 	public Hoadoinchitiet() {
 	}
@@ -109,5 +112,15 @@ public class Hoadoinchitiet implements Serializable {
 	public void setHoadon(Hoadon hoadon) {
 		this.hoadon = hoadon;
 	}
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+        
+        
 
 }

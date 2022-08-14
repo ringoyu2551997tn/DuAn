@@ -31,7 +31,8 @@ public class JpanelThongke extends javax.swing.JPanel {
     DefaultTableModel _tablcb = new DefaultTableModel();
     DefaultTableModel _tablsp = new DefaultTableModel();
     InterfaceBangHoaDonChiTiet hdct = new ImplBangHoaDonChiTiet();
-  DecimalFormat fommater = new DecimalFormat("###, ###, ###");
+    DecimalFormat fommater = new DecimalFormat("###, ###, ###");
+
     public JpanelThongke() {
         initComponents();
     }
@@ -372,39 +373,37 @@ public class JpanelThongke extends javax.swing.JPanel {
 
     private void loctheoKhoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loctheoKhoangActionPerformed
         // TODO add your handling code here:
-        
+
         Calendar cal1 = Calendar.getInstance();
-            Calendar cal2 = Calendar.getInstance();
-           
-            if(date1.getDate() == null || date2.getDate() == null){
-                System.out.println("null ");
-                 JOptionPane.showMessageDialog(this, "Không được null !");
-                return;
-            }
+        Calendar cal2 = Calendar.getInstance();
+
+        if (date1.getDate() == null || date2.getDate() == null) {
+            System.out.println("null ");
+            JOptionPane.showMessageDialog(this, "Không được null !");
+            return;
+        }
 //             if (!date1.getDateFormatString().equals(date1.getDate())){
 //                JOptionPane.showMessageDialog(this, "Không đúng định dạng ngày ");
 //                return;
 //            } 
-            
-             cal1.setTime(date1.getDate());
-            cal2.setTime(date2.getDate());
-            if(cal1.after(cal2)){
-                JOptionPane.showMessageDialog(this, "Không được chọn ngày bắt đầu < ngày khết thúc!");
-                return;
-            }
-            
+
+        cal1.setTime(date1.getDate());
+        cal2.setTime(date2.getDate());
+        if (cal1.after(cal2)) {
+            JOptionPane.showMessageDialog(this, "Không được chọn ngày bắt đầu < ngày khết thúc!");
+            return;
+        }
+
         if (TkDService.listdatatheokhoang(date1.getDate(), date2.getDate()) == null) {
             lblDoanhthu.setText(String.valueOf(0));
             lblHoadon.setText(String.valueOf(0));
-            lblTongSp.setText(String.valueOf(0));       
+            lblTongSp.setText(String.valueOf(0));
             _tablcb.setRowCount(0);
             _tablsp.setRowCount(0);
             JOptionPane.showMessageDialog(this, "Không có dữ liệu trong ngày ");
             return;
         }
 
-      
-        
         lblDoanhthu.setText(String.valueOf(fommater.format(TkDService.listdatatheokhoang(date1.getDate(), date2.getDate()).get(0).getTongtien())) + "VNĐ");
         lblHoadon.setText(String.valueOf(TkDService.listdatatheokhoang(date1.getDate(), date2.getDate()).get(0).getTonghd()));
         lblTongSp.setText(String.valueOf(TkDService.listdatatheokhoang(date1.getDate(), date2.getDate()).get(0).getTongsp()));
@@ -415,10 +414,10 @@ public class JpanelThongke extends javax.swing.JPanel {
 
     private void loctheongayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loctheongayActionPerformed
         // TODO add your handling code here:
-         if(datengay.getDate() == null ){        
-                 JOptionPane.showMessageDialog(this, "Không được null !");
-                return;
-            }
+        if (datengay.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Không được null !");
+            return;
+        }
         if (TkDService.listdatatheongay(datengay.getDate()) == null) {
             lblDoanhthu.setText(String.valueOf(0));
             lblHoadon.setText(String.valueOf(0));
@@ -429,8 +428,7 @@ public class JpanelThongke extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Không có dữ liệu trong ngày ");
             return;
         }
-
-        lblDoanhthu.setText(String.valueOf(TkDService.listdatatheongay(datengay.getDate()).get(0).getTongtien()));
+        lblDoanhthu.setText(String.valueOf(fommater.format(TkDService.listdatatheongay(datengay.getDate()).get(0).getTongtien())) + "VNĐ");
         lblHoadon.setText(String.valueOf(TkDService.listdatatheongay(datengay.getDate()).get(0).getTonghd()));
         lblTongSp.setText(String.valueOf(TkDService.listdatatheongay(datengay.getDate()).get(0).getTongsp()));
         TkDService.setDataNgay(pnBieudo, datengay.getDate());
@@ -446,14 +444,14 @@ public class JpanelThongke extends javax.swing.JPanel {
             lblDoanhthu.setText(String.valueOf(0));
             lblHoadon.setText(String.valueOf(0));
             lblTongSp.setText(String.valueOf(0));
-//            TkDService.setDatanull(pnBieudo,);
+            TkDService.setDatangaynull(pnBieudo, date1.getDate());
             _tablcb.setRowCount(0);
             _tablsp.setRowCount(0);
             JOptionPane.showMessageDialog(this, "Không có dữ liệu trong ngày ");
             return;
         }
 
-        lblDoanhthu.setText(String.valueOf(TkDService.listdatatheothang(thang, nam).get(0).getTongtien()));
+        lblDoanhthu.setText(String.valueOf(fommater.format(TkDService.listdatatheothang(thang, nam).get(0).getTongtien())) + "VNĐ");
         lblHoadon.setText(String.valueOf(TkDService.listdatatheothang(thang, nam).get(0).getTonghd()));
         lblTongSp.setText(String.valueOf(TkDService.listdatatheothang(thang, nam).get(0).getTongsp()));
         TkDService.setDataThang(pnBieudo, thang, nam);
@@ -470,14 +468,14 @@ public class JpanelThongke extends javax.swing.JPanel {
             lblDoanhthu.setText(String.valueOf(0));
             lblHoadon.setText(String.valueOf(0));
             lblTongSp.setText(String.valueOf(0));
-//            TkDService.setDatanull(pnBieudo);
+            TkDService.setDatangaynull(pnBieudo, datengay.getDate());
             _tablcb.setRowCount(0);
             _tablsp.setRowCount(0);
             JOptionPane.showMessageDialog(this, "Không có dữ liệu trong ngày ");
             return;
         }
 
-        lblDoanhthu.setText(String.valueOf(TkDService.listdatatheonam(nam).get(0).getTongtien()));
+        lblDoanhthu.setText(String.valueOf(fommater.format(TkDService.listdatatheonam(nam).get(0).getTongtien())) + "VNĐ");
         lblHoadon.setText(String.valueOf(TkDService.listdatatheonam(nam).get(0).getTonghd()));
         lblTongSp.setText(String.valueOf(TkDService.listdatatheonam(nam).get(0).getTongsp()));
         TkDService.setDataNam(pnBieudo, nam);
@@ -488,12 +486,12 @@ public class JpanelThongke extends javax.swing.JPanel {
 
     private void homnayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homnayActionPerformed
         // TODO add your handling code here:
- Date date = java.util.Calendar.getInstance().getTime();
+        Date date = java.util.Calendar.getInstance().getTime();
         if (TkDService.listdatatheongay(date) == null) {
             lblDoanhthu.setText(String.valueOf(0));
             lblHoadon.setText(String.valueOf(0));
             lblTongSp.setText(String.valueOf(0));
-           
+            TkDService.setDatangaynull(pnBieudo, datengay.getDate());
             TkDService.setDatangaynull(pnBieudo, date);
             _tablcb.setRowCount(0);
             _tablsp.setRowCount(0);
@@ -501,16 +499,16 @@ public class JpanelThongke extends javax.swing.JPanel {
             return;
         }
 
-        lblDoanhthu.setText(String.valueOf(TkDService.listdatatheongay(date).get(0).getTongtien()));
+        lblDoanhthu.setText(String.valueOf(fommater.format(TkDService.listdatatheongay(date).get(0).getTongtien())) + "VNĐ");
         lblHoadon.setText(String.valueOf(TkDService.listdatatheongay(date).get(0).getTonghd()));
         lblTongSp.setText(String.valueOf(TkDService.listdatatheongay(date).get(0).getTongsp()));
         TkDService.setDataNgay(pnBieudo, date);
         loaddatasp(TkDService.thongkesptheongay(date));
         loaddatacb(TkDService.thongkecbtheongay(date));
 
-        
+
     }//GEN-LAST:event_homnayActionPerformed
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser date1;

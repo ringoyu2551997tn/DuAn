@@ -40,8 +40,6 @@ public class Hoadoinchitiet implements Serializable {
 	@JoinColumn(name="IDHoaDon")
 	private Hoadon hoadon;
         
-         private String ghiChu;
-
 
 	public Hoadoinchitiet() {
 	}

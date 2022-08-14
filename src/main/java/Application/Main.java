@@ -25,14 +25,14 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        if (Login.getCurrentUser().getVaiTro() == 1) {
-//            btnCombo.setVisible(false);
-//            btnKhuyenMai.setVisible(false);
-//            btnSanPham.setVisible(false);
-//            btnThongke.setVisible(false);
-//            btnNhanVien.setVisible(false);
-//
-//        }
+        if (Login.getCurrentUser().getVaiTro() == 1) {
+            btnCombo.setVisible(false);
+            btnKhuyenMai.setVisible(false);
+            btnSanPham.setVisible(false);
+            btnThongke.setVisible(false);
+            btnNhanVien.setVisible(false);
+
+        }
     }
 
     public void setColor(JButton btn) {

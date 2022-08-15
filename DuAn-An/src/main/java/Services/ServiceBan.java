@@ -27,53 +27,31 @@ public class ServiceBan implements IServiceBan {
     InterfaceBangBan daoBan = new ImplBangBan();
     InterfaceBangHoaDon daoHD = new ImplBangHoaDon();
     InterfaceBangHoaDonChiTiet daoHDCT = new ImplBangHoaDonChiTiet();
-    private final ImplBangBan _dao;
-    private List<BanView> _lstBanMod = new ArrayList<>();
-    private List<Ban> _lstBan = new ArrayList<>();
-
-    public ServiceBan() {
-        _dao = new ImplBangBan();
-        getlst();
-    }
-
-    public List<Ban> getlst() {
-        return _dao.findAll();
-    }
-
-    public BanView create(BanView BanView) {
-        _dao.create(new Ban(BanView.getMaBan(), BanView.getTrangThai()));
-        return new BanView(BanView.getMaBan(), BanView.getTrangThai());
-    }
-
-    public BanView update(BanView BanView) {
-        _dao.update(new Ban(BanView.getID_Ban(), BanView.getMaBan(), BanView.getTrangThai()));
-        return new BanView(BanView.getMaBan(), BanView.getTrangThai());
-    }
-
+    
     @Override
     public List<BanView> findByStatus(int status) {
         if (status == 2) {
             List<BanView> lstBanView = new ArrayList<>();
             for (Ban x : daoBan.findAll()) {
-                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai()));
+                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai(),x.getSoGhe()));
             }
             return lstBanView;
         } else {
             List<BanView> lstBanView = new ArrayList<>();
             for (Ban x : daoBan.findByStatus(status)) {
-                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai()));
+                lstBanView.add(new BanView(x.getID_Ban(), x.getMaBan(), x.getTrangThai(),x.getSoGhe()));
             }
             return lstBanView;
         }
     }
 
     @Override
-    public List<SelectedItems> showSelectedItems(int ID_ban, int trangthai) {
-        if (trangthai == 0) {
-            List<SelectedItems> lst = new ArrayList<>();
+    public List<Hoadoinchitiet> showSelectedItems(int ID_ban, int trangthai) {
+        if(trangthai==0){
+            List<Hoadoinchitiet> lst= new ArrayList<>();
             return lst;
-        } else {
-            List<SelectedItems> lst = new ArrayList<>();
+        }else{
+            List<Hoadoinchitiet> lst= new ArrayList<>();
             lst = daoBan.findAllSelectedItem(ID_ban);
             return lst;
         }
@@ -84,11 +62,14 @@ public class ServiceBan implements IServiceBan {
         List<Hoadoinchitiet> lst = daoHDCT.findByIdBan(idBanDi);
         for (Hoadoinchitiet x : lst) {
             x.setBan(daoBan.findById(idBanToi));
+            if(x.getGhiChu()==null){
+                x.setGhiChu("");
+            }
+            x.setGhiChu(x.getGhiChu()+ " Chuyển từ :B"+idBanDi);
             daoHDCT.update(x);
-            System.out.println(x.toString());
         }
         Ban bantoi = daoBan.findById(idBanToi);
-        Ban ban = daoBan.findById(idBanDi);
+        Ban ban= daoBan.findById(idBanDi);
         bantoi.setTrangThai(1);
         ban.setTrangThai(0);
         daoBan.update(ban);
@@ -103,13 +84,18 @@ public class ServiceBan implements IServiceBan {
         for (Hoadoinchitiet x : lst) {
             x.setBan(daoBan.findById(idBanToi));
             x.setHoadon(hoadon);
+            if(x.getGhiChu()==null){
+                x.setGhiChu("");
+            }
+            x.setGhiChu(x.getGhiChu()+ " Gộp từ B"+idBanDi);
             daoHDCT.update(x);
         }
-        Ban ban = daoBan.findById(idBanDi);
+        Ban ban= daoBan.findById(idBanDi);
         ban.setTrangThai(0);
         daoBan.update(ban);
         hoadonBanDi.setTrangThai(1);
         daoHD.update(hoadonBanDi);
     }
 
+    
 }

@@ -16,7 +16,6 @@ public class Nhanvien implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID_NhanVien;
 
 	private String diaChi;
@@ -52,37 +51,6 @@ public class Nhanvien implements Serializable {
 
 	public Nhanvien() {
 	}
-
-    public Nhanvien(int ID_NhanVien, String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
-        this.ID_NhanVien = ID_NhanVien;
-        this.diaChi = diaChi;
-        this.email = email;
-        this.gioITinh = gioITinh;
-        this.maNhanVien = maNhanVien;
-        this.matKhau = matKhau;
-        this.ngaySinh = ngaySinh;
-        this.soDienThoai = soDienThoai;
-        this.taiKhoan = taiKhoan;
-        this.tenNhanVien = tenNhanVien;
-        this.trangThai = trangThai;
-        this.vaiTro = vaiTro;
-    }
-
-    public Nhanvien(String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
-        this.diaChi = diaChi;
-        this.email = email;
-        this.gioITinh = gioITinh;
-        this.maNhanVien = maNhanVien;
-        this.matKhau = matKhau;
-        this.ngaySinh = ngaySinh;
-        this.soDienThoai = soDienThoai;
-        this.taiKhoan = taiKhoan;
-        this.tenNhanVien = tenNhanVien;
-        this.trangThai = trangThai;
-        this.vaiTro = vaiTro;
-    }
-        
-        
 
 	public int getID_NhanVien() {
 		return this.ID_NhanVien;

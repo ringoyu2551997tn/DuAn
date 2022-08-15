@@ -1,0 +1,541 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package Views;
+
+import DomainModel.Sanpham;
+import DomainModel.Theloai;
+import Services.ServiceSanPham;
+import Services.ServiceTheLoai;
+import Utilities.HibernateUtil;
+import ViewModels.SanPhamView;
+import java.awt.Component;
+import java.awt.Image;
+import java.io.File;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import repositories.ImplBangSanPham;
+import repositories.ImplBangTheLoai;
+
+/**
+ *
+ * @author LuongQuocBao
+ */
+public class JPanelSanPham extends javax.swing.JPanel {
+
+    DefaultTableModel _DefaultTableModel = new DefaultTableModel();
+    ServiceSanPham _ServiceSanPham = new ServiceSanPham();
+    ServiceTheLoai _TheLoaiService = new ServiceTheLoai();
+    ImplBangTheLoai _daoTL = new ImplBangTheLoai();
+    ImplBangSanPham _daoSP = new ImplBangSanPham();
+
+    /**
+     * Creates new form PanelSanPham
+     */
+    public JPanelSanPham() {
+        initComponents();
+        loadTable(_ServiceSanPham.getlst());
+        System.out.println(_ServiceSanPham.getlst().size());
+        TheLoai();
+        trangThai();
+    }
+
+    void trangThai() {
+        cbxTrangThai.removeAllItems();
+        cbxTrangThai.addItem("Hoạt động");
+        cbxTrangThai.addItem("Không hoạt động");
+    }
+
+    void TheLoai() {
+        cbxTheLoai.removeAllItems();
+        for (Theloai x : _daoTL.findAll()) {
+            cbxTheLoai.addItem(String.valueOf(x.getTenTheLoai()));
+        }
+        JOptionPane.showMessageDialog(this, "aaaaaaaaaa");
+    }
+
+    void loadTable(List<Sanpham> lstSanphams) {
+        _DefaultTableModel = (DefaultTableModel) tblSanPham.getModel();
+        if (lstSanphams.isEmpty()) {
+            _DefaultTableModel.setRowCount(0);
+            return;
+        }
+        _DefaultTableModel.setRowCount(0);
+        for (Sanpham x : lstSanphams) {
+            _DefaultTableModel.addRow(new Object[]{
+                x.getMaSanPham(), x.getTenSanPham(), x.getGiaTien(), x.getHinhAnh(), x.getTrangThai() == 1 ? "Hoạt động" : "Không hoạt động"
+            });
+        }
+    }
+
+    Theloai getTL(String TL) {
+        for (Theloai x : _TheLoaiService.getlst()) {
+            if (cbxTheLoai.getSelectedItem().toString().equals(TL)) {
+                return x;
+            }
+        }
+        return null;
+    }
+
+    String getTL(int maTL) {
+        for (Theloai x : _TheLoaiService.getlst()) {
+            if (cbxTheLoai.getSelectedItem().toString().equals(maTL)) {
+                return x.getTenTheLoai();
+            }
+        }
+        return null;
+    }
+
+    SanPhamView getGUI() {
+        int ma = 0;
+        for (int i = 0; i < _ServiceSanPham.getlst().size(); i++) {
+            ma++;
+        }
+        System.out.println(ma);
+        return new SanPhamView(-1, Double.parseDouble(txtGiaTien.getText()), txtAnh.getText(), txtMaSP.getText(),
+                txtTenSP.getText(), cbxTrangThai.getSelectedItem().toString() == "Hoạt đông" ? 1 : 0, getTL(cbxTheLoai.getSelectedItem().toString()));
+    }
+
+//        class ButtonRenderer extends JButton implements TableCellRenderer {
+//
+//        @Override
+//        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+//
+//            setText((value == null) ? "" : value.toString());
+//            return this;
+//
+//        }
+//    }
+//            public void addTableHeader() {
+//        DefaultTableModel model = (DefaultTableModel) tblSanPham.getModel();
+//        Object[] newIdentifiers = new Object[]{"Mã sản phẩm", "Tên sản phẩm", "Giá tiền", "Hình ảnh", "Trạng thái"};
+//        model.setColumnIdentifiers(newIdentifiers);
+//        tblSanPham.setFillsViewportHeight(true);
+//        tblSanPham.getColumn("Hình ảnh").setCellRenderer(new CellRenderer());
+// 
+//    }
+// 
+//    class CellRenderer implements TableCellRenderer {
+// 
+//        @Override
+//        public Component getTableCellRendererComponent(JTable table,
+//                Object value,
+//                boolean isSelected,
+//                boolean hasFocus,
+//                int row,
+//                int column) {
+// 
+//            TableColumn tb = tblSanPham.getColumn("Hình ảnh");
+//            tb.setMaxWidth(60);
+//            tb.setMinWidth(60);
+// 
+//            tblSanPham.setRowHeight(60);
+// 
+//            return (Component) value;
+//        }
+// 
+//    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        btn_clear = new javax.swing.JButton();
+        cbxTheLoai = new javax.swing.JComboBox<>();
+        cbxTrangThai = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtMaSP = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSanPham = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtGiaTien = new javax.swing.JTextField();
+        btn_them = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtTenSP = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        txtAnh = new javax.swing.JTextField();
+        lblHinh = new javax.swing.JLabel();
+        btn_sua = new javax.swing.JButton();
+
+        setLayout(new java.awt.GridBagLayout());
+
+        btn_clear.setText("Clear");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 52;
+        gridBagConstraints.ipady = 14;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 18, 0, 0);
+        add(btn_clear, gridBagConstraints);
+
+        cbxTheLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 15, 29, 0);
+        add(cbxTheLoai, gridBagConstraints);
+
+        cbxTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 4, 29, 0);
+        add(cbxTrangThai, gridBagConstraints);
+
+        jLabel5.setText("Mã Sản Phẩm");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.ipadx = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 37, 0, 0);
+        add(jLabel5, gridBagConstraints);
+
+        txtMaSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaSPActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridheight = 6;
+        gridBagConstraints.ipadx = 154;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 4, 0, 0);
+        add(txtMaSP, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Sản phẩm");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 0);
+        add(jLabel1, gridBagConstraints);
+
+        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mã sản phẩm", "Tên sản phẩm", "Giá tiền", "Hình ảnh", "Trạng thái"
+            }
+        ));
+        tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSanPhamMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblSanPham);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 702;
+        gridBagConstraints.ipady = 161;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(23, 12, 0, 12);
+        add(jScrollPane1, gridBagConstraints);
+
+        jLabel2.setText("Hình ảnh");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 36, 0, 0);
+        add(jLabel2, gridBagConstraints);
+
+        jLabel3.setText("Trạng thái");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 37, 0, 0);
+        add(jLabel3, gridBagConstraints);
+
+        jLabel4.setText("Giá tiền");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 9;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(35, 36, 0, 0);
+        add(jLabel4, gridBagConstraints);
+
+        txtGiaTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGiaTienActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 155;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 15, 0, 0);
+        add(txtGiaTien, gridBagConstraints);
+
+        btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 48;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 18, 0, 0);
+        add(btn_them, gridBagConstraints);
+
+        jLabel6.setText("Tên sản Phẩm");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(32, 37, 0, 0);
+        add(jLabel6, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 154;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 5, 0, 0);
+        add(txtTenSP, gridBagConstraints);
+
+        jLabel7.setText("Thể loại");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 36, 0, 0);
+        add(jLabel7, gridBagConstraints);
+
+        jLabel8.setText("Thông tin sản phẩm");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 37, 0, 0);
+        add(jLabel8, gridBagConstraints);
+
+        jTextField1.setText("Tìm kiếm");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 13;
+        gridBagConstraints.ipadx = 718;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(13, 12, 0, 12);
+        add(jTextField1, gridBagConstraints);
+
+        txtAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAnhMouseClicked(evt);
+            }
+        });
+        txtAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAnhActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 6;
+        gridBagConstraints.ipadx = 155;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(7, 15, 0, 0);
+        add(txtAnh, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 112;
+        gridBagConstraints.ipady = 72;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(19, 41, 0, 0);
+        add(lblHinh, gridBagConstraints);
+
+        btn_sua.setText("Sửa");
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 11;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = 58;
+        gridBagConstraints.ipady = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 18, 0, 0);
+        add(btn_sua, gridBagConstraints);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        txtGiaTien.setText("");
+        txtMaSP.setText("");
+    }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
+        int index = tblSanPham.getSelectedRow();
+        txtMaSP.setText(tblSanPham.getModel().getValueAt(index, 0).toString());
+        cbxTrangThai.setSelectedItem(tblSanPham.getModel().getValueAt(index, 4).toString());
+        txtTenSP.setText(tblSanPham.getModel().getValueAt(index, 1).toString());
+        txtGiaTien.setText(tblSanPham.getModel().getValueAt(index, 2).toString());
+        txtAnh.setText(tblSanPham.getModel().getValueAt(index, 3).toString());
+    }//GEN-LAST:event_tblSanPhamMouseClicked
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        _ServiceSanPham.createNewSanPham(getGUI());
+        loadTable(_ServiceSanPham.getlst());
+    }//GEN-LAST:event_btn_themActionPerformed
+
+    private void txtGiaTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaTienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGiaTienActionPerformed
+
+    private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaSPActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void txtAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnhActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("hình ảnh", "png", "jpg");//lọc
+        fileChooser.setFileFilter(imageFilter);
+        fileChooser.setMultiSelectionEnabled(false);//cho phép chọn 1 ảnh
+
+        int a = fileChooser.showDialog(this, "Chọn file");// hiển thị hộp chọn
+        if (a == JFileChooser.APPROVE_OPTION) // đã chọn
+        {
+            File f = fileChooser.getSelectedFile();
+            ImageIcon imageicon = new ImageIcon(f.getAbsolutePath());
+            Image image = (imageicon).getImage().getScaledInstance(lblHinh.getWidth(), lblHinh.getHeight(), Image.SCALE_SMOOTH);
+            imageicon = new ImageIcon(image);
+            lblHinh.setIcon(imageicon);
+            txtAnh.setText(f.getAbsolutePath());
+        }
+    }//GEN-LAST:event_txtAnhActionPerformed
+
+    private void txtAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAnhMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter imageFilter = new FileNameExtensionFilter("hình ảnh", "png", "jpg");//lọc
+        fileChooser.setFileFilter(imageFilter);
+        fileChooser.setMultiSelectionEnabled(false);//cho phép chọn 1 ảnh
+
+        int a = fileChooser.showDialog(this, "Chọn file");// hiển thị hộp chọn
+        if (a == JFileChooser.APPROVE_OPTION) // đã chọn
+        {
+            File f = fileChooser.getSelectedFile();
+            ImageIcon imageicon = new ImageIcon(f.getAbsolutePath());
+            Image image = (imageicon).getImage().getScaledInstance(lblHinh.getWidth(), lblHinh.getHeight(), Image.SCALE_SMOOTH);
+            imageicon = new ImageIcon(image);
+            lblHinh.setIcon(imageicon);
+            txtAnh.setText(f.getAbsolutePath());
+        }
+    }//GEN-LAST:event_txtAnhMouseClicked
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        int index = tblSanPham.getSelectedRow();
+        _ServiceSanPham.updateSanPhamById(getGUI());
+        loadTable(_ServiceSanPham.getlst());
+    }//GEN-LAST:event_btn_suaActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_them;
+    private javax.swing.JComboBox<String> cbxTheLoai;
+    private javax.swing.JComboBox<String> cbxTrangThai;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblHinh;
+    private javax.swing.JTable tblSanPham;
+    private javax.swing.JTextField txtAnh;
+    private javax.swing.JTextField txtGiaTien;
+    private javax.swing.JTextField txtMaSP;
+    private javax.swing.JTextField txtTenSP;
+    // End of variables declaration//GEN-END:variables
+}

@@ -4,6 +4,8 @@
  */
 package Services;
 
+import DomainModel.Sanpham;
+
 import ViewModels.SanPhamView;
 import java.util.List;
 
@@ -12,7 +14,22 @@ import java.util.List;
  * @author lucif
  */
 public interface IServiceSanPham {
-    
+
+    List<SanPhamView> getSanPham();
+
+    SanPhamView getSanPhamById(int id);
+
+    SanPhamView createNewSanPham(SanPhamView sanPhamModel);
+
+    SanPhamView updateSanPhamById(SanPhamView sanPhamModel);
+
+    int deleteSanPhamById(Sanpham sp);
+
+    List<Sanpham> getlst();
+
+    long totalCount();
+
     List<SanPhamView> findByType(int type);
-    
+
+
 }

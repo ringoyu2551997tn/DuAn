@@ -14,7 +14,8 @@ public class ImplBangTheLoai implements InterfaceBangTheLoai{
 	public static final EntityManager entityManager = JpaUtils.getEntityManager();
 	@Override
 	public List<Theloai> findAll() {
-		String sql = "SELECT b FROM Bangtheloai b";
+		String sql = "SELECT t FROM Theloai t";
+
 		TypedQuery<Theloai> query = entityManager.createQuery(sql.toString(), Theloai.class);
 		return query.getResultList();
 	}
@@ -22,7 +23,9 @@ public class ImplBangTheLoai implements InterfaceBangTheLoai{
 	public Theloai findById(int id) {
 			EntityManager em = JpaUtils.getEntityManager();
 
-			TypedQuery<Theloai> query = em.createQuery("Select k from Theloai k where k.maTheLoai =:maTL",Theloai.class);
+
+			TypedQuery<Theloai> query = em.createQuery("Select t from Theloai t where t.maTheLoai =:maTL",Theloai.class);
+
 
 			query.setParameter("maTL", id);
 			

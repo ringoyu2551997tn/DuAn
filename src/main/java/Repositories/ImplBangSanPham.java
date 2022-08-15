@@ -96,6 +96,14 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
         TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s WHERE s.theloai="+type, Sanpham.class);
 		return query.getResultList();
     }
+    
+    	public List<Sanpham> findSP() {
+
+		TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s", Sanpham.class);
+		return query.getResultList();
+
+	}
+
 
 	
 	

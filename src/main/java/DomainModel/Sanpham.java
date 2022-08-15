@@ -35,6 +35,7 @@ public class Sanpham implements Serializable {
 	public Sanpham() {
 	}
 
+
     public Sanpham(int ID_SanPham, double giaTien, String hinhAnh, String maSanPham, String tenSanPham, int trangThai, Theloai theloai) {
         this.ID_SanPham = ID_SanPham;
         this.giaTien = giaTien;
@@ -46,6 +47,7 @@ public class Sanpham implements Serializable {
     }
         
         
+
 
 	public int getID_SanPham() {
 		return this.ID_SanPham;

@@ -49,7 +49,6 @@ InterfaceBangNhanVien daonv = new ImplBangNhanVien();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
-
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -226,6 +225,7 @@ InterfaceBangNhanVien daonv = new ImplBangNhanVien();
         new QuenMatKhau().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnquenmkActionPerformed
+
 
     private void txtmatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmatkhauActionPerformed
         // TODO add your handling code here:

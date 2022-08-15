@@ -4,12 +4,13 @@
  */
 package Application;
 
+
 import DomainModel.Sanpham;
 import Views.BanHang;
 import Views.JPanelSanPham;
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
-import Views.Test;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -25,8 +26,10 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-//        setLocationRelativeTo(null);
-//        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
         if (Login.getCurrentUser().getVaiTro() == 1) {
             btnCombo.setVisible(false);
             btnKhuyenMai.setVisible(false);
@@ -58,10 +61,12 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         java.awt.GridBagConstraints gridBagConstraints;
 
         pn = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+
         jPanel1 = new javax.swing.JPanel();
         btnBanHang = new javax.swing.JButton();
         btnNhanVien = new javax.swing.JButton();
@@ -110,6 +115,7 @@ public class Main extends javax.swing.JFrame {
         btnBanHang.setBackground(new java.awt.Color(255, 255, 255));
         btnBanHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sell.png"))); // NOI18N
+
         btnBanHang.setText("BÁN HÀNG");
         btnBanHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +126,7 @@ public class Main extends javax.swing.JFrame {
         btnNhanVien.setBackground(new java.awt.Color(255, 255, 255));
         btnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff.png"))); // NOI18N
+
         btnNhanVien.setText("NHÂN VIÊN");
         btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,6 +137,7 @@ public class Main extends javax.swing.JFrame {
         btnSanPham.setBackground(new java.awt.Color(255, 255, 255));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/coffeeNcookie.png"))); // NOI18N
+
         btnSanPham.setText("SẢN PHẨM");
         btnSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +148,7 @@ public class Main extends javax.swing.JFrame {
         btnCombo.setBackground(new java.awt.Color(255, 255, 255));
         btnCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCombo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vip.png"))); // NOI18N
+
         btnCombo.setText("COMBO");
         btnCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +218,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnThongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
             .addComponent(btnDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,6 +291,7 @@ public class Main extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(13, 0, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -310,6 +321,7 @@ public class Main extends javax.swing.JFrame {
 //        pn.add(new ViewNguoiHoc());
         pn.validate();
         pn.setVisible(true);
+
         setColor(btnSanPham);
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
@@ -330,6 +342,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
+
+
+        pn.removeAll();
+      pn.add(new JpanelThongke());
+        pn.validate();
+
         setColor(btnThongke);
 
     }//GEN-LAST:event_btnThongkeActionPerformed

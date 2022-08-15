@@ -22,4 +22,5 @@ public interface InterfaceBangSanPham {
 	    long totalCount();
             
             List<Sanpham> findSP();
+
 }

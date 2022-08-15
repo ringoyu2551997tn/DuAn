@@ -62,6 +62,7 @@ ServiceNhanVien nvService = new ServiceNhanVien();
         btndoimk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btndoimk.setForeground(new java.awt.Color(255, 255, 255));
         btndoimk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/changePass.png"))); // NOI18N
+
         btndoimk.setText("Đổi mật khẩu ");
         btndoimk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +147,7 @@ ServiceNhanVien nvService = new ServiceNhanVien();
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,6 +155,7 @@ ServiceNhanVien nvService = new ServiceNhanVien();
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,6 +163,7 @@ ServiceNhanVien nvService = new ServiceNhanVien();
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -187,6 +191,7 @@ ServiceNhanVien nvService = new ServiceNhanVien();
     private void txtconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtconfirmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtconfirmActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -231,6 +236,7 @@ ServiceNhanVien nvService = new ServiceNhanVien();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+
     private javax.swing.JPasswordField txtMKMoi;
     private javax.swing.JPasswordField txtconfirm;
     // End of variables declaration//GEN-END:variables

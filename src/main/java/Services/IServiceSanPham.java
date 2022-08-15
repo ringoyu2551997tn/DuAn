@@ -5,6 +5,7 @@
 package Services;
 
 import DomainModel.Sanpham;
+
 import ViewModels.SanPhamView;
 import java.util.List;
 
@@ -29,5 +30,6 @@ public interface IServiceSanPham {
     long totalCount();
 
     List<SanPhamView> findByType(int type);
+
 
 }

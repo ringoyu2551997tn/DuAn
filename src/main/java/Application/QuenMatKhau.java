@@ -52,12 +52,14 @@ public class QuenMatKhau extends javax.swing.JFrame {
         btndangnhap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btndangnhap.setForeground(new java.awt.Color(255, 255, 255));
         btndangnhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password.png"))); // NOI18N
+
         btndangnhap.setText("Lấy lại mật khẩu ");
         btndangnhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndangnhapActionPerformed(evt);
             }
         });
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
@@ -168,14 +170,17 @@ public class QuenMatKhau extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 0, 0, 0);
         jPanel1.add(jLabel4, gridBagConstraints);
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,6 +188,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+
         );
 
         pack();
@@ -209,6 +215,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
     private void txtTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTKActionPerformed
+
 boolean check() {
         String taikhoan =txtTK.getText();
         String email = txtEmail.getText();
@@ -294,6 +301,7 @@ boolean check() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtTK;
     // End of variables declaration//GEN-END:variables

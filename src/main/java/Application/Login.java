@@ -182,6 +182,12 @@ InterfaceBangNhanVien daonv = new ImplBangNhanVien();
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel1.add(backGround, gridBagConstraints);
 
+        txtmatkhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmatkhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,7 +231,6 @@ InterfaceBangNhanVien daonv = new ImplBangNhanVien();
         new QuenMatKhau().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnquenmkActionPerformed
-
 
     private void txtmatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmatkhauActionPerformed
         // TODO add your handling code here:

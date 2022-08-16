@@ -7,6 +7,7 @@ package Repositories;
 import DomainModel.Hoadon;
 import DomainModel.detail;
 import ViewModels.Bieudo;
+import ViewModels.bieudongay;
 import ViewModels.thongkeCombo;
 import ViewModels.thongkeSanPham;
 import java.awt.CardLayout;
@@ -154,9 +155,9 @@ public class ImplThongke implements InterfaceThongke {
 
 // biểu đồ theo ngày 
     @Override
-    public List<Bieudo> getbdByTKNgay(Date ngay) {
-        List<Bieudo> list = new ArrayList<>();
-        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao =?1";
+    public List<bieudongay> getbdByTKNgay(Date ngay) {
+        List<bieudongay> list = new ArrayList<>();
+        String jsql = "select new ViewModels.bieudongay( SUM(hdct.donGia * hdct.soLuong),HOUR(h.thoiGian)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao =?1 group by HOUR(h.thoiGian)";
         Query query = entityManager.createQuery(jsql);
         query.setParameter(1, ngay);
         list = query.getResultList();;
@@ -170,18 +171,20 @@ public class ImplThongke implements InterfaceThongke {
     @Override
     public void setDataNgay(JPanel pnlNgay, Date jdateNgay) {
 
-        List<Bieudo> list = getbdByTKNgay(jdateNgay);
+        List<bieudongay> list = getbdByTKNgay(jdateNgay);
+        System.out.println(list.size());
         DefaultCategoryDataset data = new DefaultCategoryDataset();
-        if (list != null) {
-            for (Bieudo o : list) {
+            for (bieudongay o : list) {
                 String s = String.valueOf(o.getTongtien());
                 float tien = Float.valueOf(s);
-                String gio = format.format(o.getDate());
+                String gio = String.valueOf(o.getTimee());
                 System.out.println("" + tien + gio);
                 data.addValue(tien, "Số tiền", gio);
+               
+               
             }
-        }
-        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Thời gian", "Số Tiền", data,
+           
+        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu ngày".toUpperCase(), "Gio", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
@@ -196,7 +199,7 @@ public class ImplThongke implements InterfaceThongke {
 
     public List<Bieudo> getbdByTKthang(int thang, int year) {
         List<Bieudo> list = new ArrayList<>();
-        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where month(h.ngayTao) = ?1 and year(h.ngayTao) = ?2";
+        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where month(h.ngayTao) = ?1 and year(h.ngayTao) = ?2 group by h.ngayTao";
         Query query = entityManager.createQuery(jsql);
         query.setParameter(1, thang);
         query.setParameter(2, year);
@@ -222,7 +225,7 @@ public class ImplThongke implements InterfaceThongke {
                     data.addValue(tien, "Số tiền", ngay);
                 }
             }
-            JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Thời gian", "Số Tiền", data,
+            JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu tháng".toUpperCase(), "Ngày", "Số Tiền", data,
                     PlotOrientation.VERTICAL, false, true, false);
 
             ChartPanel chartPanel = new ChartPanel(barChart);
@@ -241,7 +244,7 @@ public class ImplThongke implements InterfaceThongke {
     @Override
     public List<Bieudo> getbdByTKnam(int year) {
         List<Bieudo> list = new ArrayList<>();
-        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where year(h.ngayTao) = ?1";
+        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where year(h.ngayTao) = ?1 group by h.ngayTao ";
         Query query = entityManager.createQuery(jsql);
         query.setParameter(1, year);
         list = query.getResultList();
@@ -261,12 +264,12 @@ public class ImplThongke implements InterfaceThongke {
             for (Bieudo o : list) {
                 String s = String.valueOf(o.getTongtien());
                 float so = Float.valueOf(s);
-                String thang = String.valueOf(o.getDate());
+                String thang = String.valueOf(o.getDate().getMonth()+ 1);
                 //  System.out.println("" + so + thang);
                 data.addValue(so, "Số tiền", "Tháng " + thang);
             }
         }
-        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu năm".toUpperCase(), "Thời gian", "Số Tiền", data,
+        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu năm".toUpperCase(), " Tháng", "Số Tiền", data,
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
@@ -282,7 +285,7 @@ public class ImplThongke implements InterfaceThongke {
     @Override
     public List<Bieudo> getbdByTKtheokhosng(Date date1, Date date2) {
         List<Bieudo> list = new ArrayList<>();
-        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao between ? 1 and ? 2";
+        String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao between ? 1 and ? 2 group by h.ngayTao ";
         Query query = entityManager.createQuery(jsql);
         query.setParameter(1, date1);
         query.setParameter(2, date2);
@@ -309,7 +312,7 @@ public class ImplThongke implements InterfaceThongke {
                 dataset.addValue(so, "Số tiền", ngay);
             }
         }
-        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu theo khoảng".toUpperCase(), "Thời gian", "Số Tiền", dataset,
+        JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu theo khoảng".toUpperCase(), "Ngày", "Số Tiền", dataset,
                 PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);

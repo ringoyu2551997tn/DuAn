@@ -209,7 +209,10 @@ InterfaceBangNhanVien daonv = new ImplBangNhanVien();
 
     private void btnDnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDnActionPerformed
         // TODO add your handling code here:
-       
+       if(txtTK.getText().isEmpty() || txtmatkhau.getPassword() == null){
+          JOptionPane.showMessageDialog(this, "Không được null");
+          return;
+       }
         Nhanvien nv = new Nhanvien();
         nv = daonv.login(txtTK.getText(), String.valueOf(txtmatkhau.getPassword()));
         

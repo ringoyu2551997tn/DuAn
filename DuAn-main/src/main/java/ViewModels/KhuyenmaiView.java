@@ -49,13 +49,12 @@ public class KhuyenmaiView {
 	public void setID_KhuyenMai(int ID_KhuyenMai) {
 		this.ID_KhuyenMai = ID_KhuyenMai;
 	}
-	
+
 	public int getChietKhau() {
 		return this.chietKhau;
 	}
 
 	public void setChietKhau(int chietKhau) {
-
 		this.chietKhau = chietKhau;
 	}
 

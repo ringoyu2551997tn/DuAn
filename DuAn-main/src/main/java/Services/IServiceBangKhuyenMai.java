@@ -2,7 +2,6 @@ package Services;
 
 import java.util.List;
 import DomainModel.Khuyenmai;
-
 import ViewModels.KhuyenmaiView;
 
 public interface IServiceBangKhuyenMai {
@@ -17,6 +16,7 @@ public interface IServiceBangKhuyenMai {
     
 	Khuyenmai update(KhuyenmaiView km);
 
+    
     long totalCount();
 
     List<Khuyenmai> find (int page,int pagesize, String name);

@@ -15,16 +15,18 @@ import Utilities.JpaUtils;
 
 public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
-EntityManager entityManager = JpaUtils.getEntityManager();
+//EntityManager entityManager = JpaUtils.getEntityManager();
 	
 	@Override
 	public List<Hoadon> findAll() {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		List<Hoadon> list = query.getResultList();
 		return list;
 	}
 	public List<Hoadon> findAll(int position, int pageSize) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT hd FROM Hoadon hd";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setFirstResult((position-1)*3);
@@ -35,12 +37,14 @@ EntityManager entityManager = JpaUtils.getEntityManager();
 
 	@Override
 	public Hoadon findById(int id) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		Hoadon hoadon = entityManager.find(Hoadon.class, id);
 		return hoadon;
 	}
 
 	@Override
 	public Hoadon create(Hoadon hoadon) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		try {
 			System.out.println(hoadon.toString());
 			entityManager.getTransaction().begin();
@@ -57,6 +61,7 @@ EntityManager entityManager = JpaUtils.getEntityManager();
 
 	@Override
 	public Hoadon update(Hoadon hoadon) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.merge(hoadon);
@@ -83,6 +88,7 @@ EntityManager entityManager = JpaUtils.getEntityManager();
 	
 	@Override
 	public List<Hoadon> findByTStatus (int a, int position, int pageSize) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h where h.trangThai = ? 1";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setFirstResult((position-1)*3);
@@ -95,6 +101,7 @@ EntityManager entityManager = JpaUtils.getEntityManager();
 	
 	@Override
 	public List<Hoadon> findByTStatusvaTrangthai (int a, Date date, int position, int pageSize) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h where h.trangThai = ? 1 and  h.ngayTao = ? 2";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setFirstResult((position-1)*3);

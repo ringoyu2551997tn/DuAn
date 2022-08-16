@@ -165,6 +165,8 @@ public class BanHang extends javax.swing.JPanel {
             txt_tienThua.setText(String.valueOf(Double.parseDouble(txt_khachDua.getText())
                     - (Double.parseDouble(txt_tienPhaiTra.getText()))));
         }
+        txt_khachDua.setText("");
+        txt_tienThua.setText("");
     }
 
     void loadTableSanPham(JButton btn, int type) {
@@ -483,32 +485,56 @@ public class BanHang extends javax.swing.JPanel {
             giamSL.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int IdHDCT = Integer.parseInt(tbl_selectedSP.getValueAt(index, 0).toString().substring(4));
-                    Hoadoinchitiet hdct = daoHDCT.findById(IdHDCT);
-                    String sl = JOptionPane.showInputDialog("Nhập số lượng muốn giảm");
-                    if (sl != null) {
-                        if (sl.isBlank()) {
-                            JOptionPane.showMessageDialog(new Panel(), "Mời nhập số lượng lớn hơn 0 và là chữ số");
-                        } else {
-                            if (Integer.parseInt(sl) >= hdct.getSoLuong()) {
-                                JOptionPane.showMessageDialog(new Panel(), "Bạn không thể giảm số lượng quá số lượng Order");
+                    if (tbl_selectedSP.getValueAt(index, 0) != null) {
+                        // Đây là giữ liệu thật
+                        int IdHDCT = Integer.parseInt(tbl_selectedSP.getValueAt(index, 0).toString().substring(4));
+                        Hoadoinchitiet hdct = daoHDCT.findById(IdHDCT);
+                        String sl = JOptionPane.showInputDialog("Nhập số lượng muốn giảm");
+                        if (sl != null) {
+                            if (sl.isBlank()) {
+                                JOptionPane.showMessageDialog(tbl_selectedSP, "Mời nhập số lượng lớn hơn 0 và là chữ số");
                             } else {
-                                String note = JOptionPane.showInputDialog("Nhập lý do giảm");
-                                if (note != null) {
-                                    if (note.isBlank()) {
-                                        JOptionPane.showMessageDialog(new Panel(), "Phải nhập lý do để có thể giảm");
-                                    } else {
-                                        if (hdct.getGhiChu() == null) {
-                                            hdct.setGhiChu("");
+                                if (Integer.parseInt(sl) >= hdct.getSoLuong()) {
+                                    JOptionPane.showMessageDialog(tbl_selectedSP, "Bạn không thể giảm số lượng quá số lượng Order");
+                                } else {
+                                    String note = JOptionPane.showInputDialog("Nhập lý do giảm");
+                                    if (note != null) {
+                                        if (note.isBlank()) {
+                                            JOptionPane.showMessageDialog(tbl_selectedSP, "Phải nhập lý do để có thể giảm");
+                                        } else {
+                                            if (hdct.getGhiChu() == null) {
+                                                hdct.setGhiChu("");
+                                            }
+                                            hdct.setGhiChu(hdct.getGhiChu() + " " + note);
+                                            hdct.setSoLuong(hdct.getSoLuong() - Integer.parseInt(sl));
+                                            daoHDCT.update(hdct);
+                                            loadForm();
+                                            int trangThai = tbl_ban.getValueAt(index, 1).toString().equals("Trống") ? 0 : 1;
+                                            lstSelected = svsBan.showSelectedItems(selectedBan.getID_Ban(), trangThai);
+                                            loadTableSelected(lstSelected);
                                         }
-                                        hdct.setGhiChu(hdct.getGhiChu() + " " + note);
-                                        hdct.setSoLuong(hdct.getSoLuong() - Integer.parseInt(sl));
-                                        daoHDCT.update(hdct);
-                                        loadForm();
-                                        int trangThai = tbl_ban.getValueAt(index, 1).toString().equals("Trống") ? 0 : 1;
-                                        lstSelected = svsBan.showSelectedItems(selectedBan.getID_Ban(), trangThai);
-                                        loadTableSelected(lstSelected);
                                     }
+                                }
+                            }
+                        }
+                        // Đây là giữ liệu giả
+                    } else {
+                        String sl = JOptionPane.showInputDialog("Nhập số lượng muốn giảm");
+                        if (sl != null) {
+                            if (sl.isBlank()) {
+                                JOptionPane.showMessageDialog(tbl_selectedSP, "Mời nhập số lượng lớn hơn 0 và là chữ số");
+                            } else {
+                                if (Integer.parseInt(sl) >= Integer.parseInt(tbl_selectedSP.getValueAt(index, 5).toString())) {
+                                    JOptionPane.showMessageDialog(tbl_selectedSP, "Bạn không thể giảm số lượng quá số lượng Order");
+                                } else {
+                                    for (Hoadoinchitiet x : lstSelected) {
+                                        String maSP = (x.getKieu() == 0) ? "CB" + x.getMa() : "SP" + x.getMa();
+                                        if (maSP.equals(tbl_selectedSP.getValueAt(index, 2))) {
+                                            x.setSoLuong(x.getSoLuong() - Integer.parseInt(sl));
+                                        }
+                                    }
+                                    loadForm();
+                                    loadTableSelected(lstSelected);
                                 }
                             }
                         }
@@ -520,26 +546,40 @@ public class BanHang extends javax.swing.JPanel {
             huy.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    int IdHDCT = Integer.parseInt(tbl_selectedSP.getValueAt(index, 0).toString().substring(4));
-                    Hoadoinchitiet hdct = daoHDCT.findById(IdHDCT);
-                    String note = JOptionPane.showInputDialog("Nhập lý do hủy");
-                    if (note != null) {
-                        if (note.isBlank()) {
-                            JOptionPane.showMessageDialog(new Panel(), "Phải nhập lý do để có thể hủy");
-                        } else {
-                            if (hdct.getGhiChu() == null) {
-                                hdct.setGhiChu("");
+                    if (tbl_selectedSP.getValueAt(index, 0) != null) {
+                        int IdHDCT = Integer.parseInt(tbl_selectedSP.getValueAt(index, 0).toString().substring(4));
+                        Hoadoinchitiet hdct = daoHDCT.findById(IdHDCT);
+                        String note = JOptionPane.showInputDialog("Nhập lý do hủy");
+                        if (note != null) {
+                            if (note.isBlank()) {
+                                JOptionPane.showMessageDialog(new Panel(), "Phải nhập lý do để có thể hủy");
+                            } else {
+                                if (hdct.getGhiChu() == null) {
+                                    hdct.setGhiChu("");
+                                }
+                                hdct.setGhiChu(hdct.getGhiChu() + " " + note);
+                                hdct.setSoLuong(0);
+                                daoHDCT.update(hdct);
+                                loadForm();
+                                int trangThai = tbl_ban.getValueAt(index, 1).toString().equals("Trống") ? 0 : 1;
+                                lstSelected = svsBan.showSelectedItems(selectedBan.getID_Ban(), trangThai);
+                                loadTableSelected(lstSelected);
                             }
-                            hdct.setGhiChu(hdct.getGhiChu() + " " + note);
-                            hdct.setSoLuong(0);
-                            daoHDCT.update(hdct);
-                            loadForm();
-                            int trangThai = tbl_ban.getValueAt(index, 1).toString().equals("Trống") ? 0 : 1;
-                            lstSelected = svsBan.showSelectedItems(selectedBan.getID_Ban(), trangThai);
-                            loadTableSelected(lstSelected);
                         }
+                        //Đây là dữ liệu giả
+                    } else {
+                        for (int i = 0; i < lstSelected.size(); i++) {
+                             String maSP = (lstSelected.get(i).getKieu() == 0) ? "CB" + lstSelected.get(i).getMa() : "SP" + lstSelected.get(i).getMa();
+                            if (maSP.equals(tbl_selectedSP.getValueAt(index, 2))) {
+                                lstSelected.remove(lstSelected.get(i));
+                            }
+                        }
+                        if(lstSelected.size()==0){
+                            lstSelected= new ArrayList<>();
+                        }
+                        loadForm();
+                        loadTableSelected(lstSelected);
                     }
-
                 }
             }
             );
@@ -971,6 +1011,7 @@ public class BanHang extends javax.swing.JPanel {
         selectedBan = daoBan.findById(-1);
         lstSelected = new ArrayList<>();
         loadTableSelected(lstSelected);
+        txt_maHoaDon.setText("");
     }//GEN-LAST:event_btn_allBanActionPerformed
 
     private void btn_banTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_banTrongActionPerformed
@@ -978,13 +1019,15 @@ public class BanHang extends javax.swing.JPanel {
         selectedBan = daoBan.findById(-1);
         lstSelected = new ArrayList<>();
         loadTableSelected(lstSelected);// TODO add your handling code here:
+        txt_maHoaDon.setText("");
     }//GEN-LAST:event_btn_banTrongActionPerformed
 
     private void btn_banHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_banHDActionPerformed
         loadTableBan(svsBan.findByStatus(1), btn_banHD);
         selectedBan = daoBan.findById(-1);
         lstSelected = new ArrayList<>();
-        loadTableSelected(lstSelected);        // TODO add your handling code here:
+        loadTableSelected(lstSelected);
+        txt_maHoaDon.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_btn_banHDActionPerformed
 
     private void btn_cafeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cafeActionPerformed
@@ -1065,7 +1108,8 @@ public class BanHang extends javax.swing.JPanel {
                 loadTableBan(svsBan.findByStatus(2), btn_allBan);
             }
         }
-        txt_khachDua.setText("");
+        loadForm();
+        JOptionPane.showMessageDialog(this, "Thanh toán thành công");
     }//GEN-LAST:event_btn_thanhToanActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
@@ -1073,21 +1117,23 @@ public class BanHang extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mời bạn tạo hóa đơn trước khi lưu sản phẩm");
             return;
         }
-        String note = JOptionPane.showInputDialog("Ghi chú hóa đơn");
-        if (selectedBan.getID_Ban() == 0) {
+        if (selectedBan.getID_Ban() == -1) {
             JOptionPane.showMessageDialog(this, "Mời bạn chọn bàn");
         } else {
 //            if (tbl_ban.getValueAt(tbl_ban.getSelectedRow(), 1).equals("Trống")) {
-            daoHD.create(CreateNewHoaDon(note));
+
             if (lstSelected.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Mời bạn chọn sản phẩm trước khi lưu hóa đơn");
             } else {
+                String note = JOptionPane.showInputDialog("Ghi chú hóa đơn");
+                daoHD.create(CreateNewHoaDon(note));
                 CreateNewHoaDonChiTiet();
                 selectedBan.setTrangThai(1);
                 daoBan.update(selectedBan);
                 List<BanView> lst = svsBan.findByStatus(2);
                 loadTableBan(svsBan.findByStatus(2), btn_allBan);
 //            }
+                lstSelected = new ArrayList<>();
                 txt_khachDua.setText("");
                 loadForm();
                 JOptionPane.showMessageDialog(this, "Lưu thành công");
@@ -1106,7 +1152,7 @@ public class BanHang extends javax.swing.JPanel {
         loadTableSelected(lstSelected);
         List<BanView> lst = new ArrayList<>();
         loadTableBan(lst, btn_mangVe);
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_mangVeActionPerformed
 
@@ -1134,11 +1180,12 @@ public class BanHang extends javax.swing.JPanel {
                     hd.setGhiChu(hd.getGhiChu() + " " + note);
                     hd.setTrangThai(2);
                     daoHD.update(hd);
-                    
                     JOptionPane.showMessageDialog(this, "Hủy đơn thành công");
                 }
             }
-        }        // TODO add your handling code here:
+        }
+        loadForm();
+        loadTableBan(svsBan.findByStatus(2), btn_allBan);        // TODO add your handling code here:
     }//GEN-LAST:event_btn_huyActionPerformed
 
 

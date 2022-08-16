@@ -18,6 +18,8 @@ public interface IServiceBan {
     
     List<BanView> findByStatus(int status);
     
+    List<BanView> findBanGop(int idBanGop);
+    
     List<Hoadoinchitiet> showSelectedItems(int ID_ban, int trangthai);
     
     void chuyenBan (int idBanDi, int idBanToi);

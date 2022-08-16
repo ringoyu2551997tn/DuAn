@@ -6,6 +6,7 @@ package Repositories;
 
 import DomainModel.detail;
 import ViewModels.Bieudo;
+import ViewModels.bieudongay;
 import ViewModels.thongkeCombo;
 import ViewModels.thongkeSanPham;
 import java.util.Date;
@@ -32,7 +33,7 @@ public interface InterfaceThongke {
 
     public List<detail> listdatatheothang(int thang, int year);
 
-    public List<Bieudo> getbdByTKNgay(Date ngay);
+    public List<bieudongay> getbdByTKNgay(Date ngay);
 
     public void setDataThang(JPanel pnlNgay, int thang, int year);
 

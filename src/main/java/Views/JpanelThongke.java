@@ -94,6 +94,7 @@ public class JpanelThongke extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblsp = new javax.swing.JTable();
 
+
         setBackground(new java.awt.Color(209, 171, 134));
 
         pnBieudo.setBackground(new java.awt.Color(255, 204, 204));
@@ -107,6 +108,7 @@ public class JpanelThongke extends javax.swing.JPanel {
         );
         pnBieudoLayout.setVerticalGroup(
             pnBieudoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
@@ -182,7 +184,7 @@ public class JpanelThongke extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(date2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43))
@@ -200,6 +202,7 @@ public class JpanelThongke extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(loctheoKhoang, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(68, 68, 68)
+
                         .addComponent(jButton4)))
                 .addGap(289, 289, 289))
         );
@@ -234,8 +237,11 @@ public class JpanelThongke extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jchooseMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jchooseyear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+
                 .addGap(0, 6, Short.MAX_VALUE))
         );
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 906, -1));
 
         tblcb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,6 +255,7 @@ public class JpanelThongke extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(tblcb);
+
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -264,7 +271,7 @@ public class JpanelThongke extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(lblDoanhthu, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(lblDoanhthu, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -276,6 +283,7 @@ public class JpanelThongke extends javax.swing.JPanel {
                     .addComponent(lblDoanhthu))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
 
         jPanel4.setBackground(new java.awt.Color(255, 102, 102));
 
@@ -292,6 +300,7 @@ public class JpanelThongke extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                 .addGap(0, 63, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -303,6 +312,7 @@ public class JpanelThongke extends javax.swing.JPanel {
                     .addComponent(lblHoadon))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -331,6 +341,8 @@ public class JpanelThongke extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, 40));
+
         tblsp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -343,6 +355,7 @@ public class JpanelThongke extends javax.swing.JPanel {
             }
         ));
         jScrollPane3.setViewportView(tblsp);
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

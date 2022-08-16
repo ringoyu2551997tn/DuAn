@@ -2,16 +2,19 @@ package Services;
 
 import java.util.List;
 import DomainModel.Khuyenmai;
+import ViewModels.KhuyenmaiView;
 
 public interface IServiceBangKhuyenMai {
 	
-	List<Khuyenmai> findAll(int page,int pagesize);
+	List<KhuyenmaiView> findAll(int page,int pagesize);
+        
+        List<KhuyenmaiView> findAll();
 	
-	Khuyenmai findById(String maKM);
+	Khuyenmai findById(int id);
     
-	Khuyenmai create(Khuyenmai khuyenmai);
+	Khuyenmai create(KhuyenmaiView km);
     
-	Khuyenmai update(Khuyenmai khuyenmai);
+	Khuyenmai update(KhuyenmaiView km);
 
     
     long totalCount();

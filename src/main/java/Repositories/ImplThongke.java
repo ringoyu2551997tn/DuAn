@@ -4,6 +4,7 @@
  */
 package Repositories;
 
+import DomainModel.Hoadon;
 import DomainModel.detail;
 import ViewModels.Bieudo;
 import ViewModels.thongkeCombo;
@@ -14,8 +15,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -454,17 +464,17 @@ public class ImplThongke implements InterfaceThongke {
         }
         return list;
     }
-    
-      @Override
-     public void setDatangaynull(JPanel pnlNgay, Date date) {
+
+    @Override
+    public void setDatangaynull(JPanel pnlNgay, Date date) {
 
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                String s = "0";
-                float so = Float.valueOf(s);
-                String ngay = String.valueOf(date);
-                dataset.addValue( so,"Số tiền", ngay);
+        String s = "0";
+        float so = Float.valueOf(s);
+        String ngay = String.valueOf(date);
+        dataset.addValue(so, "Số tiền", ngay);
         JFreeChart barChart = ChartFactory.createBarChart("Thống kê doanh thu".toUpperCase(), "Thời gian", "Số Tiền", dataset,
-        PlotOrientation.VERTICAL, false, true, false);
+                PlotOrientation.VERTICAL, false, true, false);
 
         ChartPanel chartPanel = new ChartPanel(barChart);
         chartPanel.setPreferredSize(new Dimension(pnlNgay.getWidth(), 321));
@@ -475,4 +485,87 @@ public class ImplThongke implements InterfaceThongke {
         pnlNgay.validate();
         pnlNgay.repaint();
     }
+
+    public void GuiMail(String mes) {
+
+        String username = "tamlttph19033@fpt.edu.vn";
+        String password = "vtjekpdqurdtzpfs";
+
+        try {
+
+            // your host email smtp server details
+            Properties pr = new Properties();
+
+            pr.put("mail.smtp.host", "smtp.gmail.com");
+            pr.put("mail.smtp.port", "587");
+            pr.put("mail.smtp.auth", "true");
+            pr.put("mail.smtp.ssl.protocols", "TLSv1.2");
+            pr.put("mail.smtp.starttls.enable", "true");
+
+            //get session to authenticate the host email address and password
+            Session session = Session.getInstance(pr,
+                    new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+            //set email message details
+            Message message = new MimeMessage(session);
+            System.setProperty("mail.mime.charset", "UTF-8");
+
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress("lethithanhtam24102002hn@gmail.com"));
+            message.setFrom(new InternetAddress("tamlttph19033@fpt.edu.vn"));
+            message.setSubject("Báo cáo ");
+            message.setText(mes);
+
+            Transport.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Hoadon> getBillHuyNgay(Date date) {
+        String jsql = "SELECT h FROM Hoadon h where h.trangThai = 2 and h.ngayTao = ?1";
+        TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
+        query.setParameter(1, date);
+        List<Hoadon> list = query.getResultList();
+        return list;
+    }
+
+    @Override
+    public String guiBCN(Date date) {
+
+        String message = "";
+        try {
+            List<detail> list1 = listdatatheongay(date);
+
+            for (detail x : list1) {
+                message = message + "\t\t\t\tBáo cáo trong năm\n"
+                        + "|---------------------------------------------------------------------------|\n"
+                        + " |                                                  \t\t\t\t\t|\n"
+                        + "\t\tTổng món bán trong năm: " + String.valueOf(x.getTongsp()) + "\t\t\n"
+                        + "\t\tTổng bill trong năm: " + String.valueOf(x.getTonghd()) + "\t\t\n"
+                        + "\t\tTổng tiền trong năm: " + String.valueOf(x.getTongtien()) + "VNĐ" + "\t\t\n";
+            }
+            for (Hoadon x : getBillHuyNgay(date)) {
+
+                message = message + "\t|-----------------------------------------------------|\n"
+                        + "\t|\tMã hóa đơn bị hủy là: " + String.valueOf(x.getMaHoaDon() + "\t\n"
+                                + "\t|\tMã nhân viên order: " + String.valueOf(x.getNhanvien().getTenNhanVien())) + "\t\n"
+                        + "\t|\tNgày :  " + String.valueOf(x.getNgayTao() + "\t\n"
+                                + "\t|\tGiờ: " + String.valueOf(x.getThoiGian()) + "\t\n"
+                                + "\t|\tLý do: " + String.valueOf(x.getGhiChu()) + "\t\n"
+                                + "\t|-----------------------------------------------------|\n"
+                        );
+
+            }
+
+            GuiMail(message);
+            return "Gửi mail thành công";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Gửi mail thất bại!";
+        }
+    }
+
 }

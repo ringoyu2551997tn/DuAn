@@ -52,6 +52,7 @@ public class sendMail {
             });
             //set email message details
             Message message = new MimeMessage(session);
+            System.setProperty("mail.mime.charset", "UTF-8");
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
             message.setFrom(new InternetAddress("tamlttph19033@fpt.edu.vn"));
             message.setSubject("Xác minh Email Người dùng");

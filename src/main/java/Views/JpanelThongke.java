@@ -152,6 +152,11 @@ public class JpanelThongke extends javax.swing.JPanel {
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/printer.png"))); // NOI18N
         jButton4.setText("Xuất ");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         homnay.setText("Hôm nay");
         homnay.addActionListener(new java.awt.event.ActionListener() {
@@ -510,7 +515,7 @@ public class JpanelThongke extends javax.swing.JPanel {
 
             return;
         }
-
+        datengay.setDate(date);
         lblDoanhthu.setText(String.valueOf(fommater.format(TkDService.listdatatheongay(date).get(0).getTongtien())) + "VNĐ");
         lblHoadon.setText(String.valueOf(TkDService.listdatatheongay(date).get(0).getTonghd()));
         lblTongSp.setText(String.valueOf(TkDService.listdatatheongay(date).get(0).getTongsp()));
@@ -520,6 +525,21 @@ public class JpanelThongke extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_homnayActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO adguid your handling code here:
+        if (TkDService.listdatatheongay(datengay.getDate()) == null) {
+            lblDoanhthu.setText(String.valueOf(0));
+            lblHoadon.setText(String.valueOf(0));
+            lblTongSp.setText(String.valueOf(0));
+            TkDService.setDatangaynull(pnBieudo, datengay.getDate());
+            _tablcb.setRowCount(0);
+            _tablsp.setRowCount(0);
+            JOptionPane.showMessageDialog(this, "Không có dữ liệu trong ngày ");
+            return;
+        }
+            JOptionPane.showMessageDialog(this, TkDService.guiBCN(datengay.getDate()));
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

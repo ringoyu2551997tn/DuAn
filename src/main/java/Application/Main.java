@@ -269,7 +269,8 @@ public class Main extends javax.swing.JFrame {
 
         pn.removeAll();
         pn.add(new BanHang());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         setColor(btnBanHang);
         
     }//GEN-LAST:event_btnBanHangActionPerformed
@@ -278,7 +279,8 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         pn.removeAll();
 //        pn.add(new ViewChuyenDee());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         setColor(btnNhanVien);
 
     }//GEN-LAST:event_btnNhanVienActionPerformed
@@ -289,7 +291,8 @@ public class Main extends javax.swing.JFrame {
         pn.add(new JPanelSanPham());
 //        pn.add(new ViewNguoiHoc());
 setColor(btnSanPham);
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         pn.setVisible(true);
 
         
@@ -299,14 +302,16 @@ setColor(btnSanPham);
         // TODO add your handling code here:
         pn.removeAll();
 //        pn.add(new ViewKhoaHoc());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         setColor(btnCombo);
     }//GEN-LAST:event_btnComboActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
         pn.removeAll();
 //        pn.add(new ViewHocVien());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         setColor(btnKhuyenMai);
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
@@ -316,7 +321,8 @@ setColor(btnSanPham);
 
         pn.removeAll();
       pn.add(new JpanelThongke());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
 
         setColor(btnThongke);
 
@@ -326,7 +332,8 @@ setColor(btnSanPham);
         // TODO add your handling code here:
         pn.removeAll();
         pn.add(new JpanelHoaDon());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         setColor(btnHoaDon);
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
@@ -334,7 +341,8 @@ setColor(btnSanPham);
         // TODO add your handling code here:
         pn.removeAll();
         pn.add(new JpanelDoimatkhau());
-        pn.validate();
+        pn.repaint();
+        pn.revalidate();
         setColor(btnDoiMatKhau);
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 

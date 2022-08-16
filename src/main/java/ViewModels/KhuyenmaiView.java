@@ -14,7 +14,7 @@ import java.util.Date;
 public class KhuyenmaiView {
     private int ID_KhuyenMai;
 
-	private BigDecimal chietKhau;
+	private int chietKhau;
 
 	private String maKhuyenMai;
 
@@ -30,6 +30,18 @@ public class KhuyenmaiView {
 	public KhuyenmaiView() {
 	}
 
+    public KhuyenmaiView(int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public KhuyenmaiView(int id_KhuyenMai, int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public KhuyenmaiView(int id_KhuyenMai, String text, String text0, int i) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 	public int getID_KhuyenMai() {
 		return this.ID_KhuyenMai;
 	}
@@ -37,12 +49,13 @@ public class KhuyenmaiView {
 	public void setID_KhuyenMai(int ID_KhuyenMai) {
 		this.ID_KhuyenMai = ID_KhuyenMai;
 	}
-
-	public BigDecimal getChietKhau() {
+	
+	public int getChietKhau() {
 		return this.chietKhau;
 	}
 
-	public void setChietKhau(BigDecimal chietKhau) {
+	public void setChietKhau(int chietKhau) {
+
 		this.chietKhau = chietKhau;
 	}
 

@@ -17,7 +17,7 @@ public class Khuyenmai implements Serializable {
 	@Id
 	private int ID_KhuyenMai;
 
-	private BigDecimal chietKhau;
+	private int chietKhau;
 
 	private String maKhuyenMai;
 
@@ -38,6 +38,31 @@ public class Khuyenmai implements Serializable {
 	public Khuyenmai() {
 	}
 
+    public Khuyenmai(int ID_KhuyenMai, int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai, List<Hoadon> hoadons) {
+        this.ID_KhuyenMai = ID_KhuyenMai;
+        this.chietKhau = chietKhau;
+        this.maKhuyenMai = maKhuyenMai;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.tenKhuyenMai = tenKhuyenMai;
+        this.trangThai = trangThai;
+        this.hoadons = hoadons;
+    }
+
+    public Khuyenmai(int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai) {
+        this.chietKhau = chietKhau;
+        this.maKhuyenMai = maKhuyenMai;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.tenKhuyenMai = tenKhuyenMai;
+        this.trangThai = trangThai;
+        
+    }
+
+    public Khuyenmai(int id_KhuyenMai, int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 	public int getID_KhuyenMai() {
 		return this.ID_KhuyenMai;
 	}
@@ -46,11 +71,12 @@ public class Khuyenmai implements Serializable {
 		this.ID_KhuyenMai = ID_KhuyenMai;
 	}
 
-	public BigDecimal getChietKhau() {
+	public int getChietKhau() {
 		return this.chietKhau;
 	}
 
-	public void setChietKhau(BigDecimal chietKhau) {
+	public void setChietKhau(int chietKhau) {
+
 		this.chietKhau = chietKhau;
 	}
 

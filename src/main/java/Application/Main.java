@@ -4,9 +4,14 @@
  */
 package Application;
 
+
+import DomainModel.Sanpham;
 import Views.BanHang;
+import Views.JPanelSanPham;
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
+import Views.JpanelThongke;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -22,16 +27,20 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-//        if (Login.getCurrentUser().getVaiTro() == 1) {
-//            btnCombo.setVisible(false);
-//            btnKhuyenMai.setVisible(false);
-//            btnSanPham.setVisible(false);
-//            btnThongke.setVisible(false);
-//            btnNhanVien.setVisible(false);
-//
-//        }
+
+        setBounds(80, 0, 1400, 1000);
+        setResizable(false);
+        if (Login.getCurrentUser().getVaiTro() == 1) {
+            btnCombo.setVisible(false);
+            btnKhuyenMai.setVisible(false);
+            btnSanPham.setVisible(false);
+            btnThongke.setVisible(false);
+            btnNhanVien.setVisible(false);
+
+        }
     }
 
     public void setColor(JButton btn) {
@@ -55,8 +64,10 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         pn = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnBanHang = new javax.swing.JButton();
         btnNhanVien = new javax.swing.JButton();
@@ -67,14 +78,28 @@ public class Main extends javax.swing.JFrame {
         btnHoaDon = new javax.swing.JButton();
         btnDoiMatKhau = new javax.swing.JButton();
         btnDangXuat = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("QUẢN LÝ ");
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        pn.setLayout(new javax.swing.BoxLayout(pn, javax.swing.BoxLayout.LINE_AXIS));
+        pn.setBackground(new java.awt.Color(209, 171, 134));
+        pn.setLayout(new java.awt.GridBagLayout());
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/shop.jpg"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = -20;
+        gridBagConstraints.ipady = -105;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        pn.add(jLabel4, gridBagConstraints);
 
         btnBanHang.setBackground(new java.awt.Color(255, 255, 255));
         btnBanHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBanHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sell.png"))); // NOI18N
         btnBanHang.setText("BÁN HÀNG");
         btnBanHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +109,7 @@ public class Main extends javax.swing.JFrame {
 
         btnNhanVien.setBackground(new java.awt.Color(255, 255, 255));
         btnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/staff.png"))); // NOI18N
         btnNhanVien.setText("NHÂN VIÊN");
         btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +119,7 @@ public class Main extends javax.swing.JFrame {
 
         btnSanPham.setBackground(new java.awt.Color(255, 255, 255));
         btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/coffeeNcookie.png"))); // NOI18N
         btnSanPham.setText("SẢN PHẨM");
         btnSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +129,7 @@ public class Main extends javax.swing.JFrame {
 
         btnCombo.setBackground(new java.awt.Color(255, 255, 255));
         btnCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCombo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vip.png"))); // NOI18N
         btnCombo.setText("COMBO");
         btnCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +139,7 @@ public class Main extends javax.swing.JFrame {
 
         btnKhuyenMai.setBackground(new java.awt.Color(255, 255, 255));
         btnKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnKhuyenMai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sale.png"))); // NOI18N
         btnKhuyenMai.setText("KHUYẾN MÃI");
         btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,6 +149,7 @@ public class Main extends javax.swing.JFrame {
 
         btnThongke.setBackground(new java.awt.Color(255, 255, 255));
         btnThongke.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnThongke.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/increase.png"))); // NOI18N
         btnThongke.setText("THỐNG KÊ");
         btnThongke.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +159,7 @@ public class Main extends javax.swing.JFrame {
 
         btnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
         btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bill.png"))); // NOI18N
         btnHoaDon.setText("HÓA ĐƠN");
         btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +169,7 @@ public class Main extends javax.swing.JFrame {
 
         btnDoiMatKhau.setBackground(new java.awt.Color(255, 255, 255));
         btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDoiMatKhau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password (1).png"))); // NOI18N
         btnDoiMatKhau.setText("ĐỔI MẬT KHẨU");
         btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +179,7 @@ public class Main extends javax.swing.JFrame {
 
         btnDangXuat.setBackground(new java.awt.Color(255, 255, 255));
         btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDangXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/log-out.png"))); // NOI18N
         btnDangXuat.setText("ĐĂNG XUẤT");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +198,7 @@ public class Main extends javax.swing.JFrame {
             .addComponent(btnKhuyenMai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnThongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+            .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -174,45 +207,58 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addComponent(btnCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(btnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(1, 1, 1)
                 .addComponent(btnThongke, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(2, 2, 2)
                 .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/iconCafe.png"))); // NOI18N
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/brown-wooden.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn, javax.swing.GroupLayout.DEFAULT_SIZE, 1134, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1395, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
         );
 
         pack();
@@ -225,7 +271,7 @@ public class Main extends javax.swing.JFrame {
         pn.add(new BanHang());
         pn.validate();
         setColor(btnBanHang);
-
+        
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
@@ -240,9 +286,13 @@ public class Main extends javax.swing.JFrame {
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
         // TODO add your handling code here:
         pn.removeAll();
+        pn.add(new JPanelSanPham());
 //        pn.add(new ViewNguoiHoc());
+setColor(btnSanPham);
         pn.validate();
-        setColor(btnSanPham);
+        pn.setVisible(true);
+
+        
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComboActionPerformed
@@ -262,6 +312,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
+
+
+        pn.removeAll();
+      pn.add(new JpanelThongke());
+        pn.validate();
+
         setColor(btnThongke);
 
     }//GEN-LAST:event_btnThongkeActionPerformed
@@ -315,6 +371,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnNhanVien;
     private javax.swing.JButton btnSanPham;
     private javax.swing.JButton btnThongke;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pn;
     // End of variables declaration//GEN-END:variables

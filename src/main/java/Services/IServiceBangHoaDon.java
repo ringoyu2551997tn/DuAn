@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import DomainModel.Hoadon;
 import ViewModels.HoadonView;
+import com.toedter.calendar.JDateChooser;
 
 public interface IServiceBangHoaDon {
 	
@@ -18,6 +19,7 @@ public interface IServiceBangHoaDon {
     
     long totalCount();
     List<HoadonView> findByTStatus (int a);
-    List<HoadonView> findByDate (Date date);
+    List<HoadonView> findByDate (Date date1, Date date2);
+
    
 }

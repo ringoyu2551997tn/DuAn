@@ -4,17 +4,13 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 
-/**
- * The persistent class for the hoadoinchitiet database table.
- * 
- */
+
 @Entity
 public class Hoadoinchitiet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="ID_HDCT")
-
         @GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private int idHdct;
@@ -24,13 +20,16 @@ public class Hoadoinchitiet implements Serializable {
 
 	private int kieu;
 
-
 	private int ma;
 
 	private String maHoaDonChiTiet;
 
 	private int soLuong;
         
+
+        private String ghiChu ;
+
+
 	//bi-directional many-to-one association to Ban
 	@ManyToOne
 	@JoinColumn(name="IDBan")
@@ -41,8 +40,6 @@ public class Hoadoinchitiet implements Serializable {
 	@JoinColumn(name="IDHoaDon")
 	private Hoadon hoadon;
         
-         private String ghiChu;
-
 
 	public Hoadoinchitiet() {
 	}
@@ -120,7 +117,6 @@ public class Hoadoinchitiet implements Serializable {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
-        
-        
+
 
 }

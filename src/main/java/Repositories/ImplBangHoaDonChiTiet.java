@@ -166,9 +166,6 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
 		List<Sanpham> list = query.getResultList();
 		return list;
 	}
-	
-
-	
 
 
 
@@ -212,6 +209,8 @@ public class ImplBangHoaDonChiTiet implements InterfaceBangHoaDonChiTiet{
         em.getTransaction().commit();
         return;
     }
+
+
     
     
 

@@ -20,4 +20,7 @@ public interface InterfaceBangSanPham {
 	 	Sanpham remove(int id);
 	    
 	    long totalCount();
+            
+            List<Sanpham> findSP();
+
 }

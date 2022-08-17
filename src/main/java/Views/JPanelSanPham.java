@@ -69,7 +69,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         for (Theloai x : _daoTL.findAll()) {
             cbxTheLoai.addItem(String.valueOf(x.getTenTheLoai()));
         }
-        JOptionPane.showMessageDialog(this, "aaaaaaaaaa");
     }
 
     void loadTable(List<Sanpham> lstSanphams) {

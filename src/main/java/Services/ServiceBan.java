@@ -42,7 +42,7 @@ public class ServiceBan implements IServiceBan {
     
     public BanView create(BanView ban) {
         _dao.create(new Ban(ban.getMaBan(), ban.getTrangThai(),ban.getSoGhe()));
-        return new BanView(ban.getMaBan(), ban.getTrangThai());
+        return new BanView(ban.getMaBan(), ban.getTrangThai(),ban.getSoGhe());
     }
 
     public BanView update(BanView ban) {

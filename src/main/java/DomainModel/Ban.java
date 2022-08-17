@@ -24,15 +24,20 @@ public class Ban implements Serializable {
         
         private int soGhe;
 
-    public Ban(String maBan, int trangThai, int soGhe) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
+        
 
     public int getSoGhe() {
         return soGhe;
     }
 
     public void setSoGhe(int soGhe) {
+        this.soGhe = soGhe;
+    }
+
+    public Ban(String maBan, int trangThai, int soGhe) {
+        this.maBan = maBan;
+        this.trangThai = trangThai;
         this.soGhe = soGhe;
     }
 

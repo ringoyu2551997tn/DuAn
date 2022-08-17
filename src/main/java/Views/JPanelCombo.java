@@ -13,6 +13,7 @@ import Services.ServiceSanPham;
 import Services.ServiceCombo;
 import Services.ServiceComboSanPham;
 import Services.TheLoaiService;
+import Utilities.GetID;
 import ViewModels.ComboSanphamView;
 import ViewModels.ComboView;
 import java.awt.Button;
@@ -23,10 +24,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -56,17 +59,21 @@ public class JPanelCombo extends javax.swing.JPanel {
 
     ImplBangSanPham _implSP = new ImplBangSanPham();
     ImplBangCombo _imlCB = new ImplBangCombo();
+    GetID setID = new GetID();
 //    String _inputSoLuong;
+    private final ImplBangCombo _dao = new ImplBangCombo();
 
     /**
      * Creates new form PanelCombo
      */
     public JPanelCombo() {
         initComponents();
+        setTableHeader();
         trangThai();
         loadTable_SanPham(_ServiceSanPham.getlst());
         loadTable_Combo(_ServiceCombo.getlst());
 //        loadTable_ChiTietCombo(_ServiceComboSanPham.getlst());
+        txtMaCB.setText(setID.getIDMax("CB", _ServiceCombo.findAll().get(_ServiceCombo.findAll().size() - 1).getID_ComBo()));
     }
 
     void trangThai() {
@@ -111,8 +118,14 @@ public class JPanelCombo extends javax.swing.JPanel {
         }
         _DefaultTableModelSanPham.setRowCount(0);
         for (Sanpham x : lst) {
+            JLabel imageLabel = new JLabel();
+            ImageIcon imageicon = new ImageIcon(x.getHinhAnh());
+            Image img = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            imageLabel.setIcon(new ImageIcon(img));
             _DefaultTableModelSanPham.addRow(new Object[]{
-                x.getMaSanPham(), x.getTenSanPham(), x.getGiaTien(), x.getHinhAnh(), x.getTrangThai() == 1 ? "Hoạt động" : "Không hoạt động"
+                x.getMaSanPham(), x.getTenSanPham(), x.getGiaTien(),
+                imageLabel,
+                x.getTrangThai() == 1 ? "Hoạt động" : "Không hoạt động"
             });
         }
     }
@@ -122,6 +135,23 @@ public class JPanelCombo extends javax.swing.JPanel {
             return new ComboView(Double.parseDouble(txtGiaTien.getText()), btn_HinhAnh.getText(), txtMaCB.getText(), txtTenCB.getText(), cbxTrangThai.getSelectedItem().equals("Hoạt động") ? 1 : 0);
         }
         return new ComboView(_ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getID_ComBo(), Double.parseDouble(txtGiaTien.getText()), btn_HinhAnh.getText(), txtMaCB.getText(), txtTenCB.getText(), cbxTrangThai.getSelectedItem().equals("Hoạt động") ? 1 : 0);
+    }
+
+    void setTableHeader() {
+        tbl_SanPham.getColumn("Hình ảnh").setCellRenderer(new myCDTableRenderer());
+        tbl_SanPham.setRowHeight(60);
+    }
+
+    private static class myCDTableRenderer implements TableCellRenderer {
+
+        public myCDTableRenderer() {
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+            return (Component) value;
+        }
     }
 
     void MenuSanPham() {
@@ -134,19 +164,12 @@ public class JPanelCombo extends javax.swing.JPanel {
                 if (Integer.parseInt(_inputSoLuong) <= 0) {
                     JOptionPane.showMessageDialog(_jpmSanPham, "Số lượng nhập phải lớn hơn 0! Yêu cầu nhập lại!");
                 } else {
-                    if (checkTrungMaSP(tbl_SanPham.getValueAt(tbl_SanPham.getSelectedRow(), 0).toString())) {
-                        _ServiceComboSanPham.update(new ComboSanphamView(_ServiceSanPham.findIDByMa(tbl_SanPham.getValueAt(tbl_SanPham.getSelectedRow(), 0).toString()),Integer.parseInt(_inputSoLuong),
+
+                    _ServiceComboSanPham.create(new ComboSanphamView(Integer.parseInt(_inputSoLuong),
                             new Combo(_ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getID_ComBo(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getGiaTien(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getHInhAnh(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getMaComBo(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getTenComBo(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getTrangThai()),
                             _implSP.findById(_ServiceSanPham.getlst().get(tbl_SanPham.getSelectedRow()).getID_SanPham())));
                     loadTable_ChiTietCombo(_ServiceComboSanPham.findByIDCB(_ServiceComboSanPham.findIDByMa(txtMaCB.getText())));
-               
-                    } else {
-                        _ServiceComboSanPham.create(new ComboSanphamView(Integer.parseInt(_inputSoLuong),
-                                new Combo(_ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getID_ComBo(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getGiaTien(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getHInhAnh(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getMaComBo(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getTenComBo(), _ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getTrangThai()),
-                                _implSP.findById(_ServiceSanPham.getlst().get(tbl_SanPham.getSelectedRow()).getID_SanPham())));
-                        loadTable_ChiTietCombo(_ServiceComboSanPham.findByIDCB(_ServiceComboSanPham.findIDByMa(txtMaCB.getText())));
 
-                    }
                 }
             }
         });
@@ -240,6 +263,11 @@ public class JPanelCombo extends javax.swing.JPanel {
         });
 
         btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
 
         cbxTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -351,7 +379,7 @@ public class JPanelCombo extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -413,7 +441,7 @@ public class JPanelCombo extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -438,8 +466,15 @@ public class JPanelCombo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        _ServiceCombo.create(getGUI(1));
-        loadTable_Combo(_ServiceCombo.getlst());
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceCombo.create(getGUI(1));
+            loadTable_Combo(_ServiceCombo.getlst());
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            return;
+        }
+
+
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_HinhAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HinhAnhActionPerformed
@@ -473,8 +508,18 @@ public class JPanelCombo extends javax.swing.JPanel {
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         // TODO add your handling code here:
-        _ServiceCombo.update(getGUI(0));
-        loadTable_Combo(_ServiceCombo.getlst());
+
+        if (tblCombo.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn!");
+            return;
+        }
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceCombo.update(getGUI(0));
+            loadTable_Combo(_ServiceCombo.getlst());
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            return;
+        }
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void tblComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblComboMouseClicked
@@ -486,6 +531,7 @@ public class JPanelCombo extends javax.swing.JPanel {
         cbxTrangThai.setSelectedItem(_ServiceCombo.getlst().get(choose).getTrangThai() == 1 ? "Hoạt động" : "Không hoạt động");
 //        btn_HinhAnh.setIcon(imageicon);
 //        btn_HinhAnh.setText(f.getAbsolutePath());
+        
 
 //load data combo sản phẩm chi tiết
         loadTable_ChiTietCombo(_ServiceComboSanPham.findByIDCB(_ServiceCombo.getlst().get(tblCombo.getSelectedRow()).getID_ComBo()));
@@ -497,6 +543,14 @@ public class JPanelCombo extends javax.swing.JPanel {
             _jpmSanPham.show(evt.getComponent(), evt.getX(), evt.getY());
         }
     }//GEN-LAST:event_tbl_SanPhamMouseReleased
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        txtMaCB.setText(setID.getIDMax("CB", _ServiceCombo.findAll().get(_ServiceCombo.findAll().size() - 1).getID_ComBo()));
+        txtGiaTien.setText("");
+        txtTenCB.setText("");
+        btn_HinhAnh.setText("");
+    }//GEN-LAST:event_btnLamMoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

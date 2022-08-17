@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,8 +39,8 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
     void trangThai() {
         cbx_TrangThai.removeAllItems();
-        cbx_TrangThai.addItem("Online");
-        cbx_TrangThai.addItem("Offline");
+        cbx_TrangThai.addItem("Hoạt động");
+        cbx_TrangThai.addItem("Không hoạt động");
     }
 
     void vaitro() {
@@ -63,7 +64,7 @@ public class JPanelNhanVien extends javax.swing.JPanel {
         _DefaultTableModel.setRowCount(0);
         for (Nhanvien x : lst) {
             _DefaultTableModel.addRow(new Object[]{
-                x.getMaNhanVien(), x.getTenNhanVien(), x.getGioITinh() == 0 ? "Nam" : "Nữ", x.getDiaChi(), x.getSoDienThoai(), x.getEmail(), x.getNgaySinh(), x.getTaiKhoan(), x.getMatKhau(), x.getVaiTro() == 0 ? "Quản lý" : "Nhân viên", x.getTrangThai() == 0 ? "Online" : "Offline"
+                x.getMaNhanVien(), x.getTenNhanVien(), x.getGioITinh() == 0 ? "Nam" : "Nữ", x.getDiaChi(), x.getSoDienThoai(), x.getEmail(), x.getNgaySinh(), x.getTaiKhoan(), x.getMatKhau(), x.getVaiTro() == 0 ? "Quản lý" : "Nhân viên", x.getTrangThai() == 1 ? "Hoạt động" : "Không hoạt động"
             });
         }
     }
@@ -299,14 +300,31 @@ public class JPanelNhanVien extends javax.swing.JPanel {
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         // TODO add your handling code here:
-        _ServiceNV.create(getGUI(1));
-        loadTable(_ServiceNV.getlst());
+
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceNV.update(getGUI(1));
+            loadTable(_ServiceNV.getlst());
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
+            return;
+        }
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         // TODO add your handling code here:
-        _ServiceNV.update(getGUI(2));
-        loadTable(_ServiceNV.getlst());
+        if (tbl_NhanVien.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn!");
+            return;
+        }
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceNV.update(getGUI(2));
+            loadTable(_ServiceNV.getlst());
+            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            return;
+        }
+        
+
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void tbl_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhanVienMouseClicked

@@ -89,6 +89,14 @@ public class ServiceSanPham implements IServiceSanPham{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public int findIDByMa(String ma){
+        for (Sanpham x : getlst()) {
+            if (x.getMaSanPham().equals(ma)) {
+                return x.getID_SanPham();
+            }
+        }
+        return -1;
+    }
     
  
 }

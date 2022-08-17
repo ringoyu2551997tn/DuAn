@@ -66,6 +66,7 @@ public interface InterfaceThongke {
     public List<thongkeSanPham> thongkesptheonam(int nam);
 
     public void  setDatangaynull (JPanel pnlNgay,Date date);
+    
     public String guiBCN(Date date);
 
 }

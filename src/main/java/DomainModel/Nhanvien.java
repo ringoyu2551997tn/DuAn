@@ -78,6 +78,7 @@ public class Nhanvien implements Serializable {
         this.vaiTro = vaiTro;
     }
 
+
     public int getID_NhanVien() {
         return this.ID_NhanVien;
     }

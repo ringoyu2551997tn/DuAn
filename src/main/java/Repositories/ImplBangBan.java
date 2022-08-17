@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import Utilities.JpaUtils;
 import DomainModel.Ban;
+import DomainModel.Hoadoinchitiet;
 
 public class ImplBangBan implements InterfaceBangBan{
 
@@ -94,6 +95,16 @@ public class ImplBangBan implements InterfaceBangBan{
 			throw new RuntimeException();
         }
 	}
+
+    @Override
+    public List<Ban> findByStatus(int status) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Hoadoinchitiet> findAllSelectedItem(int id_ban) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 	
 	
 }

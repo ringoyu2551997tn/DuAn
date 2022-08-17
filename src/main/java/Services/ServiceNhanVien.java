@@ -21,17 +21,14 @@ import repositories.InterfaceBangNhanVien;
 public class ServiceNhanVien implements IServiceBangNhanVien{
        InterfaceBangNhanVien daonv;
     List<NhanvienView> listNVModel;
-<<<<<<< Updated upstream
+private  ImplBangNhanVien _dao;
 
     public ServiceNhanVien() {
         daonv = new ImplBangNhanVien();
-=======
-    private final ImplBangNhanVien _dao;
-
-    public ServiceNhanVien() {
-        daonv = new ImplBangNhanVien();
+daonv = new ImplBangNhanVien();
         _dao = new ImplBangNhanVien();
         getlst();
+        
     }
     
     public List<Nhanvien> getlst() {
@@ -46,28 +43,7 @@ public class ServiceNhanVien implements IServiceBangNhanVien{
     public NhanvienView update(NhanvienView nv) {
         _dao.update(new Nhanvien(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
         return new NhanvienView(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
->>>>>>> Stashed changes
-    }
 
-    private final ImplBangNhanVien _dao;
-
-    public ServiceNhanVien() {
-        _dao = new ImplBangNhanVien();
-        getlst();
-    }
-    
-    public List<Nhanvien> getlst() {
-        return _dao.findAll();
-    }
-    
-    public NhanvienView create(NhanvienView nv) {
-        _dao.create(new Nhanvien(nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
-        return new NhanvienView(nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
-    }
-
-    public NhanvienView update(NhanvienView nv) {
-        _dao.update(new Nhanvien(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
-        return new NhanvienView(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
     }
 //D_NhanVien = ID_NhanVien;
 //        this.diaChi = diaChi;

@@ -18,7 +18,5 @@ public interface IServiceBangNhanVien {
 
     public NhanvienView login(String userName, String password);
 
-  
-
     public NhanvienView quenmatkhau(String email, String taikhoan);
 }

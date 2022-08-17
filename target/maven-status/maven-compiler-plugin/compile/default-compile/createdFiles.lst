@@ -1,2 +1,14 @@
+Services\IManageProductService.class
 Utilities\HibernateUtil.class
+Services\ManageCategoryService.class
+Repositories\CategoryRepository.class
+Services\IManageCategoryService.class
+Repositories\ICategoryRepository.class
+DomainModels\Product.class
+Application\Application.class
+Utilities\Migrator.class
 Utilities\JpaUtils.class
+Repositories\IProductRepository.class
+DomainModels\Category.class
+Repositories\ProductRepository.class
+Services\ManageProductService.class

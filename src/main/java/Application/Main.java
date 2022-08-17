@@ -4,51 +4,43 @@
  */
 package Application;
 
-import Views.BanHang;
-import Views.JpanelDoimatkhau;
-import Views.JpanelHoaDon;
+
+import Views.JPanelBan;
 import Views.JPanelNhanVien;
-import Views.PanelBan;
+import Views.JPanelCombo;
+import Views.PanelSanPham;
 import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
- * @author ADMIN
+ * @author LuongQuocBao
  */
 public class Main extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form Main
      */
     public Main() {
         initComponents();
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        if (Login.getCurrentUser().getVaiTro() == 1) {
-            btnCombo.setVisible(false);
-            btnKhuyenMai.setVisible(false);
-            btnSanPham.setVisible(false);
-            btnThongke.setVisible(false);
-            btnNhanVien.setVisible(false);
-
-        }
     }
 
-    public void setColor(JButton btn) {
-        btnBanHang.setBackground(Color.white);
-        btnHoaDon.setBackground(Color.WHITE);
-        btnNhanVien.setBackground(Color.WHITE);
-        btnCombo.setBackground(Color.WHITE);
-        btnSanPham.setBackground(Color.WHITE);
-        btnKhuyenMai.setBackground(Color.WHITE);
-        btnDoiMatKhau.setBackground(Color.WHITE);
-        btnDangXuat.setBackground(Color.WHITE);
-        btnThongke.setBackground(Color.WHITE);
-        btn.setBackground(Color.red);
+    void showControl(JPanel view, JButton btn) {
+        panel.removeAll();
+        panel.add(view);
+        panel.validate();
+        btn.setBackground(Color.YELLOW);
     }
 
+//    HoaDon guiDataHoaDon() {
+//        int ma = 1;
+//        for (int i = 0; i < _ServiceHoaDon.getlistHoaDon().size(); i++) {
+//            ma++;            
+//        }
+//        Date date = new Date();
+//        return new HoaDon(-1, "HD" + ma, date, 0, 1);
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,153 +50,79 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pn = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        btnBanHang = new javax.swing.JButton();
-        btnNhanVien = new javax.swing.JButton();
-        btnSanPham = new javax.swing.JButton();
-        btnCombo = new javax.swing.JButton();
-        btnKhuyenMai = new javax.swing.JButton();
-        btnThongke = new javax.swing.JButton();
-        btnHoaDon = new javax.swing.JButton();
-        btnDoiMatKhau = new javax.swing.JButton();
-        btnDangXuat = new javax.swing.JButton();
-        btn_Ban = new javax.swing.JButton();
+        btn_SanPham = new javax.swing.JButton();
+        btn_Combo = new javax.swing.JButton();
+        btn_NhanVien = new javax.swing.JButton();
+        btn_KhoaHoc = new javax.swing.JButton();
+        btn_NguoiHoc = new javax.swing.JButton();
+        panel = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("QUẢN LÝ ");
 
-        pn.setLayout(new javax.swing.BoxLayout(pn, javax.swing.BoxLayout.LINE_AXIS));
-
-        btnBanHang.setBackground(new java.awt.Color(255, 255, 255));
-        btnBanHang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnBanHang.setText("BÁN HÀNG");
-        btnBanHang.addActionListener(new java.awt.event.ActionListener() {
+        btn_SanPham.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_SanPham.setText("SẢN PHẨM");
+        btn_SanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBanHangActionPerformed(evt);
+                btn_SanPhamActionPerformed(evt);
             }
         });
 
-        btnNhanVien.setBackground(new java.awt.Color(255, 255, 255));
-        btnNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnNhanVien.setText("NHÂN VIÊN");
-        btnNhanVien.addActionListener(new java.awt.event.ActionListener() {
+        btn_Combo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_Combo.setText("COMBO");
+        btn_Combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNhanVienActionPerformed(evt);
+                btn_ComboActionPerformed(evt);
             }
         });
 
-        btnSanPham.setBackground(new java.awt.Color(255, 255, 255));
-        btnSanPham.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnSanPham.setText("SẢN PHẨM");
-        btnSanPham.addActionListener(new java.awt.event.ActionListener() {
+        btn_NhanVien.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_NhanVien.setText("NHÂN VIÊN ");
+        btn_NhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSanPhamActionPerformed(evt);
+                btn_NhanVienActionPerformed(evt);
             }
         });
 
-        btnCombo.setBackground(new java.awt.Color(255, 255, 255));
-        btnCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCombo.setText("COMBO");
-        btnCombo.addActionListener(new java.awt.event.ActionListener() {
+        btn_KhoaHoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_KhoaHoc.setText("KHÓA HỌC");
+        btn_KhoaHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComboActionPerformed(evt);
+                btn_KhoaHocActionPerformed(evt);
             }
         });
 
-        btnKhuyenMai.setBackground(new java.awt.Color(255, 255, 255));
-        btnKhuyenMai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnKhuyenMai.setText("KHUYẾN MÃI");
-        btnKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+        btn_NguoiHoc.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btn_NguoiHoc.setText("NGƯỜI HỌC");
+        btn_NguoiHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKhuyenMaiActionPerformed(evt);
+                btn_NguoiHocActionPerformed(evt);
             }
         });
 
-        btnThongke.setBackground(new java.awt.Color(255, 255, 255));
-        btnThongke.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThongke.setText("THỐNG KÊ");
-        btnThongke.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jButton6.setText("exit");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThongkeActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
-        btnHoaDon.setBackground(new java.awt.Color(255, 255, 255));
-        btnHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnHoaDon.setText("HÓA ĐƠN");
-        btnHoaDon.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Ban");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHoaDonActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        btnDoiMatKhau.setBackground(new java.awt.Color(255, 255, 255));
-        btnDoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDoiMatKhau.setText("ĐỔI MẬT KHẨU");
-        btnDoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Ban");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDoiMatKhauActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-
-        btnDangXuat.setBackground(new java.awt.Color(255, 255, 255));
-        btnDangXuat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnDangXuat.setText("ĐĂNG XUẤT");
-        btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDangXuatActionPerformed(evt);
-            }
-        });
-
-        btn_Ban.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Ban.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_Ban.setText("BÀN");
-        btn_Ban.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_BanActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnSanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnBanHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnKhuyenMai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnThongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-            .addComponent(btnDangXuat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Ban, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnBanHang, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(btnNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnThongke, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_Ban, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,110 +130,132 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 1044, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btn_SanPham, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Combo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_KhoaHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_NhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_NguoiHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btn_SanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btn_Combo)
+                        .addGap(36, 36, 36)
+                        .addComponent(btn_NhanVien)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_KhoaHoc)
+                        .addGap(34, 34, 34)
+                        .addComponent(btn_NguoiHoc)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 17, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
+    private void btn_SanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SanPhamActionPerformed
+        showControl(new PanelSanPham(), btn_SanPham);
+        btn_Combo.setBackground(Color.WHITE);
+        btn_KhoaHoc.setBackground(Color.WHITE);
+        btn_NguoiHoc.setBackground(Color.WHITE);
+        btn_NhanVien.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btn_SanPhamActionPerformed
+
+    private void btn_ComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ComboActionPerformed
+        showControl(new JPanelCombo(), btn_Combo);
+        btn_SanPham.setBackground(Color.WHITE);
+        btn_KhoaHoc.setBackground(Color.WHITE);
+        btn_NguoiHoc.setBackground(Color.WHITE);
+        btn_NhanVien.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btn_ComboActionPerformed
+
+    private void btn_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhanVienActionPerformed
+        showControl(new PanelSanPham(), btn_NhanVien);
+        btn_SanPham.setBackground(Color.WHITE);
+        btn_KhoaHoc.setBackground(Color.WHITE);
+        btn_NguoiHoc.setBackground(Color.WHITE);
+        btn_Combo.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btn_NhanVienActionPerformed
+
+    private void btn_KhoaHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_KhoaHocActionPerformed
+        showControl(new PanelSanPham(), btn_KhoaHoc);
+        btn_SanPham.setBackground(Color.WHITE);
+        btn_Combo.setBackground(Color.WHITE);
+        btn_NguoiHoc.setBackground(Color.WHITE);
+        btn_NhanVien.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btn_KhoaHocActionPerformed
+
+    private void btn_NguoiHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NguoiHocActionPerformed
+        showControl(new PanelSanPham(), btn_NguoiHoc);
+        btn_SanPham.setBackground(Color.WHITE);
+        btn_KhoaHoc.setBackground(Color.WHITE);
+        btn_Combo.setBackground(Color.WHITE);
+        btn_NhanVien.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btn_NguoiHocActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        showControl(new JPanelBan(), jButton1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        pn.removeAll();
-        pn.add(new BanHang());
-        pn.validate();
-        setColor(btnBanHang);
-
-    }//GEN-LAST:event_btnBanHangActionPerformed
-
-    private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        pn.removeAll();
-        pn.add(new JPanelNhanVien());
-        pn.validate();
-        setColor(btnNhanVien);
-
-    }//GEN-LAST:event_btnNhanVienActionPerformed
-
-    private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
-        // TODO add your handling code here:
-        pn.removeAll();
-//        pn.add(new ViewNguoiHoc());
-        pn.validate();
-        setColor(btnSanPham);
-    }//GEN-LAST:event_btnSanPhamActionPerformed
-
-    private void btnComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComboActionPerformed
-        // TODO add your handling code here:
-        pn.removeAll();
-//        pn.add(new ViewKhoaHoc());
-        pn.validate();
-        setColor(btnCombo);
-    }//GEN-LAST:event_btnComboActionPerformed
-
-    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
-        pn.removeAll();
-//        pn.add(new ViewHocVien());
-        pn.validate();
-        setColor(btnKhuyenMai);
-    }//GEN-LAST:event_btnKhuyenMaiActionPerformed
-
-    private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
-        // TODO add your handling code here:
-        setColor(btnThongke);
-
-    }//GEN-LAST:event_btnThongkeActionPerformed
-
-    private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
-        // TODO add your handling code here:
-        pn.removeAll();
-        pn.add(new JpanelHoaDon());
-        pn.validate();
-        setColor(btnHoaDon);
-    }//GEN-LAST:event_btnHoaDonActionPerformed
-
-    private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
-        // TODO add your handling code here:
-        pn.removeAll();
-        pn.add(new JpanelDoimatkhau());
-        pn.validate();
-        setColor(btnDoiMatKhau);
-    }//GEN-LAST:event_btnDoiMatKhauActionPerformed
-
-    private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
-
-        int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn thoát không?");
-        if (a == 0) {
-            this.dispose();
-            new Login().setVisible(true);
-        }// TODO add your handling code here:
-    }//GEN-LAST:event_btnDangXuatActionPerformed
-
-    private void btn_BanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_BanActionPerformed
-        // TODO add your handling code here:
-        pn.removeAll();
-        pn.add(new PanelBan());
-        pn.validate();
-        setColor(btn_Ban);
-    }//GEN-LAST:event_btn_BanActionPerformed
+        showControl(new JPanelNhanVien(), jButton1);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -326,17 +266,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBanHang;
-    private javax.swing.JButton btnCombo;
-    private javax.swing.JButton btnDangXuat;
-    private javax.swing.JButton btnDoiMatKhau;
-    private javax.swing.JButton btnHoaDon;
-    private javax.swing.JButton btnKhuyenMai;
-    private javax.swing.JButton btnNhanVien;
-    private javax.swing.JButton btnSanPham;
-    private javax.swing.JButton btnThongke;
-    private javax.swing.JButton btn_Ban;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel pn;
+    private javax.swing.JButton btn_Combo;
+    private javax.swing.JButton btn_KhoaHoc;
+    private javax.swing.JButton btn_NguoiHoc;
+    private javax.swing.JButton btn_NhanVien;
+    private javax.swing.JButton btn_SanPham;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 }

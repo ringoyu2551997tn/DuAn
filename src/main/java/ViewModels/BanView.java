@@ -19,8 +19,6 @@ public class BanView {
         this.trangThai = trangThai;
     }
 
-    
-    
     public int getID_Ban() {
         return ID_Ban;
     }

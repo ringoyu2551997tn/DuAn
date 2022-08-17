@@ -28,10 +28,7 @@ public class NhanvienView {
 
     private int vaiTro;
 
-    public NhanvienView() {
-    }
-
-     public NhanvienView(int ID_NhanVien, String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
+    public NhanvienView(int ID_NhanVien, String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
         this.ID_NhanVien = ID_NhanVien;
         this.diaChi = diaChi;
         this.email = email;
@@ -60,9 +57,11 @@ public class NhanvienView {
         this.vaiTro = vaiTro;
     }
 
+    public NhanvienView() {
+    }
+    
+    
 
-    
-    
     public int getID_NhanVien() {
         return this.ID_NhanVien;
     }

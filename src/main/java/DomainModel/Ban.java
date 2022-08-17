@@ -40,7 +40,7 @@ public class Ban implements Serializable {
         this.trangThai = trangThai;
     }
     
-    
+
     public int getID_Ban() {
         return this.ID_Ban;
     }

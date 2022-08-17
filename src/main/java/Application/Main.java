@@ -42,14 +42,14 @@ public class Main extends javax.swing.JFrame {
 
         setBounds(80, 0, 1400, 1000);
         setResizable(false);
-//        if (Login.getCurrentUser().getVaiTro() == 1) {
-//            btnCombo.setVisible(false);
-//            btnKhuyenMai.setVisible(false);
-//            btnSanPham.setVisible(false);
-//            btnThongke.setVisible(false);
-//            btnNhanVien.setVisible(false);
-//
-//        }
+        if (Login.getCurrentUser().getVaiTro() == 1) {
+            btnCombo.setVisible(false);
+            btnKhuyenMai.setVisible(false);
+            btnSanPham.setVisible(false);
+            btnThongke.setVisible(false);
+            btnNhanVien.setVisible(false);
+
+        }
     }
 
     public void setColor(JButton btn) {

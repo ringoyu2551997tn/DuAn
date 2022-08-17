@@ -5,6 +5,7 @@
  */
 package Views;
 
+import Application.Login;
 import Application.Main;
 import DomainModel.Ban;
 import DomainModel.Combo;
@@ -602,7 +603,7 @@ void demoLoad(){
         Hoadon hd = new Hoadon();
         hd.setGhiChu(note);
         int maxIdHD = daoHD.findAll().get(daoHD.findAll().size() - 1).getID_HoaDon();
-        hd.setNhanvien(daoNV.findById(1));
+        hd.setNhanvien(daoNV.findById(Login.getCurrentUser().getID_NhanVien()));
         hd.setMaHoaDon(util.getIDMax("HD", maxIdHD));
         hd.setNgayTao(java.util.Calendar.getInstance().getTime());
         hd.setThoiGian(new Time(millis));
@@ -1133,9 +1134,10 @@ void demoLoad(){
                 daoBan.update(selectedBan);
                 loadTableBan(svsBan.findByStatus(2), btn_allBan);
             }
+            JOptionPane.showMessageDialog(this, "Thanh toán thành công");
         }
         loadForm();
-        JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+        
     }//GEN-LAST:event_btn_thanhToanActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed

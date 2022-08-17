@@ -12,8 +12,7 @@ import Views.BanHang;
  */
 public class NewClass {
      public static void main(String[] args) {  
-         new Main().setVisible(true); 
-         System.out.println("Ddaay laf file chuaarn");
+         new Login().setVisible(true); 
         }
 
 }

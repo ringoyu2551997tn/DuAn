@@ -5,36 +5,41 @@
 package Services;
 
 import DomainModel.Sanpham;
-import ViewModels.SanPhamModel;
+
+import ViewModels.SanPhamView;
 import java.util.ArrayList;
 import java.util.List;
 import repositories.ImplBangSanPham;
+import repositories.InterfaceBangSanPham;
 
 /**
  *
- * @author LuongQuocBao
+ * @author lucif
  */
-public class ServiceSanPham implements ISanPhamService {
+public class ServiceSanPham implements IServiceSanPham{
 
     private final ImplBangSanPham _daosp;
+    private List<SanPhamView> _lstSanPhamMod = new ArrayList<SanPhamView>();
     private List<SanPhamModel> _lstSanPhamMod = new ArrayList<SanPhamModel>();
     private List<Sanpham> _lstSanPhams = new ArrayList<Sanpham>();
 
     public ServiceSanPham() {
         _daosp = new ImplBangSanPham();
-        getlst();
+
     }
 
     @Override
-    public List<SanPhamModel> getSanPham() {
+    public List<SanPhamView> getSanPham() {
         _lstSanPhamMod = new ArrayList<>();
         var sanPham = _daosp.findAll(1, 9);
         for (Sanpham x : sanPham) {
-            _lstSanPhamMod.add(new SanPhamModel(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+            _lstSanPhamMod.add(new SanPhamView(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
                     x.getMaSanPham(), x.getTenSanPham(), x.getTrangThai(), x.getTheloai()));
         }
         return _lstSanPhamMod;
     }
+
 
     public int findIDByMa(String ma){
         for (Sanpham x : getlst()) {
@@ -49,23 +54,44 @@ public class ServiceSanPham implements ISanPhamService {
     public SanPhamModel getSanPhamById(int id) {
         var x = _daosp.findById(id);
         return new SanPhamModel(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
+    @Override
+    public SanPhamView getSanPhamById(int id) {
+        var x = _daosp.findById(id);
+        return new SanPhamView(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
                 x.getMaSanPham(), x.getTenSanPham(), x.getTrangThai(), x.getTheloai());
     }
 
     @Override
+
     public SanPhamModel createNewSanPham(SanPhamModel sanPhamModel) {
         sanPhamModel.setID_SanPham(0);
         var x = _daosp.create(new Sanpham(sanPhamModel.getID_SanPham(), sanPhamModel.getGiaTien(), sanPhamModel.getHinhAnh(),
                 sanPhamModel.getMaSanPham(), sanPhamModel.getTenSanPham(), sanPhamModel.getTrangThai(), sanPhamModel.getTheloai()));
         return new SanPhamModel(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
+    public SanPhamView createNewSanPham(SanPhamView sanPhamModel) {
+        sanPhamModel.setID_SanPham(0);
+        var x = _daosp.create(new Sanpham(sanPhamModel.getID_SanPham(), sanPhamModel.getGiaTien(), sanPhamModel.getHinhAnh(),
+                sanPhamModel.getMaSanPham(), sanPhamModel.getTenSanPham(), sanPhamModel.getTrangThai(), sanPhamModel.getTheloai()));
+        return new SanPhamView(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
                 x.getMaSanPham(), x.getTenSanPham(), x.getTrangThai(), x.getTheloai());
     }
 
     @Override
+
     public SanPhamModel updateSanPhamById(SanPhamModel sanPhamModel) {
         var x = _daosp.update(new Sanpham(sanPhamModel.getID_SanPham(), sanPhamModel.getGiaTien(), sanPhamModel.getHinhAnh(),
                 sanPhamModel.getMaSanPham(), sanPhamModel.getTenSanPham(), sanPhamModel.getTrangThai(), sanPhamModel.getTheloai()));
         return new SanPhamModel(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
+    public SanPhamView updateSanPhamById(SanPhamView sanPhamModel) {
+        var x = _daosp.update(new Sanpham(sanPhamModel.getID_SanPham(), sanPhamModel.getGiaTien(), sanPhamModel.getHinhAnh(),
+                sanPhamModel.getMaSanPham(), sanPhamModel.getTenSanPham(), sanPhamModel.getTrangThai(), sanPhamModel.getTheloai()));
+        return new SanPhamView(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(),
+
                 x.getMaSanPham(), x.getTenSanPham(), x.getTrangThai(), x.getTheloai());
     }
 
@@ -76,8 +102,30 @@ public class ServiceSanPham implements ISanPhamService {
         return -1;
     }
     
+
+    @Override
+
      public List<Sanpham> getlst() {
         return _daosp.findSP();
     }
 
+
+    
+    @Override
+    public List<SanPhamView> findByType(int type) {
+        List<SanPhamView> lstSPView = new ArrayList<>();
+        InterfaceBangSanPham daoSP = new ImplBangSanPham();
+        for (Sanpham x : daoSP.findByType(type)) {
+            lstSPView.add(new SanPhamView(x.getID_SanPham(), x.getGiaTien(), x.getHinhAnh(), x.getMaSanPham(), x.getTenSanPham()));
+        }
+        return lstSPView;
+    }
+
+    @Override
+    public long totalCount() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
+ 
 }

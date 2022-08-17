@@ -5,6 +5,7 @@
  */
 package ViewModels;
 
+
 import DomainModel.Theloai;
 
 /**
@@ -18,8 +19,11 @@ public class SanPhamView {
     private String hinhAnh;
     private String maSanPham;
     private String tenSanPham;
-    private int trangThai;
-    private Theloai theloai;
+
+    	private int trangThai;
+        
+        private Theloai theloai;
+
     public SanPhamView() {
     }
 
@@ -33,6 +37,7 @@ public class SanPhamView {
         this.theloai = theloai;
     }
 
+
     public SanPhamView(int ID_SanPham, double giaTien, String hinhAnh, String maSanPham, String tenSanPham) {
         this.ID_SanPham = ID_SanPham;
         this.giaTien = giaTien;
@@ -41,10 +46,7 @@ public class SanPhamView {
         this.tenSanPham = tenSanPham;
     }
 
-    public SanPhamView(int ID_SanPham) {
-        this.ID_SanPham = ID_SanPham;
-    }
-    
+
     public int getID_SanPham() {
         return ID_SanPham;
     }

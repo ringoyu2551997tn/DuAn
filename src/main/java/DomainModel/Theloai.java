@@ -5,10 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 
-/**
- * The persistent class for the theloai database table.
- * 
- */
+
 @Entity
 @NamedQuery(name="Theloai.findAll", query="SELECT t FROM Theloai t")
 public class Theloai implements Serializable {

@@ -15,16 +15,18 @@ import Utilities.JpaUtils;
 
 public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
-	public static final EntityManager entityManager = JpaUtils.getEntityManager();
+//EntityManager entityManager = JpaUtils.getEntityManager();
 	
 	@Override
 	public List<Hoadon> findAll() {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		List<Hoadon> list = query.getResultList();
 		return list;
 	}
 	public List<Hoadon> findAll(int position, int pageSize) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT hd FROM Hoadon hd";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setFirstResult((position-1)*3);
@@ -35,12 +37,14 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 
 	@Override
 	public Hoadon findById(int id) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		Hoadon hoadon = entityManager.find(Hoadon.class, id);
 		return hoadon;
 	}
 
 	@Override
 	public Hoadon create(Hoadon hoadon) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		try {
 			System.out.println(hoadon.toString());
 			entityManager.getTransaction().begin();
@@ -48,6 +52,8 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 		    entityManager.getTransaction().commit();
 				return hoadon;
 		}catch(Exception ex) {
+
+                    System.out.println("loooix create hoa don");
 			entityManager.getTransaction().rollback();
 			throw new RuntimeException();
 		}
@@ -55,6 +61,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 
 	@Override
 	public Hoadon update(Hoadon hoadon) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		try {
 			entityManager.getTransaction().begin();
 			entityManager.merge(hoadon);
@@ -81,6 +88,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
 	@Override
 	public List<Hoadon> findByTStatus (int a, int position, int pageSize) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h where h.trangThai = ? 1";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setFirstResult((position-1)*3);
@@ -93,6 +101,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	
 	@Override
 	public List<Hoadon> findByTStatusvaTrangthai (int a, Date date, int position, int pageSize) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h where h.trangThai = ? 1 and  h.ngayTao = ? 2";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setFirstResult((position-1)*3);
@@ -104,16 +113,29 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 	}
 
 	@Override
-	public List<Hoadon> findByDate (Date date, int position, int pageSize) {
-		String jsql = "SELECT h FROM Hoadon h where h.ngayTao = ? 1";
+	public List<Hoadon> findByDate (Date date1,Date date2 ) {
+		String jsql = "SELECT h FROM Hoadon h where h.ngayTao between ? 1 and ? 2";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
-		query.setFirstResult((position-1)*3);
-		query.setMaxResults(pageSize);
-		query.setParameter(1,date);
+		query.setParameter(1,date1);
+                query.setParameter(2,date2);
 		List<Hoadon> list = query.getResultList();
 		return list;
 	}
         
+
+        @Override
+	public Hoadon findHoaDonByBan (int idBan) {
+                EntityManager em = JpaUtils.getEntityManager();
+		String jsql = "SELECT h FROM Hoadon h "
+                        + "INNER JOIN Hoadoinchitiet hdct ON hdct.hoadon.ID_HoaDon = h.ID_HoaDon "
+                        + "INNER JOIN Ban b ON b.ID_Ban = hdct.ban.ID_Ban "
+                        + "WHERE h.trangThai =0 AND b.ID_Ban = "+idBan;
+		TypedQuery<Hoadon> query = em.createQuery(jsql, Hoadon.class);
+		Hoadon hd = query.getSingleResult();
+		return hd;
+	}
+        
+
    
 }
 

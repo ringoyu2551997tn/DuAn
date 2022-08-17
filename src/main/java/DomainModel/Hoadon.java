@@ -7,10 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * The persistent class for the hoadon database table.
- * 
- */
 @Entity
 @NamedQuery(name="Hoadon.findAll", query="SELECT h FROM Hoadon h")
 public class Hoadon implements Serializable {
@@ -28,7 +24,7 @@ public class Hoadon implements Serializable {
 
 	private Time thoiGian;
 
-	private byte trangThai;
+	private int trangThai;
 
 	//bi-directional many-to-one association to Hoadoinchitiet
 	@OneToMany(mappedBy="hoadon")
@@ -87,11 +83,11 @@ public class Hoadon implements Serializable {
 		this.thoiGian = thoiGian;
 	}
 
-	public byte getTrangThai() {
+	public int getTrangThai() {
 		return this.trangThai;
 	}
 
-	public void setTrangThai(byte trangThai) {
+	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
 	}
 

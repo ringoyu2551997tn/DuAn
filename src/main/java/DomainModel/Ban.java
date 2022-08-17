@@ -4,87 +4,86 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
+
 /**
  * The persistent class for the ban database table.
- *
+ * 
  */
 @Entity
-@NamedQuery(name = "Ban.findAll", query = "SELECT b FROM Ban b")
+@NamedQuery(name="Ban.findAll", query="SELECT b FROM Ban b")
 public class Ban implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int ID_Ban;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Ban;
+	private String maBan;
 
-    private String maBan;
+	private int trangThai;
+        
+        private int soGhe;
 
-    private int trangThai;
-
-    //bi-directional many-to-one association to Hoadoinchitiet
-    @OneToMany(mappedBy = "ban")
-    private List<Hoadoinchitiet> hoadoinchitiets;
-
-    public Ban() {
+    public int getSoGhe() {
+        return soGhe;
     }
 
-    public Ban(String maBan, int trangThai) {
-        this.maBan = maBan;
-        this.trangThai = trangThai;
+    public void setSoGhe(int soGhe) {
+        this.soGhe = soGhe;
     }
 
-    public Ban(int ID_Ban, String maBan, int trangThai) {
-        this.ID_Ban = ID_Ban;
-        this.maBan = maBan;
-        this.trangThai = trangThai;
-    }
-    
+        
+	//bi-directional many-to-one association to Hoadoinchitiet
+	@OneToMany(mappedBy="ban")
+	private List<Hoadoinchitiet> hoadoinchitiets;
 
-    public int getID_Ban() {
-        return this.ID_Ban;
-    }
+	public Ban() {
+	}
 
-    public void setID_Ban(int ID_Ban) {
-        this.ID_Ban = ID_Ban;
-    }
+	public int getID_Ban() {
+		return this.ID_Ban;
+	}
 
-    public String getMaBan() {
-        return this.maBan;
-    }
+	public void setID_Ban(int ID_Ban) {
+		this.ID_Ban = ID_Ban;
+	}
 
-    public void setMaBan(String maBan) {
-        this.maBan = maBan;
-    }
+	public String getMaBan() {
+		return this.maBan;
+	}
 
-    public int getTrangThai() {
-        return this.trangThai;
-    }
+	public void setMaBan(String maBan) {
+		this.maBan = maBan;
+	}
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
-    }
+	public int getTrangThai() {
+		return this.trangThai;
+	}
 
-    public List<Hoadoinchitiet> getHoadoinchitiets() {
-        return this.hoadoinchitiets;
-    }
+	public void setTrangThai(int trangThai) {
+		this.trangThai = trangThai;
+	}
 
-    public void setHoadoinchitiets(List<Hoadoinchitiet> hoadoinchitiets) {
-        this.hoadoinchitiets = hoadoinchitiets;
-    }
+	public List<Hoadoinchitiet> getHoadoinchitiets() {
+		return this.hoadoinchitiets;
+	}
 
-    public Hoadoinchitiet addHoadoinchitiet(Hoadoinchitiet hoadoinchitiet) {
-        getHoadoinchitiets().add(hoadoinchitiet);
-        hoadoinchitiet.setBan(this);
+	public void setHoadoinchitiets(List<Hoadoinchitiet> hoadoinchitiets) {
+		this.hoadoinchitiets = hoadoinchitiets;
+	}
 
-        return hoadoinchitiet;
-    }
+	public Hoadoinchitiet addHoadoinchitiet(Hoadoinchitiet hoadoinchitiet) {
+		getHoadoinchitiets().add(hoadoinchitiet);
+		hoadoinchitiet.setBan(this);
 
-    public Hoadoinchitiet removeHoadoinchitiet(Hoadoinchitiet hoadoinchitiet) {
-        getHoadoinchitiets().remove(hoadoinchitiet);
-        hoadoinchitiet.setBan(null);
+		return hoadoinchitiet;
+	}
 
-        return hoadoinchitiet;
-    }
+	public Hoadoinchitiet removeHoadoinchitiet(Hoadoinchitiet hoadoinchitiet) {
+		getHoadoinchitiets().remove(hoadoinchitiet);
+		hoadoinchitiet.setBan(null);
+
+		return hoadoinchitiet;
+	}
 
 }

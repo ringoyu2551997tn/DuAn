@@ -2,31 +2,39 @@ package ViewModels;
 
 import java.util.Date;
 
+
+
 public class NhanvienView {
 
-    private int ID_NhanVien;
+	private int ID_NhanVien;
 
-    private String diaChi;
+	private String diaChi;
 
-    private String email;
+	private String email;
 
-    private int gioITinh;
+	private int gioITinh;
 
-    private String maNhanVien;
+	private String maNhanVien;
 
-    private String matKhau;
+	private String matKhau;
 
-    private Date ngaySinh;
 
-    private String soDienThoai;
+	private Date ngaySinh;
 
-    private String taiKhoan;
+	private String soDienThoai;
 
-    private String tenNhanVien;
+	private String taiKhoan;
 
-    private int trangThai;
+	private String tenNhanVien;
 
-    private int vaiTro;
+	private int trangThai;
+
+	private int vaiTro;
+
+
+	public NhanvienView() {
+	}
+
 
     public NhanvienView(int ID_NhanVien, String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
         this.ID_NhanVien = ID_NhanVien;
@@ -57,8 +65,6 @@ public class NhanvienView {
         this.vaiTro = vaiTro;
     }
 
-    public NhanvienView() {
-    }
     
     
 

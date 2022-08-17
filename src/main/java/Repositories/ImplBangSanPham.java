@@ -12,6 +12,7 @@ import DomainModel.Sanpham;
 import DomainModel.Theloai;
 import Utilities.JpaUtils;
 
+
 public class ImplBangSanPham implements InterfaceBangSanPham {
 	
 
@@ -58,6 +59,7 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 			this.em.merge(SanPham);
 			this.em.getTransaction().commit();
 			return SanPham;
+
 		}catch(Exception ex) {
 			this.em.getTransaction().rollback();
 			throw ex;
@@ -72,6 +74,7 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 			this.em.remove(SanPham);
 			this.em.getTransaction().commit();
 			return SanPham;
+
 		}catch(Exception ex) {
 			this.em.getTransaction().rollback();
 			throw ex;
@@ -89,13 +92,23 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 			throw e;
 		}
 	}
-	
-	public List<Sanpham> findSP() {
+
+
+
+    @Override
+    public List<Sanpham> findByType(int type) {
+        TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s WHERE s.theloai="+type, Sanpham.class);
+		return query.getResultList();
+    }
+    
+    	public List<Sanpham> findSP() {
+
 
 		TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s", Sanpham.class);
 		return query.getResultList();
 
 	}
+
 //        public void updateSP(double giaTien, String hinhAnh, String maSanPham, String tenSanPham, int trangThai, Theloai theLoai) {
 //
 //		          try {
@@ -114,4 +127,4 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 //		return query.getResultList();
 //
 //	}
-}
+

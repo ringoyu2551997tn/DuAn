@@ -11,23 +11,21 @@ import Utilities.JpaUtils;
 
 
 public class ImplBangTheLoai implements InterfaceBangTheLoai{
-		public final EntityManager em;
-
-
-	public ImplBangTheLoai() {
-		this.em = JpaUtils.getEntityManager();
-	}
+	public static final EntityManager entityManager = JpaUtils.getEntityManager();
 	@Override
 	public List<Theloai> findAll() {
-		
-		TypedQuery<Theloai> query = em.createQuery("SELECT t FROM Theloai t", Theloai.class);
+		String sql = "SELECT t FROM Theloai t";
+
+		TypedQuery<Theloai> query = entityManager.createQuery(sql.toString(), Theloai.class);
 		return query.getResultList();
 	}
 	@Override
 	public Theloai findById(int id) {
 			EntityManager em = JpaUtils.getEntityManager();
 
+
 			TypedQuery<Theloai> query = em.createQuery("Select t from Theloai t where t.maTheLoai =:maTL",Theloai.class);
+
 
 			query.setParameter("maTL", id);
 			

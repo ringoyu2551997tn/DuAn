@@ -13,15 +13,16 @@ import DomainModel.Theloai;
  * @author lucif
  */
 public class SanPhamView {
+
     private int ID_SanPham;
     private double giaTien;
     private String hinhAnh;
     private String maSanPham;
     private String tenSanPham;
+
     	private int trangThai;
         
         private Theloai theloai;
-
 
     public SanPhamView() {
     }
@@ -44,6 +45,7 @@ public class SanPhamView {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
     }
+
 
     public int getID_SanPham() {
         return ID_SanPham;
@@ -85,7 +87,6 @@ public class SanPhamView {
         this.tenSanPham = tenSanPham;
     }
 
-
     public int getTrangThai() {
         return trangThai;
     }
@@ -102,7 +103,4 @@ public class SanPhamView {
         this.theloai = theloai;
     }
 
-    
-    
 }
-

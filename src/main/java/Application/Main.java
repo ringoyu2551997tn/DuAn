@@ -5,6 +5,7 @@
 package Application;
 
 
+
 import DomainModel.Sanpham;
 import Views.BanHang;
 import Views.JPanelSanPham;
@@ -19,10 +20,12 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author ADMIN
+
  */
 public class Main extends javax.swing.JFrame {
 
     /**
+
      * Creates new form NewJFrame
      */
     public Main() {
@@ -56,6 +59,7 @@ public class Main extends javax.swing.JFrame {
         btn.setBackground(Color.red);
     }
 
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +68,7 @@ public class Main extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         java.awt.GridBagConstraints gridBagConstraints;
 
         pn = new javax.swing.JPanel();
@@ -233,6 +238,7 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+
                 .addGap(12, 12, 12)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
@@ -241,10 +247,12 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(pn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1395, javax.swing.GroupLayout.PREFERRED_SIZE)
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+
                 .addGap(28, 28, 28)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -259,10 +267,12 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))))
+
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
         // TODO add your handling code here:
@@ -355,6 +365,7 @@ setColor(btnSanPham);
         }// TODO add your handling code here:
     }//GEN-LAST:event_btnDangXuatActionPerformed
 
+
     /**
      * @param args the command line arguments
      */
@@ -370,6 +381,7 @@ setColor(btnSanPham);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JButton btnBanHang;
     private javax.swing.JButton btnCombo;
     private javax.swing.JButton btnDangXuat;

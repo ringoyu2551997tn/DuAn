@@ -6,6 +6,7 @@ package Services;
 
 import DomainModel.Combo;
 import ViewModels.ComboView;
+
 import java.util.ArrayList;
 import java.util.List;
 import repositories.ImplBangCombo;
@@ -17,6 +18,8 @@ import repositories.InterfaceBangComBo;
  */
 public class ServiceCombo implements IServiceCombo {
 
+    private final ImplBangCombo _dao;
+
     @Override
     public List<ComboView> findAll() {
         List<ComboView> listCombo = new ArrayList<>();
@@ -27,6 +30,26 @@ public class ServiceCombo implements IServiceCombo {
             }
         }
         return listCombo;
+    }
+
+    public ServiceCombo() {
+        _dao = new ImplBangCombo();
+        getlst();
+    }
+    
+    public List<Combo> getlst() {
+        return _dao.findAll();
+    }
+    
+    public ComboView create(ComboView cb) {
+//        double giaTien, String HInhAnh, String maComBo, String tenComBo, int trangThai
+        _dao.create(new Combo(cb.getGiaTien(),cb.getHInhAnh(),cb.getMaComBo(),cb.getTenComBo(),cb.getTrangThai()));
+        return new ComboView(cb.getGiaTien(),cb.getHInhAnh(),cb.getMaComBo(),cb.getTenComBo(),cb.getTrangThai());
+    }
+
+    public ComboView update(ComboView cb) {
+        _dao.update(new Combo(cb.getID_ComBo(),cb.getGiaTien(),cb.getHInhAnh(),cb.getMaComBo(),cb.getTenComBo(),cb.getTrangThai()));
+        return new ComboView(cb.getID_ComBo(),cb.getGiaTien(),cb.getHInhAnh(),cb.getMaComBo(),cb.getTenComBo(),cb.getTrangThai());
     }
 
 }

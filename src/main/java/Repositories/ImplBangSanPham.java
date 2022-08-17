@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 
 import DomainModel.Sanpham;
+import DomainModel.Theloai;
 import Utilities.JpaUtils;
 
 
@@ -57,7 +58,8 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 			this.em.getTransaction().begin();
 			this.em.merge(SanPham);
 			this.em.getTransaction().commit();
-					return SanPham;
+			return SanPham;
+
 		}catch(Exception ex) {
 			this.em.getTransaction().rollback();
 			throw ex;
@@ -71,7 +73,8 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 			this.em.getTransaction().begin();
 			this.em.remove(SanPham);
 			this.em.getTransaction().commit();
-					return SanPham;
+			return SanPham;
+
 		}catch(Exception ex) {
 			this.em.getTransaction().rollback();
 			throw ex;
@@ -91,6 +94,7 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 	}
 
 
+
     @Override
     public List<Sanpham> findByType(int type) {
         TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s WHERE s.theloai="+type, Sanpham.class);
@@ -99,12 +103,28 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
     
     	public List<Sanpham> findSP() {
 
+
 		TypedQuery<Sanpham> query = em.createQuery("SELECT s FROM Sanpham s", Sanpham.class);
 		return query.getResultList();
 
 	}
 
+//        public void updateSP(double giaTien, String hinhAnh, String maSanPham, String tenSanPham, int trangThai, Theloai theLoai) {
+//
+//		          try {
+//                em.createNamedQuery("updateSanPham", Sanpham.class).setParameter(1, giaTien).setParameter(2, hinhAnh)
+//                        .setParameter(3, tenSanPham).setParameter(4, trangThai).setParameter(5, theLoai).setParameter(6, maSanPham).executeUpdate();
+//            } catch (Exception e) {
+//                e.getStackTrace();
+//            }}
 
 	
-	
-}
+//	public void updateByMa(String ma, String ten, String gia, String anh, String theloai) {
+//
+//		Query query = em.createQuery("UPDATE Sanpham s SET s.maSanPham = s.maSanPham + :ma", Sanpham.class);
+//		query.setFirstResult((position-1)*3);
+//		query.setMaxResults(pageSize);
+//		return query.getResultList();
+//
+//	}
+

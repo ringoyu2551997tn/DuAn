@@ -4,6 +4,7 @@
  */
 package Services;
 
+
 import DomainModel.Hoadon;
 import DomainModel.Nhanvien;
 import ViewModels.HoadonView;
@@ -23,6 +24,27 @@ public class ServiceNhanVien implements IServiceBangNhanVien{
 
     public ServiceNhanVien() {
         daonv = new ImplBangNhanVien();
+    }
+
+    private final ImplBangNhanVien _dao;
+
+    public ServiceNhanVien() {
+        _dao = new ImplBangNhanVien();
+        getlst();
+    }
+    
+    public List<Nhanvien> getlst() {
+        return _dao.findAll();
+    }
+    
+    public NhanvienView create(NhanvienView nv) {
+        _dao.create(new Nhanvien(nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
+        return new NhanvienView(nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
+    }
+
+    public NhanvienView update(NhanvienView nv) {
+        _dao.update(new Nhanvien(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
+        return new NhanvienView(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
     }
 //D_NhanVien = ID_NhanVien;
 //        this.diaChi = diaChi;
@@ -136,9 +158,5 @@ public class ServiceNhanVien implements IServiceBangNhanVien{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-
-
-
-   
 
 }

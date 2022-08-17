@@ -5,173 +5,195 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the nhanvien database table.
- * 
+ *
  */
 @Entity
-@NamedQuery(name="Nhanvien.findAll", query="SELECT b FROM Nhanvien b")
+@NamedQuery(name = "Nhanvien.findAll", query = "SELECT b FROM Nhanvien b")
 public class Nhanvien implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	private int ID_NhanVien;
+    private static final long serialVersionUID = 1L;
 
-	private String diaChi;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_NhanVien;
 
-	private String email;
+    private String diaChi;
 
+    private String email;
 
-	private int gioITinh;
+    private int gioITinh;
 
+    private String maNhanVien;
 
-	private String maNhanVien;
+    private String matKhau;
 
-	private String matKhau;
+    @Temporal(TemporalType.DATE)
+    private Date ngaySinh;
 
-	@Temporal(TemporalType.DATE)
-	private Date ngaySinh;
+    private String soDienThoai;
 
-	private String soDienThoai;
+    private String taiKhoan;
 
-	private String taiKhoan;
+    private String tenNhanVien;
 
-	private String tenNhanVien;
+    private int trangThai;
 
-	private int trangThai;
+    private int vaiTro;
 
+    //bi-directional many-to-one association to Hoadon
+    @OneToMany(mappedBy = "nhanvien")
+    private List<Hoadon> hoadons;
 
-	private int vaiTro;
+    public Nhanvien() {
+    }
 
+    public Nhanvien(String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
+        this.diaChi = diaChi;
+        this.email = email;
+        this.gioITinh = gioITinh;
+        this.maNhanVien = maNhanVien;
+        this.matKhau = matKhau;
+        this.ngaySinh = ngaySinh;
+        this.soDienThoai = soDienThoai;
+        this.taiKhoan = taiKhoan;
+        this.tenNhanVien = tenNhanVien;
+        this.trangThai = trangThai;
+        this.vaiTro = vaiTro;
+    }
 
-	//bi-directional many-to-one association to Hoadon
-	@OneToMany(mappedBy="nhanvien")
-	private List<Hoadon> hoadons;
+    public Nhanvien(int ID_NhanVien, String diaChi, String email, int gioITinh, String maNhanVien, String matKhau, Date ngaySinh, String soDienThoai, String taiKhoan, String tenNhanVien, int trangThai, int vaiTro) {
+        this.ID_NhanVien = ID_NhanVien;
+        this.diaChi = diaChi;
+        this.email = email;
+        this.gioITinh = gioITinh;
+        this.maNhanVien = maNhanVien;
+        this.matKhau = matKhau;
+        this.ngaySinh = ngaySinh;
+        this.soDienThoai = soDienThoai;
+        this.taiKhoan = taiKhoan;
+        this.tenNhanVien = tenNhanVien;
+        this.trangThai = trangThai;
+        this.vaiTro = vaiTro;
+    }
 
-	public Nhanvien() {
-	}
+    public int getID_NhanVien() {
+        return this.ID_NhanVien;
+    }
 
-	public int getID_NhanVien() {
-		return this.ID_NhanVien;
-	}
+    public void setID_NhanVien(int ID_NhanVien) {
+        this.ID_NhanVien = ID_NhanVien;
+    }
 
-	public void setID_NhanVien(int ID_NhanVien) {
-		this.ID_NhanVien = ID_NhanVien;
-	}
+    public String getDiaChi() {
+        return this.diaChi;
+    }
 
-	public String getDiaChi() {
-		return this.diaChi;
-	}
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
 
-	public void setDiaChi(String diaChi) {
-		this.diaChi = diaChi;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public int getGioITinh() {
+        return this.gioITinh;
+    }
 
+    public void setGioITinh(int gioITinh) {
+        this.gioITinh = gioITinh;
+    }
 
-	public int getGioITinh() {
-		return this.gioITinh;
-	}
+    public String getMaNhanVien() {
+        return this.maNhanVien;
+    }
 
-	public void setGioITinh(int gioITinh) {
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
+    }
 
-		this.gioITinh = gioITinh;
-	}
+    public String getMatKhau() {
+        return this.matKhau;
+    }
 
-	public String getMaNhanVien() {
-		return this.maNhanVien;
-	}
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
 
-	public void setMaNhanVien(String maNhanVien) {
-		this.maNhanVien = maNhanVien;
-	}
+    public Date getNgaySinh() {
+        return this.ngaySinh;
+    }
 
-	public String getMatKhau() {
-		return this.matKhau;
-	}
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
 
-	public void setMatKhau(String matKhau) {
-		this.matKhau = matKhau;
-	}
+    public String getSoDienThoai() {
+        return this.soDienThoai;
+    }
 
-	public Date getNgaySinh() {
-		return this.ngaySinh;
-	}
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
 
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
-	}
+    public String getTaiKhoan() {
+        return this.taiKhoan;
+    }
 
-	public String getSoDienThoai() {
-		return this.soDienThoai;
-	}
+    public void setTaiKhoan(String taiKhoan) {
+        this.taiKhoan = taiKhoan;
+    }
 
-	public void setSoDienThoai(String soDienThoai) {
-		this.soDienThoai = soDienThoai;
-	}
+    public String getTenNhanVien() {
+        return this.tenNhanVien;
+    }
 
-	public String getTaiKhoan() {
-		return this.taiKhoan;
-	}
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
+    }
 
-	public void setTaiKhoan(String taiKhoan) {
-		this.taiKhoan = taiKhoan;
-	}
+    public int getTrangThai() {
+        return this.trangThai;
+    }
 
-	public String getTenNhanVien() {
-		return this.tenNhanVien;
-	}
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
 
-	public void setTenNhanVien(String tenNhanVien) {
-		this.tenNhanVien = tenNhanVien;
-	}
+    public int getVaiTro() {
+        return this.vaiTro;
+    }
 
-	public int getTrangThai() {
-		return this.trangThai;
-	}
+    public void setVaiTro(int vaiTro) {
+        this.vaiTro = vaiTro;
+    }
 
-	public void setTrangThai(int trangThai) {
-		this.trangThai = trangThai;
-	}
+    public List<Hoadon> getHoadons() {
+        return this.hoadons;
+    }
 
+    public void setHoadons(List<Hoadon> hoadons) {
+        this.hoadons = hoadons;
+    }
 
-	public int getVaiTro() {
-		return this.vaiTro;
-	}
+    public Hoadon addHoadon(Hoadon hoadon) {
+        getHoadons().add(hoadon);
+        hoadon.setNhanvien(this);
 
-	public void setVaiTro(int vaiTro) {
+        return hoadon;
+    }
 
-		this.vaiTro = vaiTro;
-	}
+    public Hoadon removeHoadon(Hoadon hoadon) {
+        getHoadons().remove(hoadon);
+        hoadon.setNhanvien(null);
 
-	public List<Hoadon> getHoadons() {
-		return this.hoadons;
-	}
-
-	public void setHoadons(List<Hoadon> hoadons) {
-		this.hoadons = hoadons;
-	}
-
-	public Hoadon addHoadon(Hoadon hoadon) {
-		getHoadons().add(hoadon);
-		hoadon.setNhanvien(this);
-
-		return hoadon;
-	}
-
-	public Hoadon removeHoadon(Hoadon hoadon) {
-		getHoadons().remove(hoadon);
-		hoadon.setNhanvien(null);
-
-		return hoadon;
-	}
+        return hoadon;
+    }
 
 }

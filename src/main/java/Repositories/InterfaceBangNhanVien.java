@@ -6,6 +6,7 @@ import DomainModel.Nhanvien;
 public interface InterfaceBangNhanVien {
 
 
+
     List<Nhanvien> findAll(int position, int pageSize);
 
     List<Nhanvien> findAll();

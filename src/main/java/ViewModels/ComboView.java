@@ -1,36 +1,62 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ViewModels;
 
-import DomainModel.ComboSanpham;
-import java.util.List;
-
 /**
  *
- * @author lucif
+ * @author LuongQuocBao
  */
 public class ComboView {
-    
-    private int ID_ComBo;
-    private String maComBo;
-    private String HInhAnh;
-    private String tenComBo;
-    private double giaTien;
-    private List<ComboSanpham> comboSanPhams;
+    	private int ID_ComBo;
+
+	private double giaTien;
+
+	private String HInhAnh;
+
+	private String maComBo;
+
+	private String tenComBo;
+
+	private int trangThai;
 
     public ComboView() {
     }
 
-    public ComboView(int ID_ComBo, String maComBo,String HInhAnh, String tenComBo, double giaTien, List<ComboSanpham> comboSanPhams) {
+    public ComboView(int ID_ComBo, double giaTien, String HInhAnh, String maComBo, String tenComBo, int trangThai) {
         this.ID_ComBo = ID_ComBo;
-        this.maComBo = maComBo;
-        this.HInhAnh = HInhAnh;
-        this.tenComBo = tenComBo;
         this.giaTien = giaTien;
-        this.comboSanPhams = comboSanPhams;
+        this.HInhAnh = HInhAnh;
+        this.maComBo = maComBo;
+        this.tenComBo = tenComBo;
+        this.trangThai = trangThai;
+    }
+
+    public ComboView(double giaTien, String HInhAnh, String maComBo, String tenComBo, int trangThai) {
+        this.giaTien = giaTien;
+        this.HInhAnh = HInhAnh;
+        this.maComBo = maComBo;
+        this.tenComBo = tenComBo;
+        this.trangThai = trangThai;
+    }
+    
+    
+
+    public int getID_ComBo() {
+        return ID_ComBo;
+    }
+
+    public void setID_ComBo(int ID_ComBo) {
+        this.ID_ComBo = ID_ComBo;
+    }
+
+    public double getGiaTien() {
+        return giaTien;
+    }
+
+    public void setGiaTien(double giaTien) {
+        this.giaTien = giaTien;
     }
 
     public String getHInhAnh() {
@@ -39,14 +65,6 @@ public class ComboView {
 
     public void setHInhAnh(String HInhAnh) {
         this.HInhAnh = HInhAnh;
-    }
-
-    public int getID_ComBo() {
-        return ID_ComBo;
-    }
-
-    public void setID_ComBo(int ID_ComBo) {
-        this.ID_ComBo = ID_ComBo;
     }
 
     public String getMaComBo() {
@@ -65,22 +83,13 @@ public class ComboView {
         this.tenComBo = tenComBo;
     }
 
-    public double getGiaTien() {
-        return giaTien;
+    public int getTrangThai() {
+        return trangThai;
     }
 
-    public void setGiaTien(double giaTien) {
-        this.giaTien = giaTien;
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
-
-    public List<ComboSanpham> getComboSanPhams() {
-        return comboSanPhams;
-    }
-
-    public void setComboSanPhams(List<ComboSanpham> comboSanPhams) {
-        this.comboSanPhams = comboSanPhams;
-    }
-    
-    
+        
+        
 }
-

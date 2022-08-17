@@ -4,106 +4,125 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the combo database table.
- * 
+ *
  */
 @Entity
-@NamedQuery(name="Combo.findAll", query="SELECT c FROM Combo c")
+@NamedQuery(name = "Combo.findAll", query = "SELECT c FROM Combo c")
 public class Combo implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	private int ID_ComBo;
+    private static final long serialVersionUID = 1L;
 
-	private double giaTien;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_ComBo;
 
-	private String HInhAnh;
+    private double giaTien;
 
-	private String maComBo;
+    private String HInhAnh;
 
-	private String tenComBo;
+    private String maComBo;
 
-	private int trangThai;
+    private String tenComBo;
 
-	//bi-directional many-to-one association to ComboSanpham
-	@OneToMany(mappedBy="combo")
-	private List<ComboSanpham> comboSanphams;
+    private int trangThai;
 
-	public Combo() {
-	}
+    @OneToMany(mappedBy = "combo")
+    private List<ComboSanpham> comboSanphams;
 
-	public int getID_ComBo() {
-		return this.ID_ComBo;
-	}
+    public Combo() {
+    }
 
-	public void setID_ComBo(int ID_ComBo) {
-		this.ID_ComBo = ID_ComBo;
-	}
+    public Combo(int ID_ComBo, double giaTien, String HInhAnh, String maComBo, String tenComBo, int trangThai) {
+        this.ID_ComBo = ID_ComBo;
+        this.giaTien = giaTien;
+        this.HInhAnh = HInhAnh;
+        this.maComBo = maComBo;
+        this.tenComBo = tenComBo;
+        this.trangThai = trangThai;
+    }
 
-	public double getGiaTien() {
-		return this.giaTien;
-	}
+    public Combo(double giaTien, String HInhAnh, String maComBo, String tenComBo, int trangThai) {
+        this.giaTien = giaTien;
+        this.HInhAnh = HInhAnh;
+        this.maComBo = maComBo;
+        this.tenComBo = tenComBo;
+        this.trangThai = trangThai;
+    }
 
-	public void setGiaTien(double giaTien) {
-		this.giaTien = giaTien;
-	}
+    public Combo(int ID_ComBo) {
+        this.ID_ComBo = ID_ComBo;
+    }
 
-	public String getHInhAnh() {
-		return this.HInhAnh;
-	}
+    public int getID_ComBo() {
+        return this.ID_ComBo;
+    }
 
-	public void setHInhAnh(String HInhAnh) {
-		this.HInhAnh = HInhAnh;
-	}
+    public void setID_ComBo(int ID_ComBo) {
+        this.ID_ComBo = ID_ComBo;
+    }
 
-	public String getMaComBo() {
-		return this.maComBo;
-	}
+    public double getGiaTien() {
+        return this.giaTien;
+    }
 
-	public void setMaComBo(String maComBo) {
-		this.maComBo = maComBo;
-	}
+    public void setGiaTien(double giaTien) {
+        this.giaTien = giaTien;
+    }
 
-	public String getTenComBo() {
-		return this.tenComBo;
-	}
+    public String getHInhAnh() {
+        return this.HInhAnh;
+    }
 
-	public void setTenComBo(String tenComBo) {
-		this.tenComBo = tenComBo;
-	}
+    public void setHInhAnh(String HInhAnh) {
+        this.HInhAnh = HInhAnh;
+    }
 
-	public int getTrangThai() {
-		return this.trangThai;
-	}
+    public String getMaComBo() {
+        return this.maComBo;
+    }
 
-	
-	public void setTrangThai(int trangThai) {
+    public void setMaComBo(String maComBo) {
+        this.maComBo = maComBo;
+    }
 
-		this.trangThai = trangThai;
-	}
+    public String getTenComBo() {
+        return this.tenComBo;
+    }
 
-	public List<ComboSanpham> getComboSanphams() {
-		return this.comboSanphams;
-	}
+    public void setTenComBo(String tenComBo) {
+        this.tenComBo = tenComBo;
+    }
 
-	public void setComboSanphams(List<ComboSanpham> comboSanphams) {
-		this.comboSanphams = comboSanphams;
-	}
+    public int getTrangThai() {
+        return this.trangThai;
+    }
 
-	public ComboSanpham addComboSanpham(ComboSanpham comboSanpham) {
-		getComboSanphams().add(comboSanpham);
-		comboSanpham.setCombo(this);
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
 
-		return comboSanpham;
-	}
+    public List<ComboSanpham> getComboSanphams() {
+        return this.comboSanphams;
+    }
 
-	public ComboSanpham removeComboSanpham(ComboSanpham comboSanpham) {
-		getComboSanphams().remove(comboSanpham);
-		comboSanpham.setCombo(null);
+    public void setComboSanphams(List<ComboSanpham> comboSanphams) {
+        this.comboSanphams = comboSanphams;
+    }
 
-		return comboSanpham;
-	}
+    public ComboSanpham addComboSanpham(ComboSanpham comboSanpham) {
+        getComboSanphams().add(comboSanpham);
+        comboSanpham.setCombo(this);
+
+        return comboSanpham;
+    }
+
+    public ComboSanpham removeComboSanpham(ComboSanpham comboSanpham) {
+        getComboSanphams().remove(comboSanpham);
+        comboSanpham.setCombo(null);
+
+        return comboSanpham;
+    }
 
 }

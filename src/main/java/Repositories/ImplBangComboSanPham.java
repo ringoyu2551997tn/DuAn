@@ -11,25 +11,42 @@ import Utilities.JpaUtils;
 import DomainModel.ComboSanpham;
 import DomainModel.Sanpham;
 
-public class ImplBangComboSanPham implements InterfaceBangComboSanPham{
+public class ImplBangComboSanPham {
 
-	@Override
-	public ComboSanpham create(ComboSanpham cbsp) {
-		EntityManager em = JpaUtils.getEntityManager();
-		EntityTransaction trans = em.getTransaction();
-		try {
-			trans.begin();
-			System.out.println(cbsp.getSoLuong());
-			System.out.println(cbsp.getCombo().getID_ComBo());
-			System.out.println(cbsp.getSanpham().getID_SanPham());
-			em.persist(cbsp);
-			trans.commit();
+    public final EntityManager entityManager = JpaUtils.getEntityManager();
 
-			return cbsp;
-		}catch (Exception e) {
-			em.getTransaction().rollback();
-			throw new RuntimeException();
-		}
-	}
+    public List<ComboSanpham> findAll() {
+        TypedQuery<ComboSanpham> query = entityManager.createQuery("SELECT c FROM ComboSanpham c", ComboSanpham.class);
+        List<ComboSanpham> list = query.getResultList();
+        return list;
+    }
+
+    public ComboSanpham create(ComboSanpham ban) {
+        try {
+            System.out.println(ban.getCombo().getID_ComBo());
+            System.out.println(ban.getSanpham().getMaSanPham());
+            System.out.println(ban.getSoLuong());
+            entityManager.getTransaction().begin();
+            entityManager.persist(ban);
+            entityManager.getTransaction().commit();
+            return ban;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException();
+        }
+    }
+
+    public ComboSanpham update(ComboSanpham ban) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(ban);
+            entityManager.getTransaction().commit();
+            return ban;
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            throw new RuntimeException();
+        }
+    }
 
 }

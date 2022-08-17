@@ -5,6 +5,7 @@
 package Services;
 
 import DomainModel.Ban;
+
 import DomainModel.Hoadoinchitiet;
 import DomainModel.Hoadon;
 import ViewModels.BanView;
@@ -27,6 +28,25 @@ public class ServiceBan implements IServiceBan {
     InterfaceBangBan daoBan = new ImplBangBan();
     InterfaceBangHoaDon daoHD = new ImplBangHoaDon();
     InterfaceBangHoaDonChiTiet daoHDCT = new ImplBangHoaDonChiTiet();
+
+    public ServiceBan() {
+        _dao = new ImplBangBan();
+        getlst();
+    }
+    
+    public List<Ban> getlst() {
+        return _dao.findAll();
+    }
+    
+    public BanView create(BanView ban) {
+        _dao.create(new Ban(ban.getMaBan(), ban.getTrangThai()));
+        return new BanView(ban.getMaBan(), ban.getTrangThai());
+    }
+
+    public BanView update(BanView ban) {
+        _dao.update(new Ban(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai()));
+        return new BanView(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai());
+    }
 
     @Override
     public List<BanView> findByStatus(int status) {

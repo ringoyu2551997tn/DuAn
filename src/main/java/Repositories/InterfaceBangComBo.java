@@ -8,7 +8,7 @@ public interface InterfaceBangComBo {
 	
 	List<Combo> findAll(int position, int pageSize);
     
-	Combo findById(String id);
+	Combo findById(int id);
     
 	Combo create(Combo combo);
 	

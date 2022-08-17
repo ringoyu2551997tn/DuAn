@@ -13,7 +13,7 @@ public interface InterfaceBangBan {
 	
 	List<Ban> findAll(int position, int pageSize);
     
-
+        Ban findById2(long id);
 
         List<Ban> findByStatus(int status);
         

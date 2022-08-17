@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import Utilities.JpaUtils;
 import DomainModel.Ban;
 import DomainModel.Hoadoinchitiet;
+import java.util.ArrayList;
 
 public class ImplBangBan implements InterfaceBangBan{
 
@@ -25,19 +26,28 @@ public class ImplBangBan implements InterfaceBangBan{
 		return list;
 	}
         
-        public List<Ban> findAll() {
-		String jsql = "SELECT b FROM Ban b";
-		TypedQuery<Ban> query = entityManager.createQuery(jsql.toString(), Ban.class);
-		List<Ban> list = query.getResultList();
-		return list;
-	}
+//        public List<Ban> findAll() {
+//		String jsql = "SELECT b FROM Ban b";
+//		TypedQuery<Ban> query = entityManager.createQuery(jsql.toString(), Ban.class);
+//		List<Ban> list = query.getResultList();
+//		return list;
+//	}
 
 	@Override
 	public Ban findById(long id) {
 		Ban Ban = entityManager.find(Ban.class, id);
 		return Ban;
 	}
-
+        
+        @Override
+	public Ban findById2(long id) {
+		EntityManager entityManager = JpaUtils.getEntityManager();
+		 String jsql = "SELECT b FROM Ban b where b.ID_Ban = "+id;
+		TypedQuery<Ban> query = entityManager.createQuery(jsql, Ban.class);
+		Ban ban = query.getSingleResult();
+		return ban;
+	}
+        
 	@Override
 	public Ban create(Ban ban) {
 		try {
@@ -98,12 +108,34 @@ public class ImplBangBan implements InterfaceBangBan{
 
     @Override
     public List<Ban> findByStatus(int status) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         EntityManager entityManager = JpaUtils.getEntityManager();
+        String jsql = "SELECT b FROM Ban b where b.trangThai = "+status+"and b.ID_Ban<>-1";
+		TypedQuery<Ban> query = entityManager.createQuery(jsql, Ban.class);
+		List<Ban> list = query.getResultList();
+		return list;
+    }
+
+    @Override
+    public List<Ban> findAll() {
+        EntityManager entityManager = JpaUtils.getEntityManager();
+        String jsql = "SELECT b FROM Ban b Where b.ID_Ban<>-1";
+		TypedQuery<Ban> query = entityManager.createQuery(jsql, Ban.class);
+		List<Ban> list = query.getResultList();
+		return list;
     }
 
     @Override
     public List<Hoadoinchitiet> findAllSelectedItem(int id_ban) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        EntityManager entityManager = JpaUtils.getEntityManager();
+        List<Hoadoinchitiet> lst = new ArrayList<>();
+        String jsql = "SELECT hdct from Hoadoinchitiet hdct "
+                + " Inner JOIN Ban b ON hdct.ban.ID_Ban = b.ID_Ban"
+                + " Inner JOIN Hoadon hd ON hd.ID_HoaDon = hdct.hoadon.ID_HoaDon "
+                + " Where b.ID_Ban="+id_ban+""
+                +  " AND hd.trangThai = 0";
+	TypedQuery<Hoadoinchitiet> query = entityManager.createQuery(jsql,Hoadoinchitiet.class);
+        lst = query.getResultList();
+		return lst;
     }
 	
 	

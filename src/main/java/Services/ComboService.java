@@ -36,7 +36,7 @@ public class ComboService implements IComboService{
 
     @Override
     public ComboView getComboById(String id) {
-        var x = _daoCB.findById(id);
+        var x = _daoCB.findById(Integer.parseInt(id) );
         return new ComboView(x.getID_ComBo(), x.getGiaTien(), x.getHInhAnh(),
                     x.getMaComBo(), x.getTenComBo(), x.getTrangThai());
     }

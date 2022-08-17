@@ -33,7 +33,7 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	@Override
 	public Nhanvien findById(int id) {
 		TypedQuery<Nhanvien> typedQuery
-	      = em.createQuery("SELECT b FROM Bangnhanvien b WHERE b.id=:id", Nhanvien.class);
+	      = em.createQuery("SELECT b FROM Nhanvien b WHERE b.id=:id", Nhanvien.class);
 	    typedQuery.setParameter("id", id);
 	    return typedQuery.getSingleResult();
 	}

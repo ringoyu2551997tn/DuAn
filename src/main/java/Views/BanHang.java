@@ -99,7 +99,7 @@ public class BanHang extends javax.swing.JPanel {
      */
     public BanHang() {
         initComponents();
-        selectedBan = daoBan.findById(-1);
+        selectedBan = daoBan.findById2(-1);
         format.setRoundingMode(RoundingMode.HALF_UP);
         setTableHeader();
         loadTableBan(svsBan.findByStatus(2), btn_allBan);
@@ -213,7 +213,7 @@ public class BanHang extends javax.swing.JPanel {
         tbl.setRowCount(0);
         for (Hoadoinchitiet x : lst) {
             if (x.getKieu() == 0) {
-                Combo cb = daoCB.findById( String.valueOf(x.getMa()));
+                Combo cb = daoCB.findById( x.getMa());
                 JLabel imageLabel = new JLabel();
                 ImageIcon imageicon = new ImageIcon(cb.getHInhAnh());
                 Image img = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
@@ -427,7 +427,7 @@ public class BanHang extends javax.swing.JPanel {
                 public void actionPerformed(ActionEvent e) {
                     int index = tbl_ban.getSelectedRow();
                     hoadon = CreateNewHoaDon("");
-                    selectedBan = daoBan.findById(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1)));
+                    selectedBan = daoBan.findById2(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1)));
                     txt_maHoaDon.setText(hoadon.getMaHoaDon());
                 }
 
@@ -459,10 +459,10 @@ public class BanHang extends javax.swing.JPanel {
                 }
 
             });
-            if (daoBan.findById(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1))).getTrangThai() == 0) {
+            if (daoBan.findById2(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1))).getTrangThai() == 0) {
                 add(createTB);
             };
-            if (daoBan.findById(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1))).getTrangThai() == 1) {
+            if (daoBan.findById2(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1))).getTrangThai() == 1) {
                 add(chuyenBan);
                 add(gopBan);
             }
@@ -1027,7 +1027,7 @@ public class BanHang extends javax.swing.JPanel {
 
     private void btn_allBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_allBanActionPerformed
         loadTableBan(svsBan.findByStatus(2), btn_allBan);// TODO add your handling code here:
-        selectedBan = daoBan.findById(-1);
+        selectedBan = daoBan.findById2(-1);
         lstSelected = new ArrayList<>();
         loadTableSelected(lstSelected);
         txt_maHoaDon.setText("");
@@ -1035,7 +1035,7 @@ public class BanHang extends javax.swing.JPanel {
 
     private void btn_banTrongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_banTrongActionPerformed
         loadTableBan(svsBan.findByStatus(0), btn_banTrong);
-        selectedBan = daoBan.findById(-1);
+        selectedBan = daoBan.findById2(-1);
         lstSelected = new ArrayList<>();
         loadTableSelected(lstSelected);// TODO add your handling code here:
         txt_maHoaDon.setText("");
@@ -1043,7 +1043,7 @@ public class BanHang extends javax.swing.JPanel {
 
     private void btn_banHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_banHDActionPerformed
         loadTableBan(svsBan.findByStatus(1), btn_banHD);
-        selectedBan = daoBan.findById(-1);
+        selectedBan = daoBan.findById2(-1);
         lstSelected = new ArrayList<>();
         loadTableSelected(lstSelected);
         txt_maHoaDon.setText("");// TODO add your handling code here:
@@ -1071,7 +1071,7 @@ public class BanHang extends javax.swing.JPanel {
 
     private void tbl_banMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_banMouseClicked
         int index = tbl_ban.getSelectedRow();
-        selectedBan = daoBan.findById(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1)));
+        selectedBan = daoBan.findById2(Long.parseLong(tbl_ban.getValueAt(index, 0).toString().substring(1)));
         int trangThai = tbl_ban.getValueAt(index, 1).toString().equals("Trống") ? 0 : 1;
         lstSelected = svsBan.showSelectedItems(selectedBan.getID_Ban(), trangThai);
         loadTableSelected(lstSelected);
@@ -1162,7 +1162,7 @@ public class BanHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_luuActionPerformed
 
     private void btn_mangVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mangVeActionPerformed
-        selectedBan = daoBan.findById(-1);
+        selectedBan = daoBan.findById2(-1);
         lstSelected = new ArrayList<>();
         int maxIdHD = daoHD.findAll().get(daoHD.findAll().size() - 1).getID_HoaDon();
         txt_maHoaDon.setText(util.getIDMax("HD", maxIdHD));

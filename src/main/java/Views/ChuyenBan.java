@@ -99,6 +99,11 @@ public class ChuyenBan extends javax.swing.JDialog {
         btn_huy.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_huy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         btn_huy.setText("Hủy");
+        btn_huy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_huyActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("CHUYỂN BÀN");
@@ -158,6 +163,12 @@ public class ChuyenBan extends javax.swing.JDialog {
         this.dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_xacNhanActionPerformed
+
+    private void btn_huyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyActionPerformed
+        // TODO add your handling code here:
+        BanHang bh = (BanHang) Main.currentPanel;
+        bh.demoLoad();
+    }//GEN-LAST:event_btn_huyActionPerformed
 
     /**
      * @param args the command line arguments

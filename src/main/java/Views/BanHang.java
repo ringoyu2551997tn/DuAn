@@ -29,6 +29,10 @@ import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -113,7 +117,9 @@ public class BanHang extends javax.swing.JPanel {
         btn_huy.setEnabled(false);
         CbcKhuyenMai();
     }
-
+void demoLoad(){
+    loadTableBan(svsBan.findByStatus(2), btn_allBan);
+}
     void removeColorBan() {
         btn_allBan.setBackground(Color.white);
         btn_banHD.setBackground(Color.white);
@@ -440,7 +446,8 @@ public class BanHang extends javax.swing.JPanel {
                     if (trangThai.equals("Trống")) {
                         JOptionPane.showMessageDialog(new JPanel(), "Bàn đang trống");
                     } else {
-                        new ChuyenBan(new Main(), true, 0, Integer.parseInt(tbl_ban.getValueAt(index, 0).toString().substring(1))).setVisible(true);
+                        ChuyenBan cb = new ChuyenBan(new Main(), true, 0, Integer.parseInt(tbl_ban.getValueAt(index, 0).toString().substring(1)));
+                        cb.setVisible(true);
                     }
                 }
             }

@@ -28,6 +28,8 @@ public class ServiceBan implements IServiceBan {
     InterfaceBangBan daoBan = new ImplBangBan();
     InterfaceBangHoaDon daoHD = new ImplBangHoaDon();
     InterfaceBangHoaDonChiTiet daoHDCT = new ImplBangHoaDonChiTiet();
+    ImplBangBan _dao;
+    
 
     public ServiceBan() {
         _dao = new ImplBangBan();
@@ -39,13 +41,13 @@ public class ServiceBan implements IServiceBan {
     }
     
     public BanView create(BanView ban) {
-        _dao.create(new Ban(ban.getMaBan(), ban.getTrangThai()));
+        _dao.create(new Ban(ban.getMaBan(), ban.getTrangThai(),ban.getSoGhe()));
         return new BanView(ban.getMaBan(), ban.getTrangThai());
     }
 
     public BanView update(BanView ban) {
-        _dao.update(new Ban(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai()));
-        return new BanView(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai());
+        _dao.update(new Ban(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai(),ban.getSoGhe()));
+        return new BanView(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai(),ban.getSoGhe());
     }
 
     @Override

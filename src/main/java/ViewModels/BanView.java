@@ -24,7 +24,7 @@ public class BanView {
     public BanView(String maBan, int trangThai) {
         this.maBan = maBan;
         this.trangThai = trangThai;
-
+    }
     public BanView(int ID_Ban, String maBan, int trangThai,int soGhe) {
         this.ID_Ban = ID_Ban;
         this.maBan = maBan;
@@ -56,6 +56,7 @@ public class BanView {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+}
     
     
 

@@ -213,7 +213,7 @@ public class BanHang extends javax.swing.JPanel {
         tbl.setRowCount(0);
         for (Hoadoinchitiet x : lst) {
             if (x.getKieu() == 0) {
-                Combo cb = daoCB.findById( x.getMa());
+                Combo cb = daoCB.findById( String.valueOf(x.getMa()));
                 JLabel imageLabel = new JLabel();
                 ImageIcon imageicon = new ImageIcon(cb.getHInhAnh());
                 Image img = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);

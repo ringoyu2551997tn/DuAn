@@ -57,7 +57,7 @@ public class JPanelBan extends javax.swing.JPanel {
         if (style==1) {
             return new BanView(txt_MaBan.getText(), cbx_TrangThai.getSelectedItem()=="Trống" ? 0 : cbx_TrangThai.getSelectedItem()=="Trống" ? 1 : 2);
         }
-        return new BanView(_ServiceBan.getlst().get(tbl_Ban.getSelectedRow()).getID_Ban(), txt_MaBan.getText(), cbx_TrangThai.getSelectedItem()=="Trống" ? 0 : cbx_TrangThai.getSelectedItem()=="Trống" ? 1 : 2);
+        return new BanView(_ServiceBan.getlst().get(tbl_Ban.getSelectedRow()).getID_Ban(), txt_MaBan.getText(), cbx_TrangThai.getSelectedItem()=="Trống" ? 0 : cbx_TrangThai.getSelectedItem()=="Trống" ? 1 : 2,3);
     }
     
     /**

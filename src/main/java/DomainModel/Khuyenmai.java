@@ -59,9 +59,17 @@ public class Khuyenmai implements Serializable {
         
     }
 
-    public Khuyenmai(int id_KhuyenMai, int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Khuyenmai(int ID_KhuyenMai, int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai) {
+        this.ID_KhuyenMai = ID_KhuyenMai;
+        this.chietKhau = chietKhau;
+        this.maKhuyenMai = maKhuyenMai;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.tenKhuyenMai = tenKhuyenMai;
+        this.trangThai = trangThai;
     }
+
+
 
 	public int getID_KhuyenMai() {
 		return this.ID_KhuyenMai;

@@ -10,11 +10,13 @@ import Services.ServiceKhuyenMai;
 import Services.ServiceNhanVien;
 import ViewModels.KhuyenmaiView;
 import ViewModels.NhanvienView;
+import ViewModels.SanPhamView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +32,7 @@ public class KhuyenMai extends javax.swing.JPanel {
         trangThai();
         _DefaultTableModel = new DefaultTableModel();
         _ServiceKM = new ServiceKhuyenMai();
+        loadTable(_ServiceKM.getlst());
     }
     
     void trangThai() {
@@ -57,7 +60,8 @@ public class KhuyenMai extends javax.swing.JPanel {
 //            BigDecimal chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai
             return new KhuyenmaiView(Integer.parseInt(txt_ChietKhau.getText()), txt_MaKhuyenMai.getText(), jdc_NgayBatDau.getDate(),jdc_NgayKetThuc.getDate(),txt_TenKhuyenMai.getText(),cbx_trangthai.equals("Online") ? 0 : 1);
         }
-        return new KhuyenmaiView(_ServiceKM.getlst().get(tbl_KhuyenMai.getSelectedRow()).getID_KhuyenMai(),txt_ChietKhau.getText(),txt_TenKhuyenMai.getText(),cbx_trangthai.equals("Online") ? 0 : 1);
+//        int chietKhau, String maKhuyenMai, Date ngayBatDau, Date ngayKetThuc, String tenKhuyenMai, int trangThai
+        return new KhuyenmaiView(_ServiceKM.getlst().get(tbl_KhuyenMai.getSelectedRow()).getID_KhuyenMai(),Integer.parseInt(txt_ChietKhau.getText()),txt_MaKhuyenMai.getText(),jdc_NgayBatDau.getDate(),jdc_NgayKetThuc.getDate(),txt_TenKhuyenMai.getText(),cbx_trangthai.getSelectedItem().equals("Online") ? 0 : 1);
     }
     
     @SuppressWarnings("unchecked")
@@ -154,6 +158,11 @@ public class KhuyenMai extends javax.swing.JPanel {
         });
 
         btn_Reset.setText("Reset");
+        btn_Reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ResetActionPerformed(evt);
+            }
+        });
 
         txt_ChietKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +280,20 @@ public class KhuyenMai extends javax.swing.JPanel {
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         _ServiceKM.update(getGUI(2));
         loadTable(_ServiceKM.getlst());
+               
+        if (tbl_KhuyenMai.getSelectedRow()< 0)
+                {           JOptionPane.showMessageDialog(this, "Bạn phải chọn bàn");
+            return;
+        }
+
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceKM.update(getGUI(2));
+        loadTable(_ServiceKM.getlst());
+            JOptionPane.showMessageDialog(this, "Sửa thành công!");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Sửa thất bại!");
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void tbl_KhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_KhuyenMaiMouseClicked
@@ -279,16 +302,23 @@ public class KhuyenMai extends javax.swing.JPanel {
 //        cbx_TrangThai.setSelectedItem(tbl_Ban.getModel().getValueAt(index, 1).toString());
         txt_MaKhuyenMai.setText(tbl_KhuyenMai.getModel().getValueAt(index, 0).toString());
         txt_TenKhuyenMai.setText(tbl_KhuyenMai.getModel().getValueAt(index, 1).toString());
-        txt_ChietKhau.setText(tbl_KhuyenMai.getModel().getValueAt(index, 5).toString());
+        txt_ChietKhau.setText(tbl_KhuyenMai.getModel().getValueAt(index, 4).toString());
         
-        cbx_trangthai.setSelectedItem(tbl_KhuyenMai.getModel().getValueAt(index, 6).toString());
+        cbx_trangthai.setSelectedItem(tbl_KhuyenMai.getModel().getValueAt(index, 5).toString());
         try {
-            jdc_NgayBatDau.setDate(new SimpleDateFormat("yyyy-mm-dd").parse(tbl_KhuyenMai.getModel().getValueAt(index, 3).toString()));
-            jdc_NgayKetThuc.setDate(new SimpleDateFormat("yyyy-mm-dd").parse(tbl_KhuyenMai.getModel().getValueAt(index, 4).toString()));
+            jdc_NgayBatDau.setDate(new SimpleDateFormat("yyyy-mm-dd").parse(tbl_KhuyenMai.getModel().getValueAt(index, 2).toString()));
+            jdc_NgayKetThuc.setDate(new SimpleDateFormat("yyyy-mm-dd").parse(tbl_KhuyenMai.getModel().getValueAt(index, 3).toString()));
         } catch (ParseException ex) {
             Logger.getLogger(KhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tbl_KhuyenMaiMouseClicked
+
+    private void btn_ResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResetActionPerformed
+        // TODO add your handling code here:
+        txt_ChietKhau.setText("");
+        txt_MaKhuyenMai.setText("");
+        txt_TenKhuyenMai.setText("");
+    }//GEN-LAST:event_btn_ResetActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

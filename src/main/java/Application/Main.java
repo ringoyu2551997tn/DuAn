@@ -8,10 +8,13 @@ package Application;
 
 import DomainModel.Sanpham;
 import Views.BanHang;
+import Views.JPanelCombo;
+import Views.JPanelNhanVien;
 import Views.JPanelSanPham;
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
 import Views.JpanelThongke;
+import Views.KhuyenMai;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -36,14 +39,14 @@ public class Main extends javax.swing.JFrame {
 
         setBounds(80, 0, 1400, 1000);
         setResizable(false);
-        if (Login.getCurrentUser().getVaiTro() == 1) {
-            btnCombo.setVisible(false);
-            btnKhuyenMai.setVisible(false);
-            btnSanPham.setVisible(false);
-            btnThongke.setVisible(false);
-            btnNhanVien.setVisible(false);
-
-        }
+//        if (Login.getCurrentUser().getVaiTro() == 1) {
+//            btnCombo.setVisible(false);
+//            btnKhuyenMai.setVisible(false);
+//            btnSanPham.setVisible(false);
+//            btnThongke.setVisible(false);
+//            btnNhanVien.setVisible(false);
+//
+//        }
     }
 
     public void setColor(JButton btn) {
@@ -287,8 +290,8 @@ public class Main extends javax.swing.JFrame {
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         // TODO add your handling code here:
-        pn.removeAll();
-//        pn.add(new ViewChuyenDee());
+       pn.removeAll();
+        pn.add(new JPanelNhanVien());
         pn.repaint();
         pn.revalidate();
         setColor(btnNhanVien);
@@ -299,11 +302,9 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         pn.removeAll();
         pn.add(new JPanelSanPham());
-//        pn.add(new ViewNguoiHoc());
-setColor(btnSanPham);
         pn.repaint();
         pn.revalidate();
-        pn.setVisible(true);
+        setColor(btnSanPham);
 
         
     }//GEN-LAST:event_btnSanPhamActionPerformed
@@ -311,15 +312,15 @@ setColor(btnSanPham);
     private void btnComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComboActionPerformed
         // TODO add your handling code here:
         pn.removeAll();
-//        pn.add(new ViewKhoaHoc());
+        pn.add(new JPanelCombo());
         pn.repaint();
         pn.revalidate();
         setColor(btnCombo);
     }//GEN-LAST:event_btnComboActionPerformed
 
     private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
-        pn.removeAll();
-//        pn.add(new ViewHocVien());
+       pn.removeAll();
+        pn.add(new KhuyenMai());
         pn.repaint();
         pn.revalidate();
         setColor(btnKhuyenMai);
@@ -327,13 +328,10 @@ setColor(btnSanPham);
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
-
-
-        pn.removeAll();
-      pn.add(new JpanelThongke());
+pn.removeAll();
+        pn.add(new JpanelThongke());
         pn.repaint();
         pn.revalidate();
-
         setColor(btnThongke);
 
     }//GEN-LAST:event_btnThongkeActionPerformed

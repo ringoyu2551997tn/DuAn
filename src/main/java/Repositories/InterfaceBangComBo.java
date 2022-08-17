@@ -7,11 +7,18 @@ import DomainModel.Sanpham;
 public interface InterfaceBangComBo {
 	
 	List<Combo> findAll(int position, int pageSize);
+<<<<<<< Updated upstream
 
         List<Combo> findAll();
         
 
 	Combo findById(int id);
+=======
+    
+	Combo findById(int id);
+        
+        Combo findByMa(String id);
+>>>>>>> Stashed changes
     
 	Combo create(Combo combo);
 	

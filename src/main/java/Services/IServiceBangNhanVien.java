@@ -12,10 +12,6 @@ public interface IServiceBangNhanVien {
 
     Nhanvien findById(int id);
 
-    Nhanvien create(NhanvienView nv);
-
-    Nhanvien update(NhanvienView nv);
-
     Nhanvien remove(int id);
 
     long totalCount();

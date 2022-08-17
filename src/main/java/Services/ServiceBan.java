@@ -28,6 +28,28 @@ public class ServiceBan implements IServiceBan {
     InterfaceBangHoaDon daoHD = new ImplBangHoaDon();
     InterfaceBangHoaDonChiTiet daoHDCT = new ImplBangHoaDonChiTiet();
 
+<<<<<<< Updated upstream
+=======
+    public ServiceBan() {
+//        _dao = new ImplBangBan();
+        getlst();
+    }
+    
+    public List<Ban> getlst() {
+        return daoBan.findAll();
+    }
+    
+    public BanView create(BanView ban) {
+        daoBan.create(new Ban(ban.getMaBan(), ban.getTrangThai(),ban.getSoGhe()));
+        return new BanView(ban.getMaBan(), ban.getTrangThai());
+    }
+
+    public BanView update(BanView ban) {
+        daoBan.update(new Ban(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai(),ban.getSoGhe()));
+        return new BanView(ban.getID_Ban(),ban.getMaBan(),ban.getTrangThai(),ban.getSoGhe());
+    }
+
+>>>>>>> Stashed changes
     @Override
     public List<BanView> findByStatus(int status) {
         if (status == 2) {

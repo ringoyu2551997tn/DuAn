@@ -160,7 +160,7 @@ public class BanHang extends javax.swing.JPanel {
         txt_tongTien.setText(String.valueOf(money));
         Khuyenmai km = (Khuyenmai) cbc_maKhuyenMai.getSelectedItem();
         txt_tienPhaiTra.setText(String.valueOf(Double.parseDouble(txt_tongTien.getText())
-                - (Double.parseDouble(txt_tongTien.getText()) * km.getChietKhau().doubleValue() / 100)));
+                - (Double.parseDouble(txt_tongTien.getText()) * km.getChietKhau() / 100)));
         if (!txt_khachDua.getText().isBlank()) {
             txt_tienThua.setText(String.valueOf(Double.parseDouble(txt_khachDua.getText())
                     - (Double.parseDouble(txt_tienPhaiTra.getText()))));
@@ -213,7 +213,7 @@ public class BanHang extends javax.swing.JPanel {
         tbl.setRowCount(0);
         for (Hoadoinchitiet x : lst) {
             if (x.getKieu() == 0) {
-                Combo cb = daoCB.findById(x.getMa());
+                Combo cb = daoCB.findById( x.getMa());
                 JLabel imageLabel = new JLabel();
                 ImageIcon imageicon = new ImageIcon(cb.getHInhAnh());
                 Image img = imageicon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);

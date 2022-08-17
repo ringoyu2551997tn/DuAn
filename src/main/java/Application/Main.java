@@ -7,14 +7,19 @@ package Application;
 
 import DomainModel.Sanpham;
 import Views.BanHang;
+import Views.JPanelCombo;
+import Views.JPanelNhanVien;
 import Views.JPanelSanPham;
 import Views.JpanelDoimatkhau;
 import Views.JpanelHoaDon;
 import Views.JpanelThongke;
+import Views.KhuyenMai;
+import java.awt.Button;
 
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -33,14 +38,14 @@ public class Main extends javax.swing.JFrame {
 
         setBounds(80, 0, 1400, 1000);
         setResizable(false);
-        if (Login.getCurrentUser().getVaiTro() == 1) {
-            btnCombo.setVisible(false);
-            btnKhuyenMai.setVisible(false);
-            btnSanPham.setVisible(false);
-            btnThongke.setVisible(false);
-            btnNhanVien.setVisible(false);
-
-        }
+//        if (Login.getCurrentUser().getVaiTro() == 1) {
+//            btnCombo.setVisible(false);
+//            btnKhuyenMai.setVisible(false);
+//            btnSanPham.setVisible(false);
+//            btnThongke.setVisible(false);
+//            btnNhanVien.setVisible(false);
+//
+//        }
     }
 
     public void setColor(JButton btn) {
@@ -56,6 +61,16 @@ public class Main extends javax.swing.JFrame {
         btn.setBackground(Color.red);
     }
 
+<<<<<<< Updated upstream
+=======
+    void showPanel(JPanel jn,JButton btn){
+        pn.removeAll();
+        pn.add(jn);
+        pn.repaint();
+        pn.revalidate();
+        setColor(btn);
+    }
+>>>>>>> Stashed changes
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -266,37 +281,51 @@ public class Main extends javax.swing.JFrame {
 
     private void btnBanHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanHangActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
 
         pn.removeAll();
         pn.add(new BanHang());
         pn.validate();
         setColor(btnBanHang);
+=======
+        
+        showPanel(new BanHang(), btnBanHang);
+>>>>>>> Stashed changes
         
     }//GEN-LAST:event_btnBanHangActionPerformed
 
     private void btnNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhanVienActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         pn.removeAll();
 //        pn.add(new ViewChuyenDee());
         pn.validate();
         setColor(btnNhanVien);
+=======
+        showPanel(new JPanelNhanVien(), btnNhanVien);
+>>>>>>> Stashed changes
 
     }//GEN-LAST:event_btnNhanVienActionPerformed
 
     private void btnSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSanPhamActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         pn.removeAll();
         pn.add(new JPanelSanPham());
 //        pn.add(new ViewNguoiHoc());
 setColor(btnSanPham);
         pn.validate();
         pn.setVisible(true);
+=======
+        showPanel(new JPanelSanPham(), btnSanPham);
+>>>>>>> Stashed changes
 
         
     }//GEN-LAST:event_btnSanPhamActionPerformed
 
     private void btnComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComboActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         pn.removeAll();
 //        pn.add(new ViewKhoaHoc());
         pn.validate();
@@ -308,34 +337,53 @@ setColor(btnSanPham);
 //        pn.add(new ViewHocVien());
         pn.validate();
         setColor(btnKhuyenMai);
+=======
+        showPanel(new JPanelCombo(), btnCombo);
+    }//GEN-LAST:event_btnComboActionPerformed
+
+    private void btnKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKhuyenMaiActionPerformed
+        showPanel(new KhuyenMai(), btnKhuyenMai);
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnKhuyenMaiActionPerformed
 
     private void btnThongkeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongkeActionPerformed
         // TODO add your handling code here:
 
 
+<<<<<<< Updated upstream
         pn.removeAll();
       pn.add(new JpanelThongke());
         pn.validate();
 
         setColor(btnThongke);
+=======
+       showPanel(new JpanelThongke(), btnThongke);
+>>>>>>> Stashed changes
 
     }//GEN-LAST:event_btnThongkeActionPerformed
 
     private void btnHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHoaDonActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         pn.removeAll();
         pn.add(new JpanelHoaDon());
         pn.validate();
         setColor(btnHoaDon);
+=======
+        showPanel(new JpanelHoaDon(), btnHoaDon);
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnHoaDonActionPerformed
 
     private void btnDoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoiMatKhauActionPerformed
         // TODO add your handling code here:
+<<<<<<< Updated upstream
         pn.removeAll();
         pn.add(new JpanelDoimatkhau());
         pn.validate();
         setColor(btnDoiMatKhau);
+=======
+        showPanel(new JpanelDoimatkhau(), btnDoiMatKhau);
+>>>>>>> Stashed changes
     }//GEN-LAST:event_btnDoiMatKhauActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed

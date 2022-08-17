@@ -106,6 +106,7 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	}
 
 	@Override
+<<<<<<< Updated upstream
 
 	public Nhanvien findbyEmail(String email, String taikhoan) {
 	Query typedQuery= em.createQuery("Select b from Nhanvien b WHERE b.email =  ? 1 and b.taiKhoan = ? 2 ", Nhanvien.class);
@@ -116,6 +117,18 @@ public class ImplBangNhanVien implements InterfaceBangNhanVien{
 	}
 
 
+=======
+
+	public Nhanvien findbyEmail(String email, String taikhoan) {
+	Query typedQuery= em.createQuery("Select b from Nhanvien b WHERE b.email =  ? 1 and b.taiKhoan = ? 2 ", Nhanvien.class);
+	    typedQuery.setParameter(1, email);
+             typedQuery.setParameter(2, taikhoan);
+             Nhanvien nv = (Nhanvien) typedQuery.getSingleResult();
+	    return update(nv);
+	}
+	
+	
+>>>>>>> Stashed changes
 	
 	
 }

@@ -6,6 +6,7 @@ package Repositories;
 
 import DomainModel.Hoadon;
 import DomainModel.detail;
+import Utilities.JpaUtils;
 import ViewModels.Bieudo;
 import ViewModels.thongkeCombo;
 import ViewModels.thongkeSanPham;
@@ -23,6 +24,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
@@ -32,7 +34,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import static repositories.ImplBangHoaDonChiTiet.entityManager;
+
 
 /**
  *
@@ -46,6 +48,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public double tongtien() {
+        EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select SUM(hdct.donGia * hdct.soLuong) FROM  Hoadoinchitiet hdct";
         Query query = entityManager.createQuery(jsql);
         return (double) query.getSingleResult();
@@ -53,6 +56,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public Long tonghd() {
+        EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select count(h.ID_HoaDon) FROM Hoadon h";
         Query query = entityManager.createQuery(jsql);
         return (Long) query.getSingleResult();
@@ -60,6 +64,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public Long tongsp() {
+        EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select sum(hdct.soLuong) FROM  Hoadoinchitiet hdct";
         Query query = entityManager.createQuery(jsql);
         return (Long) query.getSingleResult();
@@ -67,6 +72,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public List<detail> listdata() {
+        EntityManager entityManager = JpaUtils.getEntityManager();
         List<detail> list = new ArrayList<>();
         String jsql = "select new DomainModel.detail(SUM(hdct.donGia * hdct.soLuong), count(h.ID_HoaDon), sum(hdct.soLuong)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon";
         Query query = entityManager.createQuery(jsql);
@@ -75,7 +81,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<detail> listdatatheongay(Date date) {
+    public List<detail> listdatatheongay(Date date) {EntityManager entityManager = JpaUtils.getEntityManager();
         try {
             List<detail> list = new ArrayList<>();
             String jsql = "select new DomainModel.detail(SUM(hdct.donGia * hdct.soLuong), count(h.ID_HoaDon), sum(hdct.soLuong)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao =?1";
@@ -94,7 +100,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<detail> listdatatheokhoang(Date date1, Date date2) {
+    public List<detail> listdatatheokhoang(Date date1, Date date2) {EntityManager entityManager = JpaUtils.getEntityManager();
         try {
             List<detail> list = new ArrayList<>();
             String jsql = "select new DomainModel.detail(SUM(hdct.donGia * hdct.soLuong), count(h.ID_HoaDon), sum(hdct.soLuong)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao between ? 1 and ? 2";
@@ -114,7 +120,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<detail> listdatatheothang(int thang, int year) {
+    public List<detail> listdatatheothang(int thang, int year) {EntityManager entityManager = JpaUtils.getEntityManager();
         try {
             List<detail> list = new ArrayList<>();
             String jsql = "select new DomainModel.detail(SUM(hdct.donGia * hdct.soLuong), count(h.ID_HoaDon), sum(hdct.soLuong)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where month(h.ngayTao) = ?1 and year(h.ngayTao) = ?2";
@@ -134,7 +140,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<detail> listdatatheonam(int year) {
+    public List<detail> listdatatheonam(int year) {EntityManager entityManager = JpaUtils.getEntityManager();
         try {
             List<detail> list = new ArrayList<>();
             String jsql = "select new DomainModel.detail(SUM(hdct.donGia * hdct.soLuong), count(h.ID_HoaDon), sum(hdct.soLuong)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where year(h.ngayTao) = ?1";
@@ -154,9 +160,15 @@ public class ImplThongke implements InterfaceThongke {
 
 // biểu đồ theo ngày 
     @Override
+<<<<<<< Updated upstream
     public List<Bieudo> getbdByTKNgay(Date ngay) {
         List<Bieudo> list = new ArrayList<>();
         String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao =?1";
+=======
+    public List<bieudongay> getbdByTKNgay(Date ngay) {EntityManager entityManager = JpaUtils.getEntityManager();
+        List<bieudongay> list = new ArrayList<>();
+        String jsql = "select new ViewModels.bieudongay( SUM(hdct.donGia * hdct.soLuong),HOUR(h.thoiGian)) FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao =?1 group by HOUR(h.thoiGian)";
+>>>>>>> Stashed changes
         Query query = entityManager.createQuery(jsql);
         query.setParameter(1, ngay);
         list = query.getResultList();;
@@ -169,8 +181,14 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public void setDataNgay(JPanel pnlNgay, Date jdateNgay) {
+<<<<<<< Updated upstream
 
         List<Bieudo> list = getbdByTKNgay(jdateNgay);
+=======
+EntityManager entityManager = JpaUtils.getEntityManager();
+        List<bieudongay> list = getbdByTKNgay(jdateNgay);
+        System.out.println(list.size());
+>>>>>>> Stashed changes
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
             for (Bieudo o : list) {
@@ -194,7 +212,7 @@ public class ImplThongke implements InterfaceThongke {
         pnlNgay.repaint();
     }
 
-    public List<Bieudo> getbdByTKthang(int thang, int year) {
+    public List<Bieudo> getbdByTKthang(int thang, int year) {EntityManager entityManager = JpaUtils.getEntityManager();
         List<Bieudo> list = new ArrayList<>();
         String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where month(h.ngayTao) = ?1 and year(h.ngayTao) = ?2";
         Query query = entityManager.createQuery(jsql);
@@ -209,7 +227,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public void setDataThang(JPanel pnlNgay, int thang, int year) {
+    public void setDataThang(JPanel pnlNgay, int thang, int year) {EntityManager entityManager = JpaUtils.getEntityManager();
         try {
             List<Bieudo> list = getbdByTKthang(thang, year);
             DefaultCategoryDataset data = new DefaultCategoryDataset();
@@ -239,7 +257,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<Bieudo> getbdByTKnam(int year) {
+    public List<Bieudo> getbdByTKnam(int year) {EntityManager entityManager = JpaUtils.getEntityManager();
         List<Bieudo> list = new ArrayList<>();
         String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where year(h.ngayTao) = ?1";
         Query query = entityManager.createQuery(jsql);
@@ -254,7 +272,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public void setDataNam(JPanel pnlNgay, int nam) {
-
+EntityManager entityManager = JpaUtils.getEntityManager();
         List<Bieudo> list = getbdByTKnam(nam);
         DefaultCategoryDataset data = new DefaultCategoryDataset();
         if (list != null) {
@@ -280,7 +298,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<Bieudo> getbdByTKtheokhosng(Date date1, Date date2) {
+    public List<Bieudo> getbdByTKtheokhosng(Date date1, Date date2) {EntityManager entityManager = JpaUtils.getEntityManager();
         List<Bieudo> list = new ArrayList<>();
         String jsql = "select new ViewModels.Bieudo(SUM(hdct.donGia * hdct.soLuong),h.ngayTao)  FROM  Hoadoinchitiet hdct join Hoadon h on h.ID_HoaDon = hdct.hoadon.ID_HoaDon where h.ngayTao between ? 1 and ? 2";
         Query query = entityManager.createQuery(jsql);
@@ -296,7 +314,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public void setDataKhoang(JPanel pnlNgay, Date ngayBD, Date ngayKT) {
-
+EntityManager entityManager = JpaUtils.getEntityManager();
         List<Bieudo> list = getbdByTKtheokhosng(ngayBD, ngayKT);
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if (list != null) {
@@ -323,7 +341,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeSanPham> thongkesptheongay(Date date) {
+    public List<thongkeSanPham> thongkesptheongay(Date date) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeSanPham(s.maSanPham, s.tenSanPham,hdct.donGia,SUM(hdct.soLuong) )"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Sanpham s on hdct.ma = s.ID_SanPham "
@@ -338,7 +356,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeCombo> thongkecbtheongay(Date date) {
+    public List<thongkeCombo> thongkecbtheongay(Date date) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeCombo(c.maComBo, c.tenComBo,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Combo c on hdct.ma = c.ID_ComBo "
@@ -356,7 +374,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeSanPham> thongkesptheokhoang(Date date1, Date date2) {
+    public List<thongkeSanPham> thongkesptheokhoang(Date date1, Date date2) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeSanPham(s.maSanPham, s.tenSanPham,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Sanpham s on hdct.ma = s.ID_SanPham "
@@ -371,7 +389,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeCombo> thongkecbtheokhoang(Date date1, Date date2) {
+    public List<thongkeCombo> thongkecbtheokhoang(Date date1, Date date2) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeCombo(c.maComBo, c.tenComBo,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Combo c on hdct.ma = c.ID_ComBo "
@@ -391,7 +409,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeCombo> thongkecbtheothang(int thang, int nam) {
+    public List<thongkeCombo> thongkecbtheothang(int thang, int nam) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeCombo(c.maComBo, c.tenComBo,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Combo c on hdct.ma = c.ID_ComBo "
@@ -411,7 +429,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeSanPham> thongkesptheothang(int thang, int nam) {
+    public List<thongkeSanPham> thongkesptheothang(int thang, int nam) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeSanPham(s.maSanPham, s.tenSanPham,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Sanpham s on hdct.ma = s.ID_SanPham "
@@ -430,7 +448,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeCombo> thongkecbtheonam(int nam) {
+    public List<thongkeCombo> thongkecbtheonam(int nam) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeCombo(c.maComBo, c.tenComBo,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Combo c on hdct.ma = c.ID_ComBo "
@@ -448,7 +466,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     @Override
-    public List<thongkeSanPham> thongkesptheonam(int nam) {
+    public List<thongkeSanPham> thongkesptheonam(int nam) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "select new ViewModels.thongkeSanPham(s.maSanPham, s.tenSanPham,hdct.donGia,SUM(hdct.soLuong))"
                 + " FROM  Hoadon h join Hoadoinchitiet hdct on h.ID_HoaDon = hdct.hoadon.ID_HoaDon"
                 + " join Sanpham s on hdct.ma = s.ID_SanPham "
@@ -467,7 +485,7 @@ public class ImplThongke implements InterfaceThongke {
 
     @Override
     public void setDatangaynull(JPanel pnlNgay, Date date) {
-
+EntityManager entityManager = JpaUtils.getEntityManager();
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         String s = "0";
         float so = Float.valueOf(s);
@@ -487,7 +505,7 @@ public class ImplThongke implements InterfaceThongke {
     }
 
     public void GuiMail(String mes) {
-
+EntityManager entityManager = JpaUtils.getEntityManager();
         String username = "tamlttph19033@fpt.edu.vn";
         String password = "vtjekpdqurdtzpfs";
 
@@ -524,7 +542,7 @@ public class ImplThongke implements InterfaceThongke {
         }
     }
 
-    public List<Hoadon> getBillHuyNgay(Date date) {
+    public List<Hoadon> getBillHuyNgay(Date date) {EntityManager entityManager = JpaUtils.getEntityManager();
         String jsql = "SELECT h FROM Hoadon h where h.trangThai = 2 and h.ngayTao = ?1";
         TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
         query.setParameter(1, date);

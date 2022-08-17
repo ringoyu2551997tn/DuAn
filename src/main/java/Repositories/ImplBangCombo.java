@@ -34,6 +34,16 @@ public class ImplBangCombo implements InterfaceBangComBo{
 
 	@Override
 	public Combo findById(int id) {
+<<<<<<< Updated upstream
+=======
+		EntityManager em = JpaUtils.getEntityManager();
+		Combo bcb = em.find(Combo.class, id);
+		return bcb;
+	}
+        
+        	@Override
+	public Combo findByMa(String id) {
+>>>>>>> Stashed changes
 		EntityManager em = JpaUtils.getEntityManager();
 		Combo bcb = em.find(Combo.class, id);
 		return bcb;

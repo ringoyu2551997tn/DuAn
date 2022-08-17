@@ -21,9 +21,9 @@ public class ServiceCombo implements IServiceCombo {
     public List<ComboView> findAll() {
         List<ComboView> listCombo = new ArrayList<>();
         InterfaceBangComBo daoCombo = new ImplBangCombo();
-        for (Combo x : daoCombo.findAll()) {
+        for (Combo x : _dao.findAll()) {
             if (x.getTrangThai() != 0) {
-                listCombo.add(new ComboView(x.getID_ComBo(), x.getMaComBo(),x.getHInhAnh(), x.getTenComBo(), x.getGiaTien(), x.getComboSanphams()));
+                listCombo.add(new ComboView(x.getID_ComBo(), x.getGiaTien(),x.getHInhAnh(), x.getMaComBo(), x.getTenComBo(), x.getTrangThai()));
             }
         }
         return listCombo;

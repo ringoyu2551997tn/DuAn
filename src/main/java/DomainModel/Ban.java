@@ -24,6 +24,10 @@ public class Ban implements Serializable {
         
         private int soGhe;
 
+    public Ban(String maBan, int trangThai, int soGhe) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public int getSoGhe() {
         return soGhe;
     }
@@ -32,6 +36,14 @@ public class Ban implements Serializable {
         this.soGhe = soGhe;
     }
 
+    public Ban(int ID_Ban, String maBan, int trangThai, int soGhe) {
+        this.ID_Ban = ID_Ban;
+        this.maBan = maBan;
+        this.trangThai = trangThai;
+        this.soGhe = soGhe;
+    }
+
+   
         
 	//bi-directional many-to-one association to Hoadoinchitiet
 	@OneToMany(mappedBy="ban")

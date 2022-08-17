@@ -9,6 +9,8 @@ import javax.persistence.TypedQuery;
 
 import Utilities.JpaUtils;
 import DomainModel.Ban;
+import DomainModel.Hoadoinchitiet;
+import java.util.ArrayList;
 
 import DomainModel.Combo;
 import DomainModel.Hoadoinchitiet;
@@ -16,7 +18,11 @@ import DomainModel.Sanpham;
 import ViewModels.SelectedItems;
 import java.util.ArrayList;
 
+<<<<<<< Updated upstream
 public class ImplBangBan implements InterfaceBangBan{
+=======
+	public EntityManager entityManager = JpaUtils.getEntityManager();
+>>>>>>> Stashed changes
 
 	public EntityManager entityManager = JpaUtils.getEntityManager();
         
@@ -99,6 +105,7 @@ public class ImplBangBan implements InterfaceBangBan{
         }
 	}
 
+<<<<<<< Updated upstream
 
     @Override
     public List<Ban> findByStatus(int status) {
@@ -116,6 +123,15 @@ public class ImplBangBan implements InterfaceBangBan{
 		TypedQuery<Ban> query = entityManager.createQuery(jsql, Ban.class);
 		List<Ban> list = query.getResultList();
 		return list;
+=======
+    @Override
+    public List<Ban> findByStatus(int status) {
+        EntityManager entityManager = JpaUtils.getEntityManager();
+        String jsql = "SELECT b FROM Ban b where b.trangThai = "+status+"and b.ID_Ban<>-1";
+		TypedQuery<Ban> query = entityManager.createQuery(jsql, Ban.class);
+		List<Ban> list = query.getResultList();
+		return list; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+>>>>>>> Stashed changes
     }
 
     @Override
@@ -129,9 +145,14 @@ public class ImplBangBan implements InterfaceBangBan{
                 +  " AND hd.trangThai = 0";
 	TypedQuery<Hoadoinchitiet> query = entityManager.createQuery(jsql,Hoadoinchitiet.class);
         lst = query.getResultList();
+<<<<<<< Updated upstream
 		return lst;
     }
 
+=======
+		return lst;// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+>>>>>>> Stashed changes
 	
 	
 }

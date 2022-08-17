@@ -114,6 +114,7 @@ public class ImplBangHoaDon implements InterfaceBangHoaDon {
 
 	@Override
 	public List<Hoadon> findByDate (Date date1,Date date2 ) {
+            EntityManager entityManager = JpaUtils.getEntityManager();
 		String jsql = "SELECT h FROM Hoadon h where h.ngayTao between ? 1 and ? 2";
 		TypedQuery<Hoadon> query = entityManager.createQuery(jsql.toString(), Hoadon.class);
 		query.setParameter(1,date1);

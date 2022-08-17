@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.text.Utilities;
+import repositories.ImplBangBan;
 import repositories.ImplBangSanPham;
 import repositories.ImplBangTheLoai;
 
@@ -41,6 +42,7 @@ public class JPanelSanPham extends javax.swing.JPanel {
     ServiceTheLoai _TheLoaiService = new ServiceTheLoai();
     ImplBangTheLoai _daoTL = new ImplBangTheLoai();
     ImplBangSanPham _daoSP = new ImplBangSanPham();
+    ImplBangBan _daoBan = new ImplBangBan();
     GetID getid = new GetID();
 
     /**
@@ -67,7 +69,6 @@ public class JPanelSanPham extends javax.swing.JPanel {
         for (Theloai x : _daoTL.findAll()) {
             cbxTheLoai.addItem(String.valueOf(x.getTenTheLoai()));
         }
-        JOptionPane.showMessageDialog(this, "aaaaaaaaaa");
     }
 
     void loadTable(List<Sanpham> lstSanphams) {
@@ -112,10 +113,10 @@ public class JPanelSanPham extends javax.swing.JPanel {
 
     SanPhamView getGUI() {
         int ma = 0;
-        for (int i = 0; i < _ServiceSanPham.getlst().size(); i++) {
-            ma++;
-        }
-        ma = _daoSP.findSP().get(_daoSP.findSP().size()-1).getID_SanPham();
+//        for (int i = 0; i < _ServiceSanPham.getlst().size(); i++) {
+//            ma++;
+//        }
+        ma = _daoBan.getlst().get(_daoBan.getlst().size()-1).getID_Ban();
         System.out.println(ma);
         return new SanPhamView(-1, Double.parseDouble(txtGiaTien.getText()), txtAnh.getText(), getid.getIDMax("SP", ma),
                 txtTenSP.getText(), cbxTrangThai.getSelectedItem().toString() == "Hoạt đông" ? 1 : 0, getTL(cbxTheLoai.getSelectedItem().toString()));
@@ -453,8 +454,15 @@ public class JPanelSanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
-        _ServiceSanPham.createNewSanPham(getGUI());
+                int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceSanPham.createNewSanPham(getGUI());
         loadTable(_ServiceSanPham.getlst());
+            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Thêm thất bại!");
+        
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void txtGiaTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaTienActionPerformed
@@ -507,10 +515,23 @@ public class JPanelSanPham extends javax.swing.JPanel {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         int index = tblSanPham.getSelectedRow();
-        int ma = _daoSP.findSP().get(index).getID_SanPham();
-        _ServiceSanPham.updateSanPhamById(new SanPhamView(-1, Double.parseDouble(txtGiaTien.getText()), txtAnh.getText(), getid.getIDMax("SP", index),
+        int ma = _daoSP.findSP().get(index).getID_SanPham(); 
+        if (tblSanPham.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn phải chọn bàn");
+            return;
+        }
+
+        int choose = JOptionPane.showConfirmDialog(this, "Xác nhận!");
+        if (choose == 0) {
+            _ServiceSanPham.updateSanPhamById(new SanPhamView(-1, Double.parseDouble(txtGiaTien.getText()), txtAnh.getText(), getid.getIDMax("SP", index),
                 txtTenSP.getText(), cbxTrangThai.getSelectedItem().toString() == "Hoạt đông" ? 1 : 0, getTL(cbxTheLoai.getSelectedItem().toString())));
         loadTable(_ServiceSanPham.getlst());
+            JOptionPane.showMessageDialog(this, "Sửa thành công!");
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Sửa thất bại!");
+        
+        
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void cbxTrangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxTrangThaiActionPerformed

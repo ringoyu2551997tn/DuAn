@@ -139,4 +139,10 @@ public class ImplBangBan implements InterfaceBangBan{
     }
 	
 	
+    	public List<Ban> getlst() {
+		String jsql = "SELECT b FROM Ban b";
+		TypedQuery<Ban> query = entityManager.createQuery(jsql.toString(), Ban.class);
+		List<Ban> list = query.getResultList();
+		return list;
+	}
 }

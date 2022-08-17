@@ -42,7 +42,7 @@ public class ServiceBan implements IServiceBan {
     
     public BanView create(BanView ban) {
         _dao.create(new Ban(ban.getMaBan(), ban.getTrangThai(),ban.getSoGhe()));
-        return new BanView(ban.getMaBan(), ban.getTrangThai());
+        return new BanView(ban.getMaBan(), ban.getTrangThai(),ban.getSoGhe());
     }
 
     public BanView update(BanView ban) {
@@ -96,15 +96,15 @@ public class ServiceBan implements IServiceBan {
     public void chuyenBan(int idBanDi, int idBanToi) {
         List<Hoadoinchitiet> lst = daoHDCT.findByIdBan(idBanDi);
         for (Hoadoinchitiet x : lst) {
-            x.setBan(daoBan.findById(idBanToi));
+            x.setBan(daoBan.findById2(idBanToi));
             if (x.getGhiChu() == null) {
                 x.setGhiChu("");
             }
             x.setGhiChu(x.getGhiChu() + " Chuyển từ :B" + idBanDi);
             daoHDCT.update(x);
         }
-        Ban bantoi = daoBan.findById(idBanToi);
-        Ban ban = daoBan.findById(idBanDi);
+        Ban bantoi = daoBan.findById2(idBanToi);
+        Ban ban = daoBan.findById2(idBanDi);
         bantoi.setTrangThai(1);
         ban.setTrangThai(0);
         daoBan.update(ban);
@@ -117,7 +117,7 @@ public class ServiceBan implements IServiceBan {
         Hoadon hoadon = daoHD.findHoaDonByBan(idBanToi);
         Hoadon hoadonBanDi = daoHD.findHoaDonByBan(idBanDi);
         for (Hoadoinchitiet x : lst) {
-            x.setBan(daoBan.findById(idBanToi));
+            x.setBan(daoBan.findById2(idBanToi));
             x.setHoadon(hoadon);
             if (x.getGhiChu() == null) {
                 x.setGhiChu("");
@@ -125,7 +125,7 @@ public class ServiceBan implements IServiceBan {
             x.setGhiChu(x.getGhiChu() + " Gộp từ B" + idBanDi);
             daoHDCT.update(x);
         }
-        Ban ban = daoBan.findById(idBanDi);
+        Ban ban = daoBan.findById2(idBanDi);
         ban.setTrangThai(0);
         daoBan.update(ban);
         hoadonBanDi.setTrangThai(1);

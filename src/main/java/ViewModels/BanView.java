@@ -19,12 +19,6 @@ public class BanView {
     public BanView() {
     }
 
-
-
-    public BanView(String maBan, int trangThai) {
-        this.maBan = maBan;
-        this.trangThai = trangThai;
-    }
     public BanView(int ID_Ban, String maBan, int trangThai,int soGhe) {
         this.ID_Ban = ID_Ban;
         this.maBan = maBan;
@@ -33,6 +27,14 @@ public class BanView {
 
     }
 
+    public BanView(String maBan, int trangThai, int soGhe) {
+        this.maBan = maBan;
+        this.trangThai = trangThai;
+        this.soGhe = soGhe;
+    }
+
+    
+    
     public int getID_Ban() {
         return ID_Ban;
     }

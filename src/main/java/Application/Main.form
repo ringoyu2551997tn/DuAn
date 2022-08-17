@@ -27,7 +27,6 @@
   </AuxValues>
 
 
-
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
@@ -72,7 +71,6 @@
       </Group>
     </DimensionLayout>
   </Layout>
-
 
   <SubComponents>
     <Container class="javax.swing.JPanel" name="pn">

@@ -108,6 +108,7 @@ public class ImplBangSanPham implements InterfaceBangSanPham {
 		return query.getResultList();
 
 	}
+}
 
 //        public void updateSP(double giaTien, String hinhAnh, String maSanPham, String tenSanPham, int trangThai, Theloai theLoai) {
 //

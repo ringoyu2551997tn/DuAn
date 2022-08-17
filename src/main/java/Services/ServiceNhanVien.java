@@ -21,9 +21,32 @@ import repositories.InterfaceBangNhanVien;
 public class ServiceNhanVien implements IServiceBangNhanVien{
        InterfaceBangNhanVien daonv;
     List<NhanvienView> listNVModel;
+<<<<<<< Updated upstream
 
     public ServiceNhanVien() {
         daonv = new ImplBangNhanVien();
+=======
+    private final ImplBangNhanVien _dao;
+
+    public ServiceNhanVien() {
+        daonv = new ImplBangNhanVien();
+        _dao = new ImplBangNhanVien();
+        getlst();
+    }
+    
+    public List<Nhanvien> getlst() {
+        return _dao.findAll();
+    }
+    
+    public NhanvienView create(NhanvienView nv) {
+        _dao.create(new Nhanvien(nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
+        return new NhanvienView(nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
+    }
+
+    public NhanvienView update(NhanvienView nv) {
+        _dao.update(new Nhanvien(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro()));
+        return new NhanvienView(nv.getID_NhanVien(),nv.getDiaChi(), nv.getEmail(), nv.getGioITinh(), nv.getMaNhanVien(), nv.getMatKhau(), nv.getNgaySinh(), nv.getSoDienThoai(), nv.getTaiKhoan(), nv.getTenNhanVien(), nv.getTrangThai(), nv.getVaiTro());
+>>>>>>> Stashed changes
     }
 
     private final ImplBangNhanVien _dao;
@@ -60,39 +83,6 @@ public class ServiceNhanVien implements IServiceBangNhanVien{
 //        this.vaiTro = vaiTro;
 //        this.hoadons = hoadons;
 //    }
-    Nhanvien setdata(NhanvienView nv) {
-        Nhanvien nv1 = new Nhanvien();
-        nv1.setMaNhanVien(nv.getMaNhanVien());
-        nv1.setTenNhanVien(nv.getTenNhanVien());
-        nv1.setTaiKhoan(nv.getTaiKhoan());
-        nv1.setMatKhau(nv.getMatKhau());
-        nv1.setTrangThai(nv.getTrangThai());
-        nv1.setGioITinh(nv.getGioITinh());
-        nv1.setNgaySinh(nv.getNgaySinh());
-        nv1.setSoDienThoai(nv.getSoDienThoai());
-        nv1.setVaiTro(nv.getVaiTro());
-        nv1.setDiaChi(nv.getDiaChi());
-        nv1.setEmail(nv.getEmail());
-        
-        return nv1;
-    }
-    
-     NhanvienView setdata2(Nhanvien nv) {
-        NhanvienView nv1 = new NhanvienView();
-        nv1.setMaNhanVien(nv.getMaNhanVien());
-        nv1.setTenNhanVien(nv.getTenNhanVien());
-        nv1.setTaiKhoan(nv.getTaiKhoan());
-        nv1.setMatKhau(nv.getMatKhau());
-        nv1.setTrangThai(nv.getTrangThai());
-        nv1.setGioITinh(nv.getGioITinh());
-        nv1.setNgaySinh(nv.getNgaySinh());
-        nv1.setSoDienThoai(nv.getSoDienThoai());
-        nv1.setVaiTro(nv.getVaiTro());
-        nv1.setDiaChi(nv.getDiaChi());
-        nv1.setEmail(nv.getEmail());
-        
-        return nv1;
-    }
 
 
 //    @Override
@@ -114,16 +104,6 @@ public class ServiceNhanVien implements IServiceBangNhanVien{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-     @Override
-    public Nhanvien create(NhanvienView nv) {
-       return daonv.create(setdata(nv));
-    }
-
-    @Override
-    public Nhanvien update(NhanvienView nv) {
-       return daonv.update(setdata(nv));
-    }
-
     @Override
     public Nhanvien remove(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -135,26 +115,17 @@ public class ServiceNhanVien implements IServiceBangNhanVien{
     }
 
     @Override
-    public NhanvienView login(String userName, String password) {
-        Nhanvien nv = new Nhanvien();
-        nv = daonv.login(userName, password);
-     
-        
-       return setdata2(nv);
+    public List<NhanvienView> findAll(int position, int pageSize) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public NhanvienView login(String userName, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     @Override
     public NhanvienView quenmatkhau(String email, String taikhoan) {
-         Nhanvien nv = new Nhanvien();
-        nv = daonv.findbyEmail(email, taikhoan);
-        NhanvienView nvmodel = new NhanvienView();
-        
-       return setdata2(nv);
-    }
-
-    @Override
-    public List<NhanvienView> findAll(int position, int pageSize) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

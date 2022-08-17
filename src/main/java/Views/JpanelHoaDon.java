@@ -412,7 +412,7 @@ public class JpanelHoaDon extends javax.swing.JPanel {
             itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
             itemInfoTable.addCell(new Cell().add( new Paragraph("")).setBorder(Border.NO_BORDER));
             itemInfoTable.addCell(new Cell().add( new Paragraph("Tong ")).setBorder(Border.NO_BORDER));
-            itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf((sum * (100-hd.findById(IDHD(mahd)).getKhuyenmai().getChietKhau().intValue() )) / 100 ))).setBorder(Border.NO_BORDER));
+            itemInfoTable.addCell(new Cell().add( new Paragraph(String.valueOf((sum * (100-hd.findById(IDHD(mahd)).getKhuyenmai().getChietKhau() )) / 100 ))).setBorder(Border.NO_BORDER));
             document.add(table);
             document.add(new Paragraph());
             document.add(customerInfortable);
